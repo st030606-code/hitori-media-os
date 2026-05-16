@@ -1,0 +1,16 @@
+{
+  "_id": "visualAssetPlan.building-hitori-media-os.note-hero-v1",
+  "set": {
+    "localAssetPath": "assets/visuals/building-hitori-media-os/shared/campaign-hero-v1.png",
+    "status": "saved",
+    "updatedAt": "2026-05-14T07:59:49.920Z",
+    "reviewNotes": "Approved via Visual Register inbox and copied to final local asset path. Selected v001 as first production hero candidate. Stronger visual balance than earlier minimal versions. Suitable for note hero and Substack header shared master. Substackヘッダー（substack-header-v1）と同じ master file を共有する。1456x816 で生成すれば note hero / Substack header / Substack social preview のいずれにも使える。実ファイルが保存されるまでは localAssetPath を空に保つ。"
+  },
+  "meta": {
+    "generatedBy": "tools/visual-register/inbox",
+    "inboxSource": "assets/inbox/generated/building-hitori-media-os/note-hero-v1/v001.png",
+    "originalFileName": "v001.png",
+    "mimeType": "image/png",
+    "directSanityWrite": false
+  }
+}

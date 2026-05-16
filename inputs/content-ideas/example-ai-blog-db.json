@@ -1,0 +1,331 @@
+{
+  "title": "これからのブログは、記事を書くより「AIが使えるDB」を作った人が勝つ",
+  "slug": "ai-usable-blog-database",
+  "status": "idea",
+  "summary": "AI時代の発信では、単発の記事を増やすより、AIが理解して再利用できる構造化された知識データベースを作ることが重要になる。ひとつの元レコードを整えることで、note、Substack、Threads、YouTube、Podcast、図解、GitHubドキュメントへ展開しやすくなる。",
+  "coreThesis": "これからのブログ運営で差がつくのは、記事をたくさん書くことだけではない。AIが使える形で主張、根拠、具体例、反論、読者、媒体別の切り口を保存し、ひとつの知識レコードから複数の発信物を作れる状態を持つことが強みになる。",
+  "audience": [
+    "ひとりメディア運営者",
+    "noteやSubstackで発信する個人クリエイター",
+    "YouTubeやPodcastにも展開したい発信者",
+    "AIを使って発信の再利用性を高めたい技術者・編集者",
+    "SanityやObsidianを使って知識管理を整えたい人"
+  ],
+  "audiencePain": "発信者は、同じアイデアを記事、ニュースレター、SNS、動画台本、音声台本へ何度も書き直している。元になる主張や根拠が散らばっているため、AIに毎回文脈を説明し直す必要があり、出力の一貫性も落ちる。",
+  "contentPillars": [
+    "AIが使える知識DB",
+    "構造化コンテンツ",
+    "ひとりメディア運営",
+    "SanityとObsidianの役割分担",
+    "APIなしのAIワークフロー"
+  ],
+  "claims": [
+    {
+      "claim": "AI時代のブログは、完成記事の置き場ではなく、AIが再利用できる知識データベースとして設計したほうが価値が高い。",
+      "supportingEvidence": "AIに渡す元データが、主張、根拠、具体例、読者、反論、トーンに分かれていると、媒体ごとの出力へ変換しやすい。",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "claim": "ひとつの構造化レコードがあれば、note、Substack、Threads、YouTube、Podcast、図解、GitHubドキュメントへ展開しやすくなる。",
+      "supportingEvidence": "各媒体は表現形式が違っても、中心主張、読者、根拠、具体例を共有できるため。",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "claim": "MVPでは、OpenAI APIやAnthropic APIを使う前に、Codex、Claude Code、ChatGPT、Claudeアプリで手動ワークフローを検証するべきである。",
+      "supportingEvidence": "手動で出力を作ると、どのフィールドが効くか、どのプロンプトが弱いか、人間の編集がどこで必要かが見える。",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "claim": "ObsidianとSanityは競合ではなく役割が違う。Obsidianは思考の場、Sanityは再利用できる知識レコードの場として使い分ける。",
+      "supportingEvidence": "未整理のメモやリサーチはObsidianに向いており、複数出力へ展開するための整ったデータはSanityの構造化スキーマに向いている。",
+      "confidence": "medium",
+      "needsVerification": false
+    },
+    {
+      "claim": "生成された出力そのものは、将来的にはcontentIdeaの中に詰め込まず、platformOutputやpublishedOutputとして分けるべきである。",
+      "supportingEvidence": "ひとつのアイデアから複数の下書きと公開物が生まれるため、元レコードと出力物を分けたほうが管理しやすい。",
+      "confidence": "medium",
+      "needsVerification": false
+    }
+  ],
+  "evidence": [
+    {
+      "type": "workflow_observation",
+      "description": "同じアイデアでも、noteでは論考、Substackでは個人的な手紙、Threadsでは短い連投、YouTubeでは章立てされた台本になる。形式は違うが、元になる主張と根拠は共通している。",
+      "sourceUrl": "",
+      "notes": "このプロジェクトの手動出力検証で確認する。"
+    },
+    {
+      "type": "product_reasoning",
+      "description": "AIに毎回長い背景説明をするより、構造化された元レコードを渡したほうが、出力の方向性を揃えやすい。",
+      "sourceUrl": "",
+      "notes": "プロンプト改善時に、どのフィールドが出力品質に効いたか記録する。"
+    },
+    {
+      "type": "system_design",
+      "description": "contentIdea、prompt、workflow、platformOutput、publishedOutputを分けることで、元アイデア、生成プロセス、下書き、公開物を別々に管理できる。",
+      "sourceUrl": "",
+      "notes": "Sanity初期化前のスキーマ設計で検証する。"
+    },
+    {
+      "type": "editorial_principle",
+      "description": "APIなしMVPでは、人間が生成物を確認する工程を前提にするため、AI出力をそのまま公開する設計にしない。",
+      "sourceUrl": "",
+      "notes": "品質チェックとPhase 1.5の出力レビューで扱う。"
+    }
+  ],
+  "examples": [
+    {
+      "title": "記事ではなくDBを作る",
+      "description": "完成記事だけを保存すると、あとから動画台本やSNS投稿へ展開するときに文脈を再構成する必要がある。構造化レコードなら、主張、根拠、例、反論を再利用できる。"
+    },
+    {
+      "title": "ひとつの主張を複数媒体へ展開する",
+      "description": "『AIが使えるDBを作った人が勝つ』という主張は、noteでは長い論考、Substackでは個人的な制作記、Threadsでは短い問題提起、YouTubeではワークフロー解説になる。"
+    },
+    {
+      "title": "ObsidianからSanityへ昇格する",
+      "description": "Obsidianに散らばるラフメモや開発ログの中から、繰り返し使える知識だけをSanityのcontentIdeaとして整える。"
+    },
+    {
+      "title": "APIなしでまず検証する",
+      "description": "CodexやClaude CodeにJSONとプロンプトを渡し、手動で各出力を作る。出力レビューで足りないフィールドを見つけてからSanityスキーマに反映する。"
+    }
+  ],
+  "objections": [
+    {
+      "objection": "ブログは文章を書く場所であって、DB化すると創作が重くならないか。",
+      "response": "すべてを最初から細かく構造化する必要はない。まずは主張、読者、根拠、例、反論、トーンだけを押さえれば、創作の自由度を残したまま再利用性を上げられる。"
+    },
+    {
+      "objection": "AIが使えるDBを作っても、結局は人間が編集するなら効率化にならないのでは。",
+      "response": "目的は人間の編集をなくすことではなく、毎回ゼロから文脈を作り直す負担を減らすこと。最終判断は人間が行う前提で、下書き作成と展開の速度を上げる。"
+    },
+    {
+      "objection": "Sanityを使う前に、普通のMarkdownやObsidianだけで十分ではないか。",
+      "response": "初期の思考やメモはObsidianで十分。ただし、複数出力へ安定して展開する知識は、フィールドを持つ構造化データとして扱ったほうが再利用しやすい。"
+    },
+    {
+      "objection": "最初からAPI連携したほうが早くないか。",
+      "response": "API連携は、何を自動化すべきかが見えてからでよい。先に手動で回すことで、不要な実装や使えない自動化を避けられる。"
+    }
+  ],
+  "tone": {
+    "voice": "明快、実用的、少し挑発的、クリエイターに寄り添う、設計思想がある",
+    "styleNotes": [
+      "『AIで楽して量産』ではなく『AIが使える素材を整える』という立場で書く",
+      "大きな未来予測より、日々の発信作業が楽になる具体性を重視する",
+      "読者に作業の次の一歩が見えるようにする"
+    ],
+    "avoid": [
+      "よくあるAI礼賛",
+      "根拠のない生産性主張",
+      "大企業向けの抽象語",
+      "ツール名だけを並べる説明",
+      "人間の編集を不要にするような言い方"
+    ]
+  },
+  "platformAngles": [
+    {
+      "platform": "note",
+      "targetReader": "発信を仕組み化したい日本語クリエイター",
+      "hook": "これからのブログは、記事を書いた人ではなく、AIが使えるDBを作った人が勝つ。",
+      "formatNotes": "強い問題提起から入り、記事の山と知識DBの違いを説明し、最後に最初のcontentIdeaレコード作成へ誘導する。",
+      "callToAction": "まずは1本の記事を書く前に、主張・根拠・具体例・反論を分けた元レコードを作る。"
+    },
+    {
+      "platform": "substack",
+      "targetReader": "制作過程や思想も読みたい濃い読者",
+      "hook": "最近、ブログを書くより先に『AIが読める素材』を作るほうが大事だと感じています。",
+      "formatNotes": "個人的な気づき、制作ログ、なぜAPIなしで始めるか、という順番で読ませる。",
+      "callToAction": "読者に、自分が何度も書き直しているテーマを返信してもらう。"
+    },
+    {
+      "platform": "threads",
+      "targetReader": "短時間で発信のヒントを得たいクリエイターや開発者",
+      "hook": "ブログを『記事の置き場』だと思っていると、AI時代は少しもったいない。",
+      "formatNotes": "7から10投稿程度。1投稿ごとに、記事、DB、AI、Sanity、Obsidian、APIなしMVPの要点を短く展開する。",
+      "callToAction": "保存用に、自分の発信テーマを1つだけ構造化してみるよう促す。"
+    },
+    {
+      "platform": "x",
+      "targetReader": "短い仮説や図解ペア投稿から興味を持つ開発者・クリエイター",
+      "hook": "これからのブログは、記事数より『AIが使えるDB』を持っているかが大事になると思う。",
+      "formatNotes": "単発投稿、短いスレッド、図解ペア投稿、GitHub更新、note/Substackへの導線に使う。",
+      "callToAction": "GitHub、note、Substackのいずれかへ自然に誘導する。"
+    },
+    {
+      "platform": "instagram",
+      "targetReader": "図解で発信設計を理解したいクリエイター",
+      "hook": "ブログをDB化すると、1つのアイデアが7つの発信物になる。",
+      "formatNotes": "カルーセル8枚想定。記事の山、AIが使えるDB、元レコードの中身、複数出力、APIなし検証、最初の一歩を図解する。",
+      "callToAction": "保存して、自分の次の投稿テーマで試す。"
+    },
+    {
+      "platform": "youtube",
+      "targetReader": "長尺で発信システムを学びたいクリエイター",
+      "hook": "AI時代にブログで勝つ人は、文章が速い人ではなく、AIが使えるDBを持っている人です。",
+      "formatNotes": "10から15分の解説。記事中心の発信の限界、DB化の考え方、SanityとObsidianの役割、APIなしMVP、実際のJSON例を見せる。",
+      "callToAction": "動画を見ながら、自分のアイデアを1つJSONまたはMarkdownで構造化する。"
+    },
+    {
+      "platform": "shorts",
+      "targetReader": "短尺で発信改善のヒントがほしい人",
+      "hook": "AI時代、ブログは『書く場所』から『AIが使うDB』になります。",
+      "formatNotes": "30から45秒。記事の山とDBの対比を視覚的に見せる。",
+      "callToAction": "次の投稿前に、主張と根拠だけ分けてメモする。"
+    },
+    {
+      "platform": "podcast",
+      "targetReader": "作業しながら発信思想を聞きたいクリエイター",
+      "hook": "今日は、ブログを記事ではなくデータベースとして見る話をします。",
+      "formatNotes": "ひとり語り。なぜこの考えに至ったか、APIなしで始める理由、ObsidianとSanityの使い分けを話す。",
+      "callToAction": "自分の発信テーマを1つ選び、何度も使う主張と根拠を書き出す。"
+    },
+    {
+      "platform": "diagram",
+      "targetReader": "図解や構造図で全体像を掴みたい読者",
+      "hook": "記事の山ではなく、AIが使えるDBから複数出力が生まれる構造を見る。",
+      "formatNotes": "note記事内図解、YouTube内図解、Instagramカルーセル、X図解ペア投稿の元になる視覚設計。",
+      "callToAction": "図を見ながら、自分の発信テーマを1つの構造化レコードに分解する。"
+    },
+    {
+      "platform": "github",
+      "targetReader": "リポジトリを見て思想と設計を理解したい開発者・AIエージェント",
+      "hook": "This repository treats a blog idea as structured source data, not as a finished post.",
+      "formatNotes": "READMEやdocs向け。ワークフロー、フォルダ構造、no-API方針、MVPスキーマを整理する。",
+      "callToAction": "サンプルJSONとプロンプトを使い、最初の手動出力レビューを行う。"
+    },
+    {
+      "platform": "paid",
+      "targetReader": "より深く実装・運用手順まで知りたい読者",
+      "hook": "AIが使えるコンテンツDBを、自分の発信テーマで作るための実践設計書。",
+      "formatNotes": "有料記事や講座の構成案。思想だけでなく、入力項目、レビュー手順、出力パイプラインまで整理する。",
+      "callToAction": "自分のテーマを1つ選び、最初のcontentIdeaを作る。"
+    },
+    {
+      "platform": "newsletter",
+      "targetReader": "メールで定期的に制作過程や学びを受け取りたい読者",
+      "hook": "今週は、ブログを『AIが使えるDB』として扱うための土台を作りました。",
+      "formatNotes": "汎用ニュースレターやメール配信用。Substack固有の文脈に寄せすぎず、制作進捗、学び、次のテストを短くまとめる。",
+      "callToAction": "返信で、自分がDB化したい発信テーマを1つ教えてもらう。"
+    }
+  ],
+  "outputChecklist": [
+    {
+      "outputType": "note-article",
+      "status": "planned",
+      "localOutputPath": "outputs/note/",
+      "publishedUrl": "",
+      "notes": "思想を一番深く説明する主力記事。"
+    },
+    {
+      "outputType": "substack-post",
+      "status": "planned",
+      "localOutputPath": "outputs/substack/",
+      "publishedUrl": "",
+      "notes": "Substack固有の読者関係、制作ログ、個人的な気づきを混ぜた投稿。"
+    },
+    {
+      "outputType": "threads-thread",
+      "status": "planned",
+      "localOutputPath": "outputs/threads/",
+      "publishedUrl": "",
+      "notes": "短い問題提起と実践ステップの連投。"
+    },
+    {
+      "outputType": "x-post",
+      "status": "planned",
+      "localOutputPath": "outputs/x/",
+      "publishedUrl": "",
+      "notes": "短い仮説、図解ペア投稿、GitHub更新、note/Substackへの導線。"
+    },
+    {
+      "outputType": "instagram-carousel",
+      "status": "planned",
+      "localOutputPath": "outputs/diagrams/",
+      "publishedUrl": "",
+      "notes": "カルーセル構成案としてdiagramPlanと連携する。"
+    },
+    {
+      "outputType": "youtube-script",
+      "status": "planned",
+      "localOutputPath": "outputs/youtube/",
+      "publishedUrl": "",
+      "notes": "長尺解説。JSON例やワークフロー図を見せる。"
+    },
+    {
+      "outputType": "shorts-script",
+      "status": "planned",
+      "localOutputPath": "outputs/shorts/",
+      "publishedUrl": "",
+      "notes": "記事の山とAIが使えるDBの対比を短く見せる。"
+    },
+    {
+      "outputType": "podcast-script",
+      "status": "planned",
+      "localOutputPath": "outputs/podcast/",
+      "publishedUrl": "",
+      "notes": "開発ログをもとにしたひとり語り。"
+    },
+    {
+      "outputType": "diagram-plan",
+      "status": "planned",
+      "localOutputPath": "outputs/diagrams/",
+      "publishedUrl": "",
+      "notes": "AIが使えるDBから複数出力が生まれる構造図。"
+    },
+    {
+      "outputType": "github-doc",
+      "status": "planned",
+      "localOutputPath": "examples/",
+      "publishedUrl": "",
+      "notes": "READMEやschema docsの改善に転用する。"
+    },
+    {
+      "outputType": "paid-article-outline",
+      "status": "planned",
+      "localOutputPath": "outputs/paid/",
+      "publishedUrl": "",
+      "notes": "有料記事や講座に展開するための構成案。"
+    },
+    {
+      "outputType": "newsletter",
+      "status": "planned",
+      "localOutputPath": "outputs/newsletter/",
+      "publishedUrl": "",
+      "notes": "Substack固有ではない、汎用ニュースレターやメール配信用の下書き。"
+    }
+  ],
+  "sourceLinks": [
+    {
+      "type": "internal_doc",
+      "title": "プロジェクトコンセプト",
+      "reference": "docs/00-concept.md",
+      "notes": "ひとつの元レコードから複数出力へ展開する思想の参照。"
+    },
+    {
+      "type": "internal_doc",
+      "title": "スキーマ設計",
+      "reference": "docs/02-schema-design.md",
+      "notes": "contentIdea、platformOutput、publishedOutput などの設計方針の参照。"
+    },
+    {
+      "type": "internal_doc",
+      "title": "APIなしワークフロー",
+      "reference": "docs/03-no-api-workflow.md",
+      "notes": "OpenAI APIやAnthropic APIを使わず、手動・半自動で検証する方針の参照。"
+    },
+    {
+      "type": "devlog",
+      "title": "プロジェクト開始",
+      "reference": "docs/devlog/0001-project-start.md",
+      "notes": "初期方針と、API先行ではなくワークフロー検証から始める判断の参照。"
+    }
+  ],
+  "createdAt": "2026-05-11",
+  "updatedAt": "2026-05-11"
+}

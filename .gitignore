@@ -1,0 +1,21 @@
+node_modules/
+dist/
+.sanity/
+*.log
+.DS_Store
+
+.env
+.env.local
+
+# Private paid/reference materials. Do not commit.
+private/
+
+# Claude Code per-project local settings (personal, not portable)
+.claude/
+
+# Vercel CLI metadata (created by `vercel link`, not for the repo)
+.vercel/
+
+# Env example template — sandbox could not inspect its values, so treat as conservatively-ignored.
+# If the file holds only placeholders, the human can opt-in with `git add -f .env.example`.
+.env.example

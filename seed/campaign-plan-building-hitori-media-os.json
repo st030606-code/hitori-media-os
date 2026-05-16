@@ -1,0 +1,258 @@
+{
+  "_id": "campaignPlan.building-hitori-media-os",
+  "_type": "campaignPlan",
+  "title": "building-hitori-media-os campaign",
+  "slug": {"_type": "slug", "current": "building-hitori-media-os"},
+
+  "sourceContentIdea": {
+    "_type": "reference",
+    "_ref": "contentIdea.building-hitori-media-os"
+  },
+  "brandProfile": {
+    "_type": "reference",
+    "_ref": "brandProfile.hitori-media-os-default"
+  },
+
+  "campaignType": "build-log",
+  "contentMode": "building-in-public",
+  "coreThesis": "発信を頑張るより、発信が回る仕組みを作る。1つの構造化された Content Idea を起点に、複数媒体へ展開する Hitori Media OS の制作裏側を、building-in-public で記録する。",
+
+  "targetReader": [
+    "ひとりメディア運営者",
+    "個人発信エンジニア",
+    "editor / writer",
+    "AI時代の個人クリエイター"
+  ],
+
+  "selectedPlatforms": [
+    {
+      "platform": "x",
+      "enabled": true,
+      "priority": "P1",
+      "contentDepth": "hook-only",
+      "visualRequirement": "minimal",
+      "publishMode": "manual-only",
+      "productionMode": "solo",
+      "cadence": "per-campaign",
+      "requiredAssets": ["hook-image"],
+      "optionalAssets": [],
+      "notes": "X timeline で1秒スクロール中に内容が伝わる hook 投稿。inline preview crop で文字が切れない構図。soft CTA。"
+    },
+    {
+      "platform": "threads",
+      "enabled": true,
+      "priority": "P2",
+      "contentDepth": "summary",
+      "visualRequirement": "minimal",
+      "publishMode": "manual-only",
+      "productionMode": "solo",
+      "cadence": "per-campaign",
+      "requiredAssets": [],
+      "optionalAssets": ["section-diagram"],
+      "notes": "X と棲み分け: 会話・問いかけ寄りで、support diagram が役立つ場面で使う。"
+    },
+    {
+      "platform": "note",
+      "enabled": true,
+      "priority": "P1",
+      "contentDepth": "full-article",
+      "visualRequirement": "standard",
+      "publishMode": "manual-only",
+      "productionMode": "solo",
+      "cadence": "per-campaign",
+      "requiredAssets": ["hero"],
+      "optionalAssets": ["flow-diagram", "section-diagram", "comparison-diagram", "architecture-diagram"],
+      "notes": "長文 + 検索流入アーカイブ。冒頭は『実験ログ』と明示し、完成断言を避ける。hero は Substack header と master 共有。"
+    },
+    {
+      "platform": "substack",
+      "enabled": true,
+      "priority": "P1",
+      "contentDepth": "full-article",
+      "visualRequirement": "standard",
+      "publishMode": "manual-only",
+      "productionMode": "solo",
+      "cadence": "per-campaign",
+      "requiredAssets": ["hero"],
+      "optionalAssets": ["section-diagram"],
+      "notes": "reader-list / trust 形成。About Page / Welcome Email も整備、paid_offer は出さない。header は note hero と master 共有。"
+    }
+  ],
+
+  "platformGenerationSettings": [
+    {
+      "platform": "note",
+      "generationOrder": 1,
+      "dependsOn": [],
+      "sharedMasterAssets": ["assets/visuals/building-hitori-media-os/shared/campaign-hero-v1.png"],
+      "specialInstructions": "hero を先に生成して master を確定する。Substack header もこの master を流用するため、Substack 側で再生成しない。"
+    },
+    {
+      "platform": "substack",
+      "generationOrder": 2,
+      "dependsOn": ["note"],
+      "sharedMasterAssets": ["assets/visuals/building-hitori-media-os/shared/campaign-hero-v1.png"],
+      "specialInstructions": "header は note の hero master を共有。substack-header-v1 visualAssetPlan の localAssetPath に同じ path を入力。"
+    },
+    {
+      "platform": "x",
+      "generationOrder": 3,
+      "dependsOn": ["note"],
+      "sharedMasterAssets": [],
+      "specialInstructions": "x-hook-main-v1 は variant-required（X 専用）。tone reference に campaign-hero-v1.png を使うが、layout は別 (centered-title-only を default にしない、3-pattern-default で生成)。"
+    },
+    {
+      "platform": "threads",
+      "generationOrder": 4,
+      "dependsOn": ["note"],
+      "sharedMasterAssets": [],
+      "specialInstructions": "threads-support-diagram-v1 は任意の補助図。会話を促す柔らかさを優先、装飾は最小限。"
+    }
+  ],
+
+  "requiredRecords": [
+    {"recordType": "platformOutput", "recordId": "platformOutput.building-hitori-media-os.x", "platform": "x", "state": "in-progress"},
+    {"recordType": "platformOutput", "recordId": "platformOutput.building-hitori-media-os.threads", "platform": "threads", "state": "in-progress"},
+    {"recordType": "platformOutput", "recordId": "platformOutput.building-hitori-media-os.note", "platform": "note", "state": "in-progress"},
+    {"recordType": "platformOutput", "recordId": "platformOutput.building-hitori-media-os.substack", "platform": "substack", "state": "in-progress"},
+    {"recordType": "substackPostPlan", "recordId": "substackPostPlan.building-hitori-media-os", "platform": "substack", "state": "in-progress"},
+    {"recordType": "substackNotesPlan", "recordId": "substackNotesPlan.building-hitori-media-os", "platform": "substack", "state": "in-progress"},
+    {"recordType": "substackGrowthAction", "recordId": "substackGrowthAction.building-hitori-media-os.about-page-update", "platform": "substack", "state": "not-started"},
+    {"recordType": "visualAssetPlan", "recordId": "visualAssetPlan.building-hitori-media-os.note-hero-v1", "platform": "note", "state": "done"},
+    {"recordType": "visualAssetPlan", "recordId": "visualAssetPlan.building-hitori-media-os.substack-header-v1", "platform": "substack", "state": "done"},
+    {"recordType": "visualAssetPlan", "recordId": "visualAssetPlan.building-hitori-media-os.x-hook-main-v1", "platform": "x", "state": "pending-review", "notes": "v001.png inbox 生成済、Visual Register approve 待ち。"},
+    {"recordType": "visualAssetPlan", "recordId": "visualAssetPlan.building-hitori-media-os.threads-support-diagram-v1", "platform": "threads", "state": "not-started"},
+    {"recordType": "visualAssetPlan", "recordId": "visualAssetPlan.building-hitori-media-os.note-inline-content-os-flow-v1", "platform": "note", "state": "not-started"},
+    {"recordType": "visualAssetPlan", "recordId": "visualAssetPlan.building-hitori-media-os.note-inline-human-judgment-v1", "platform": "note", "state": "not-started"},
+    {"recordType": "visualAssetPlan", "recordId": "visualAssetPlan.building-hitori-media-os.substack-inline-reader-system-v1", "platform": "substack", "state": "not-started"}
+  ],
+
+  "requiredVisualAssets": [
+    {
+      "visualAssetPlanId": "visualAssetPlan.building-hitori-media-os.note-hero-v1",
+      "assetSlug": "note-hero-v1",
+      "platform": "note",
+      "assetType": "hero",
+      "priority": "P1",
+      "sharesMasterWith": ["substack-header-v1"],
+      "state": "done",
+      "localAssetPath": "assets/visuals/building-hitori-media-os/shared/campaign-hero-v1.png",
+      "notes": "Visual Register approve & register 完了（2026-05-14）、publish-package 配布済み。"
+    },
+    {
+      "visualAssetPlanId": "visualAssetPlan.building-hitori-media-os.substack-header-v1",
+      "assetSlug": "substack-header-v1",
+      "platform": "substack",
+      "assetType": "hero",
+      "priority": "P1",
+      "sharesMasterWith": ["note-hero-v1"],
+      "state": "done",
+      "localAssetPath": "assets/visuals/building-hitori-media-os/shared/campaign-hero-v1.png",
+      "notes": "note-hero-v1 master を共有。Sanity Studio 手動反映済（2026-05-14）。"
+    },
+    {
+      "visualAssetPlanId": "visualAssetPlan.building-hitori-media-os.x-hook-main-v1",
+      "assetSlug": "x-hook-main-v1",
+      "platform": "x",
+      "assetType": "hook-image",
+      "priority": "P1",
+      "sharesMasterWith": [],
+      "state": "pending-review",
+      "notes": "v001.png を Codex exec + image_gen + gpt-5.4 で生成済、Visual Register approve 待ち。"
+    },
+    {
+      "visualAssetPlanId": "visualAssetPlan.building-hitori-media-os.threads-support-diagram-v1",
+      "assetSlug": "threads-support-diagram-v1",
+      "platform": "threads",
+      "assetType": "section-diagram",
+      "priority": "P2",
+      "sharesMasterWith": [],
+      "state": "not-started"
+    },
+    {
+      "visualAssetPlanId": "visualAssetPlan.building-hitori-media-os.note-inline-content-os-flow-v1",
+      "assetSlug": "note-inline-content-os-flow-v1",
+      "platform": "note",
+      "assetType": "flow-diagram",
+      "priority": "P2",
+      "sharesMasterWith": [],
+      "state": "not-started"
+    },
+    {
+      "visualAssetPlanId": "visualAssetPlan.building-hitori-media-os.note-inline-human-judgment-v1",
+      "assetSlug": "note-inline-human-judgment-v1",
+      "platform": "note",
+      "assetType": "section-diagram",
+      "priority": "P2",
+      "sharesMasterWith": [],
+      "state": "not-started"
+    },
+    {
+      "visualAssetPlanId": "visualAssetPlan.building-hitori-media-os.substack-inline-reader-system-v1",
+      "assetSlug": "substack-inline-reader-system-v1",
+      "platform": "substack",
+      "assetType": "section-diagram",
+      "priority": "P3",
+      "sharesMasterWith": [],
+      "state": "not-started",
+      "notes": "任意。反応を見てから追加判断。"
+    }
+  ],
+
+  "promptTemplateSelections": [
+    {
+      "promptTemplateId": "promptTemplate.x-hook-image-diagram-rich-v1",
+      "category": "image-generation",
+      "platform": "x",
+      "assetType": "hook-image",
+      "notes": "本 campaign の x-hook-main-v1 生成で採用予定。layoutPattern に centered-title-only を含まず、3-pattern-default で生成。"
+    }
+  ],
+
+  "publishPackagePaths": [
+    {"platform": "x", "path": "publish-packages/x/building-hitori-media-os/", "state": "in-progress"},
+    {"platform": "threads", "path": "publish-packages/threads/building-hitori-media-os/", "state": "in-progress"},
+    {"platform": "note", "path": "publish-packages/note/building-hitori-media-os/", "state": "in-progress", "notes": "campaign-hero-v1.png 配布済"},
+    {"platform": "substack", "path": "publish-packages/substack/building-hitori-media-os/", "state": "in-progress", "notes": "campaign-hero-v1.png 配布済"}
+  ],
+
+  "releaseReviewPath": "publish-packages/campaigns/building-hitori-media-os-release-review/",
+
+  "progressStatus": {
+    "overall": "in-progress",
+    "textDrafts": "4/4 done (X / Threads / note / Substack)",
+    "visuals": "2/7 done (note-hero-v1 / substack-header-v1 saved), 1/7 pending-review (x-hook-main-v1 v001.png inbox), 4/7 not-started",
+    "publishPackages": "4 directories scaffolded, 2 images distributed (note / substack hero), x / threads images deferred",
+    "releaseReview": "release-review package created, final-human-checklist で hero / Sanity 反映 / 配布の3点を [x] 化済"
+  },
+
+  "humanReviewGates": [
+    {"gateName": "selectedPlatforms 確認", "state": "done", "reviewer": "self", "notes": "X / Threads / note / Substack の4 platformで確定。"},
+    {"gateName": "contentIdea claims / objections 最終確認", "state": "done", "reviewer": "self"},
+    {"gateName": "note-hero-v1 Visual Register approve", "state": "done", "reviewer": "self", "completedAt": "2026-05-14T07:59:49.920Z"},
+    {"gateName": "note-hero-v1 / substack-header-v1 Sanity 手動反映", "state": "done", "reviewer": "self"},
+    {"gateName": "x-hook-main-v1 Visual Register approve", "state": "pending-review", "reviewer": "self", "notes": "v001.png を Codex exec で生成済。Inbox Review approve 待ち。"},
+    {"gateName": "x-hook-main-v1 Sanity 手動反映", "state": "not-started", "reviewer": "self"},
+    {"gateName": "threads / note inline 3 visualの生成判断", "state": "not-started", "reviewer": "self"},
+    {"gateName": "release-review final-human-checklist の最終確認", "state": "in-progress", "reviewer": "self"},
+    {"gateName": "各 platform への manual publish", "state": "not-started", "reviewer": "self"}
+  ],
+
+  "manualPublishingStatus": [
+    {"platform": "x", "state": "not-started"},
+    {"platform": "threads", "state": "not-started"},
+    {"platform": "note", "state": "not-started"},
+    {"platform": "substack", "state": "not-started"}
+  ],
+
+  "automationLevel": "semi-auto",
+
+  "status": "draft",
+
+  "version": "0.1.0",
+
+  "notes": "human approval is required at every gate. Visual Register Inbox Review remains the only path to final visual assets. Sanity Studio updates remain manual (no direct write from code). Manual publishing remains required: auto-posting is deferred long-term. paid OpenAI Images API / 顔写真ワークフロー / Instagram / YouTube / Shorts / Podcast は本 campaign では out-of-scope。\n\n本ファイルは local-only seed。npx sanity documents create で投入していない。campaignPlan schema は未 activate。",
+
+  "createdAt": "2026-05-14T00:00:00.000Z",
+  "updatedAt": "2026-05-14T00:00:00.000Z"
+}

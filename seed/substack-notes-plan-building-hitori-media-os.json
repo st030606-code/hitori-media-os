@@ -1,0 +1,71 @@
+{
+  "_id": "substackNotesPlan.building-hitori-media-os.first-post-notes",
+  "_type": "substackNotesPlan",
+  "title": "building-hitori-media-os Substack Notes Plan",
+  "sourceContentIdea": {
+    "_type": "reference",
+    "_ref": "contentIdea.building-hitori-media-os"
+  },
+  "relatedPostPlan": {
+    "_type": "reference",
+    "_ref": "substackPostPlan.building-hitori-media-os.first-post"
+  },
+  "publicationStrategy": {
+    "_type": "reference",
+    "_ref": "substackPublicationStrategy.building-hitori-media-os"
+  },
+  "notesPurpose": "interaction",
+  "prePostNotes": [
+    {
+      "_key": "pre-question",
+      "_type": "object",
+      "noteType": "question",
+      "body": "ひとり運営している人に聞きたい。発信を『量で増やす』『型で整える』のどちらに先に手を入れたいですか？深い答えはあとでSubstackに書こうと思います。"
+    },
+    {
+      "_key": "pre-build-log",
+      "_type": "object",
+      "noteType": "build-log",
+      "body": "今週やったこと: 1つのContent Ideaから複数媒体へ展開するための、ローカルPublish Package Builderの整備。完成品の発表より、まだ手動に残している作業を共有するほうが楽しいと気づいた。"
+    },
+    {
+      "_key": "pre-lesson-learned",
+      "_type": "object",
+      "noteType": "lesson-learned",
+      "body": "AI記事生成より先に、AIが読めるDBを整えたほうが出力が安定する。という当たり前っぽい話を、自分の運営で確かめている最中。"
+    }
+  ],
+  "postLaunchNotes": [
+    {
+      "_key": "post-followup",
+      "_type": "object",
+      "noteType": "post-launch",
+      "body": "さっきPostを出しました。Hitori Media OSの裏側を、完成版ではなく開発中として共有する書き方を試しています。読んで違和感があれば返信ください。"
+    },
+    {
+      "_key": "post-soft-cta",
+      "_type": "object",
+      "noteType": "soft-cta",
+      "body": "購読してもらえると、これからの開発判断や、自分が手動に残している作業の理由などをそのまま受け取れます。煽る気はないので、気が向いたタイミングでぜひ。"
+    }
+  ],
+  "conversationPrompts": [
+    "下書き作成、公開判断、素材保存のうち、最初に仕組み化したいのはどれですか？",
+    "AIに任せたい部分と、人間が残したい判断はどこですか？"
+  ],
+  "ctaVariants": [
+    "この実験の続きを追いたい人は購読してください",
+    "返信で、あなたが仕組み化したい発信作業を教えてください",
+    "X / Threadsでも会話できます。気軽に声をかけてください"
+  ],
+  "humanReviewChecklist": [
+    "Xのコピペになっていない",
+    "Postの中心主張を1文に削れている",
+    "paid offerやアフィリエイトに直結していない",
+    "フォロー誘導と購読誘導を混同していない",
+    "1週間に4本以上投稿しすぎていない",
+    "完成版を急いで売り込むトーンになっていない"
+  ],
+  "status": "ready-for-human-edit",
+  "reviewNotes": "Initial test seed for building-hitori-media-os Substack Notes plan. Tied to substackPostPlan.building-hitori-media-os.first-post."
+}

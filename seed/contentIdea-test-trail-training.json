@@ -1,0 +1,112 @@
+{
+  "_id": "contentIdea.trail-training-3months",
+  "_type": "contentIdea",
+  "title": "トレラン初心者が最初の3ヶ月でやるべき練習4つ",
+  "slug": {
+    "_type": "slug",
+    "current": "trail-training-3months"
+  },
+  "status": "idea",
+  "rawInput": "トレラン初心者は、いきなり距離や累積標高を増やすより、登り、下り、補強、補給の基礎を3ヶ月で整えるほうが安全に続けやすい。ロードランの延長で山に入ると、下りで脚を壊したり、補給不足で失速しやすい。",
+  "summary": "トレラン初心者向けに、最初の3ヶ月で優先すべき練習を整理するテスト用Content Idea。距離を伸ばす前に、登り、下り、補強、補給の基礎を作るという主張を中心にする。",
+  "coreThesis": "トレラン初心者は、最初から距離を増やすより、登り・下り・補強・補給の基礎を3ヶ月で整えるべき。",
+  "audience": [
+    "トレラン初心者",
+    "ロードランから山へ移行したいランナー",
+    "最初のレースに向けて安全に準備したい人"
+  ],
+  "audiencePain": "トレラン初心者は、何から練習すればいいか分からず、ロードランの距離だけを増やしがち。登りで歩けず、下りで脚を痛め、補給も足りずに失速しやすい。",
+  "contentPillars": [
+    "トレラン初心者",
+    "3ヶ月練習計画",
+    "登りと下り",
+    "補強",
+    "補給"
+  ],
+  "claims": [
+    {
+      "_key": "claim-foundation-first",
+      "_type": "object",
+      "claim": "初心者は距離を増やす前に、登り・下り・補強・補給の基礎を整えるほうが安全に続けやすい。",
+      "supportingEvidence": "山ではロードと違い、登りの心肺、下りの着地衝撃、足場への対応、補給判断がパフォーマンスと安全性に影響するため。",
+      "confidence": "medium",
+      "needsVerification": false
+    },
+    {
+      "_key": "claim-three-months",
+      "_type": "object",
+      "claim": "最初の3ヶ月は、速さよりも山に慣れるための反復練習に向いている。",
+      "supportingEvidence": "短期間で距離や標高を急に増やすより、技術と身体づくりを分けて積むほうが練習を継続しやすい。",
+      "confidence": "medium",
+      "needsVerification": false
+    }
+  ],
+  "tone": {
+    "voice": "実用的、落ち着いた、初心者に寄り添う、安全重視",
+    "styleNotes": [
+      "上級者向けの追い込みではなく、最初に怪我なく続ける設計として話す",
+      "根性論ではなく、具体的な練習カテゴリに分けて説明する"
+    ],
+    "avoid": [
+      "過度なタイム短縮の約束",
+      "危険な山行を煽る表現",
+      "根拠のないトレーニング効果の断定"
+    ]
+  },
+  "platformAngles": [
+    {
+      "_key": "angle-note",
+      "_type": "object",
+      "platform": "note",
+      "targetReader": "これからトレランを始めたい日本語ランナー",
+      "hook": "トレラン初心者が最初に増やすべきなのは、距離ではなく基礎です。",
+      "formatNotes": "登り、下り、補強、補給の4つに分けて、3ヶ月の優先順位を説明する。",
+      "callToAction": "次の週末に、短い坂道練習と補給テストを1つだけ入れてみる。"
+    },
+    {
+      "_key": "angle-x",
+      "_type": "object",
+      "platform": "x",
+      "targetReader": "短く練習のヒントを知りたいランナー",
+      "hook": "トレラン初心者は、距離より先に4つの基礎を作った方がいい。",
+      "formatNotes": "単発投稿、短いスレッド、図解ペア投稿に使う。",
+      "callToAction": "保存して、次の3ヶ月メニューを組むときに見返す。"
+    },
+    {
+      "_key": "angle-instagram",
+      "_type": "object",
+      "platform": "instagram",
+      "targetReader": "図解でトレーニングを理解したい初心者",
+      "hook": "最初の3ヶ月でやるべきトレラン練習4つ。",
+      "formatNotes": "カルーセル表紙と3枚の基礎説明スライドに向く。",
+      "callToAction": "保存して、自分の練習メニューに1つ足す。"
+    }
+  ],
+  "outputChecklist": [
+    {
+      "_key": "output-note-article",
+      "_type": "object",
+      "outputType": "note-article",
+      "status": "planned",
+      "localOutputPath": "outputs/note/",
+      "notes": "初心者向けの基礎練習記事。"
+    },
+    {
+      "_key": "output-x-post",
+      "_type": "object",
+      "outputType": "x-post",
+      "status": "planned",
+      "localOutputPath": "outputs/x/",
+      "notes": "4つの基礎を短く伝える投稿。"
+    },
+    {
+      "_key": "output-instagram-carousel",
+      "_type": "object",
+      "outputType": "instagram-carousel",
+      "status": "planned",
+      "localOutputPath": "outputs/diagrams/",
+      "notes": "カルーセル表紙と基礎練習スライド。"
+    }
+  ],
+  "personalContext": "Visual RegisterのContent Idea filter / groupingを検証するための軽量テストレコード。既存のAIブログDBテーマと明確に違うスポーツ系テーマとして使う。"
+}

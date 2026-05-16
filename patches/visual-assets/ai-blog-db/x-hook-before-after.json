@@ -1,0 +1,15 @@
+{
+  "_id": "visualAssetPlan.ai-blog-db.x-hook-before-after",
+  "set": {
+    "localAssetPath": "assets/visuals/ai-blog-db/x/hook/x-hook-before-after-v1.png",
+    "status": "saved",
+    "updatedAt": "2026-05-13T07:11:28.411Z",
+    "reviewNotes": "Local image saved through Visual Register. Needs visual review. note heroの方向性が良ければ、X向けに文字量を減らして再構成する。"
+  },
+  "meta": {
+    "generatedBy": "tools/visual-register",
+    "originalFileName": "スクリーンショット 2026-05-13 8.23.00.png",
+    "mimeType": "image/png",
+    "directSanityWrite": false
+  }
+}

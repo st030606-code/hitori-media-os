@@ -1,0 +1,11 @@
+{
+  "_id": "visualAssetPlan.ai-blog-db.note-hero-v1",
+  "set": {
+    "expectedLocalAssetPath": "assets/visuals/ai-blog-db/note/hero/note-hero-v1.png"
+  },
+  "meta": {
+    "generatedBy": "codex",
+    "purpose": "Backfill expectedLocalAssetPath from seed/visual-asset-plan-records.json.",
+    "directSanityWrite": false
+  }
+}

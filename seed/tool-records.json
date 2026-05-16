@@ -1,0 +1,210 @@
+[
+  {
+    "_id": "tool.codex",
+    "_type": "tool",
+    "name": "Codex",
+    "category": "coding",
+    "role": "リポジトリ内の実装、ドキュメント更新、seed JSON作成、検証を担当する主要実装エージェント。",
+    "usedFor": [
+      "repository implementation",
+      "documentation updates",
+      "seed creation",
+      "validation",
+      "handoff creation"
+    ],
+    "costModel": "subscription",
+    "notes": "APIキー、トークン、認証情報、シークレットは保存しない。no-API MVPではローカルファイルとSanity Studio/CLIを中心に扱う。"
+  },
+  {
+    "_id": "tool.claude-code",
+    "_type": "tool",
+    "name": "Claude Code",
+    "category": "coding",
+    "role": "ローカル開発、レビュー補助、devlog整理、発信素材化の補助に使うコード支援ツール。",
+    "usedFor": [
+      "local coding assistance",
+      "review support",
+      "devlog refinement",
+      "content angle extraction"
+    ],
+    "costModel": "subscription",
+    "notes": "Codexの代替または補助として使う。認証情報やAPIキーは保存しない。"
+  },
+  {
+    "_id": "tool.chatgpt",
+    "_type": "tool",
+    "name": "ChatGPT",
+    "category": "writing",
+    "role": "保存済みプロンプトと構造化レコードを使い、媒体別下書き、レビュー、整理を支援する。",
+    "usedFor": [
+      "draft generation",
+      "Japanese review",
+      "content strategy review",
+      "handoff review"
+    ],
+    "costModel": "subscription",
+    "notes": "MVPではChatGPTアプリや手動操作として使う。OpenAI APIクライアントは追加しない。"
+  },
+  {
+    "_id": "tool.claude-app",
+    "_type": "tool",
+    "name": "Claude app",
+    "category": "writing",
+    "role": "長文整理、下書きレビュー、別視点の編集、発信素材化の補助に使う。",
+    "usedFor": [
+      "long-form review",
+      "draft editing",
+      "alternative framing",
+      "content repurposing"
+    ],
+    "costModel": "subscription",
+    "notes": "MVPでは手動利用。Anthropic APIクライアントは追加しない。"
+  },
+  {
+    "_id": "tool.sanity",
+    "_type": "tool",
+    "name": "Sanity",
+    "category": "cms",
+    "role": "構造化された知識レコード、プロンプト台帳、下書き、図解計画、ワークフローを保存するデータバックエンド。",
+    "usedFor": [
+      "structured content backend",
+      "schema validation",
+      "content operations data store"
+    ],
+    "costModel": "unknown",
+    "notes": "実project ID、APIキー、トークンは保存しない。設定はローカルの.env.localで扱う。"
+  },
+  {
+    "_id": "tool.sanity-cli",
+    "_type": "tool",
+    "name": "Sanity CLI",
+    "category": "cms",
+    "role": "seed JSONからSanity documentを作成し、初期データ投入を再現可能にするCLI。",
+    "usedFor": [
+      "document creation",
+      "seed import",
+      "local studio workflow validation"
+    ],
+    "costModel": "free",
+    "notes": "実行はユーザーのローカル環境で行う。認証情報はseedやdocsに保存しない。"
+  },
+  {
+    "_id": "tool.sanity-studio",
+    "_type": "tool",
+    "name": "Sanity Studio",
+    "category": "cms",
+    "role": "開発者・管理者・上級ユーザー向けのバックオフィス確認画面。seed作成後の表示確認や手動修正に使う。",
+    "usedFor": [
+      "admin review",
+      "schema validation",
+      "seed review",
+      "manual editing"
+    ],
+    "costModel": "free",
+    "notes": "買い手の日常入力UIではなく、将来ダッシュボードの裏側を確認する画面として扱う。"
+  },
+  {
+    "_id": "tool.local-files",
+    "_type": "tool",
+    "name": "Local files",
+    "category": "other",
+    "role": "inputs、prompts、outputs、docs、seedをローカルで管理し、no-API MVPの正本や作業ログとして使う。",
+    "usedFor": [
+      "input storage",
+      "prompt source of truth",
+      "draft output storage",
+      "seed files",
+      "documentation"
+    ],
+    "costModel": "free",
+    "notes": "ローカルファイルはGitで管理する。シークレットや.env.localはコミットしない。"
+  },
+  {
+    "_id": "tool.docs-devlog",
+    "_type": "tool",
+    "name": "Docs and devlog",
+    "category": "other",
+    "role": "設計判断、作業結果、レビュー観点、発信素材を記録するドキュメント群。",
+    "usedFor": [
+      "decision logging",
+      "handoff",
+      "review context",
+      "content repurposing"
+    ],
+    "costModel": "free",
+    "notes": "devlogは単なる作業記録ではなく、note/Substack/Threadsへ転用できる素材として扱う。"
+  },
+  {
+    "_id": "tool.github",
+    "_type": "tool",
+    "name": "GitHub",
+    "category": "other",
+    "role": "リポジトリ公開、README、GitHub Docs、変更履歴、将来の公開物配布に使う。",
+    "usedFor": [
+      "repository hosting",
+      "documentation publishing",
+      "change tracking",
+      "GitHub docs output"
+    ],
+    "costModel": "free",
+    "notes": "現時点ではGitHub API連携や自動公開は実装しない。"
+  },
+  {
+    "_id": "tool.obsidian",
+    "_type": "tool",
+    "name": "Obsidian",
+    "category": "writing",
+    "role": "未整理の思考、リサーチ、ラフメモ、日々の気づき、開発ログ前の素材を扱う。",
+    "usedFor": [
+      "rough notes",
+      "research",
+      "thinking",
+      "source material before structuring"
+    ],
+    "costModel": "free",
+    "notes": "Obsidianは考える場所、Sanityは構造化して展開する場所として分ける。"
+  },
+  {
+    "_id": "tool.capcut",
+    "_type": "tool",
+    "name": "CapCut",
+    "category": "video",
+    "role": "ShortsやYouTube用の動画編集、字幕、縦長動画制作に使う制作ツール。",
+    "usedFor": [
+      "video editing",
+      "short-form editing",
+      "captions",
+      "export"
+    ],
+    "costModel": "existing-contract",
+    "notes": "LLM APIではなく媒体化のための制作ツールとして扱う。"
+  },
+  {
+    "_id": "tool.elevenlabs",
+    "_type": "tool",
+    "name": "ElevenLabs",
+    "category": "audio",
+    "role": "音声生成やナレーション制作に使う可能性がある外部メディア生成サービス。",
+    "usedFor": [
+      "voice generation",
+      "narration draft",
+      "audio production"
+    ],
+    "costModel": "existing-contract",
+    "notes": "LLM API連携ではなく、音声制作ツールとして扱う。APIキーや認証情報は保存しない。"
+  },
+  {
+    "_id": "tool.fish-audio",
+    "_type": "tool",
+    "name": "Fish Audio",
+    "category": "audio",
+    "role": "音声生成や音声バリエーション制作に使う可能性がある外部メディア生成サービス。",
+    "usedFor": [
+      "voice generation",
+      "audio variation",
+      "production support"
+    ],
+    "costModel": "existing-contract",
+    "notes": "LLM API連携ではなく、音声制作ツールとして扱う。APIキーや認証情報は保存しない。"
+  }
+]

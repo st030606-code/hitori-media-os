@@ -1,0 +1,42 @@
+{
+  "_id": "substackPublicationStrategy.building-hitori-media-os",
+  "_type": "substackPublicationStrategy",
+  "title": "building-hitori-media-os Substack Publication Strategy",
+  "slug": {
+    "_type": "slug",
+    "current": "building-hitori-media-os"
+  },
+  "sourceContentIdea": {
+    "_type": "reference",
+    "_ref": "contentIdea.building-hitori-media-os"
+  },
+  "relatedContentIdeas": [
+    {
+      "_key": "related-ai-blog-db",
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    }
+  ],
+  "targetReader": "ひとりで発信・商品化・メディア運営を進めたい個人。AIとローカルツールで発信の型を整えたいクリエイター、開発者、編集者を含む。",
+  "positioningStatement": "発信を頑張るより、発信が回る仕組みを作るための実験ログ。完成版ツールの宣伝ではなく、Hitori Media OS を building-in-public で組み立てる過程と判断を共有する publication。",
+  "coreTopics": [
+    "Hitori Media OS",
+    "AI-assisted media workflow",
+    "Substack / reader-list growth"
+  ],
+  "publicationPromise": "個人がAIとローカルツールを使って、発信を仕組み化していく過程をそのまま共有する。完成品の発表ではなく、手動運用・判断・迷いまで含めた制作ログを届ける。",
+  "freeContentRole": "最高の公開ログ、実験結果、学びを無料で出す。出し惜しみはしない。free Postでも単独で価値が伝わる構成にする。",
+  "paidContentRole": "まだ急がない。将来は『裏側 / テンプレート / 導入支援』候補。Substack教科書のbackstage-pass的役割を意識し、free公開で信頼形成ができたあとに、初めて検討する。",
+  "notesRole": "交流、問いかけ、進捗共有。Substack内の会話入口として使う。Post予告 / launch follow-up / lesson learned / soft CTA の4種類を、過度な煽りなしで使い分ける。",
+  "postRole": "深い信頼形成、email配信、archive。週次の制作ログ・編集後記・思想記事として届ける。Reader Question を1問だけ置き、返信誘導を主軸にする。",
+  "subscriberCTA": "この実験の進捗を追いたい人は購読してください。煽らない soft CTAを基本とする。",
+  "aboutPageDraft": "TODO: 公開前に手書きで埋める。Hitori Media OS とは何か、誰のためか、どんな内容が届くかを1段落で。",
+  "welcomeEmailDraft": "TODO: 公開前に手書きで埋める。登録のお礼、これから届く内容、最初に読んでほしい1本、軽い返信誘導の問い。",
+  "voiceContentFormat": {
+    "voice": "落ち着いた、抑制的、誠実、building-in-publicの判断と迷いをそのまま見せる。",
+    "content": "Hitori Media OSの開発ログを中心に、AIワークフロー / Substack戦略 / ひとりメディア運営の制作判断を扱う。",
+    "format": "週次 build log を主軸に、思想記事 / 実験結果 / 編集後記 を混ぜる。冒頭フックは「自分の現在地」から入る。"
+  },
+  "status": "draft",
+  "reviewNotes": "Initial test seed. Do not publish automatically. Activation of substackPublicationStrategy only — other proposed Substack schemas (PostPlan / NotesPlan / GrowthAction / SubscriberMilestone / PaidReadiness) remain proposed and are NOT registered in Studio."
+}

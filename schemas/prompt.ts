@@ -1,0 +1,127 @@
+import {defineField, defineType} from 'sanity'
+
+export const prompt = defineType({
+  name: 'prompt',
+  title: 'プロンプト（Prompt）',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'title',
+      title: 'タイトル（Title）',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'targetPlatform',
+      title: '対象媒体（Target Platform）',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'note（note）', value: 'note'},
+          {title: 'Substack（substack）', value: 'substack'},
+          {title: 'Threads（threads）', value: 'threads'},
+          {title: 'X（x）', value: 'x'},
+          {title: 'YouTube（youtube）', value: 'youtube'},
+          {title: 'Shorts（shorts）', value: 'shorts'},
+          {title: 'Podcast（podcast）', value: 'podcast'},
+          {title: '図解（diagram）', value: 'diagram'},
+          {title: 'GitHub（github）', value: 'github'},
+          {title: '有料記事（paid）', value: 'paid'},
+          {title: 'Instagram（instagram）', value: 'instagram'},
+          {title: 'ニュースレター（newsletter）', value: 'newsletter'},
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'outputType',
+      title: '出力種別（Output Type）',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'note記事（note-article）', value: 'note-article'},
+          {title: 'Substack投稿（substack-post）', value: 'substack-post'},
+          {title: 'Threadsスレッド（threads-thread）', value: 'threads-thread'},
+          {title: 'X投稿（x-post）', value: 'x-post'},
+          {title: 'YouTube台本（youtube-script）', value: 'youtube-script'},
+          {title: 'Shorts台本（shorts-script）', value: 'shorts-script'},
+          {title: 'Podcast台本（podcast-script）', value: 'podcast-script'},
+          {title: '図解計画（diagram-plan）', value: 'diagram-plan'},
+          {title: 'GitHubドキュメント（github-doc）', value: 'github-doc'},
+          {title: '有料記事構成（paid-article-outline）', value: 'paid-article-outline'},
+          {title: 'Instagramカルーセル（instagram-carousel）', value: 'instagram-carousel'},
+          {title: 'ニュースレター（newsletter）', value: 'newsletter'},
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'localFilePath',
+      title: 'ローカルファイルパス（Local File Path）',
+      type: 'string',
+      description: '正本として管理するMarkdownプロンプトファイルへのパスです。',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'promptBody',
+      title: 'プロンプト本文（Prompt Body）',
+      type: 'text',
+      rows: 10,
+      description: '任意のコピーまたはスナップショットです。正本はローカルのMarkdownファイルに残します。',
+    }),
+    defineField({
+      name: 'requiredInputFields',
+      title: '必要な入力フィールド（Required Input Fields）',
+      type: 'array',
+      of: [{type: 'string'}],
+      validation: (Rule) => Rule.required().min(1),
+    }),
+    defineField({
+      name: 'humanReviewChecklist',
+      title: '人間レビュー項目（Human Review Checklist）',
+      type: 'array',
+      of: [{type: 'string'}],
+      validation: (Rule) => Rule.required().min(1),
+    }),
+    defineField({
+      name: 'outputPathPattern',
+      title: '出力パス形式（Output Path Pattern）',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'version',
+      title: 'バージョン（Version）',
+      type: 'string',
+      initialValue: '0.1.0',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'status',
+      title: '状態（Status）',
+      type: 'string',
+      initialValue: 'draft',
+      options: {
+        list: [
+          {title: '下書き（draft）', value: 'draft'},
+          {title: '有効（active）', value: 'active'},
+          {title: 'アーカイブ済み（archived）', value: 'archived'},
+        ],
+        layout: 'radio',
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'notes',
+      title: 'メモ（Notes）',
+      type: 'text',
+      rows: 3,
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'targetPlatform',
+    },
+  },
+})

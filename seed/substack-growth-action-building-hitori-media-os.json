@@ -1,0 +1,22 @@
+{
+  "_id": "substackGrowthAction.building-hitori-media-os.about-page-update",
+  "_type": "substackGrowthAction",
+  "title": "Update About Page for building-hitori-media-os",
+  "sourceContentIdea": {
+    "_type": "reference",
+    "_ref": "contentIdea.building-hitori-media-os"
+  },
+  "publicationStrategy": {
+    "_type": "reference",
+    "_ref": "substackPublicationStrategy.building-hitori-media-os"
+  },
+  "actionType": "about-page-update",
+  "targetPlatform": "substack",
+  "actionDescription": "building-hitori-media-os の読者向けに、SubstackのAbout Pageを「ひとりメディア運営OSの開発ログ」として整理する。完成版ツールの宣伝ではなく、build-in-public な実験ログpublicationであることが3秒で伝わる構成にする。coreTopics（Hitori Media OS / AI-assisted media workflow / Substack reader-list growth）を明示する。",
+  "expectedOutcome": "初回訪問者が、このPublicationで何を追えるのか理解しやすくなる。Substack内discoveryからの bounce が減り、登録した読者の期待値が揃う。",
+  "subscriberCTA": "この実験の続きを追いたい人は購読してください。",
+  "resultNotes": "",
+  "relatedPublishPackagePath": "publish-packages/substack/building-hitori-media-os/",
+  "safetyNotes": "自動投稿しない。Substack APIを呼ばない。subscribers個人情報を扱わない。About Pageの本文は人間が直接Substackエディタへ貼り付ける。",
+  "status": "planned"
+}

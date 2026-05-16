@@ -1,0 +1,225 @@
+{
+  "_id": "promptTemplate.x-hook-image-diagram-rich-v1",
+  "_type": "promptTemplate",
+  "title": "X hook-image diagram-rich v1",
+  "slug": {"_type": "slug", "current": "x-hook-image-diagram-rich-v1"},
+
+  "category": "image-generation",
+  "targetPlatform": "x",
+  "applicablePlatforms": ["x"],
+  "assetType": "hook-image",
+  "applicableAssetTypes": ["hook-image"],
+
+  "contentMode": "building-in-public",
+  "applicableContentModes": ["building-in-public", "build-log"],
+
+  "brandProfile": {
+    "_type": "reference",
+    "_ref": "brandProfile.hitori-media-os-default"
+  },
+  "visualStyleProfile": {
+    "_type": "reference",
+    "_ref": "visualStyleProfile.hitori-media-os.x-hook-image"
+  },
+
+  "outputFormat": "image-png",
+  "automationLevel": "semi-auto",
+
+  "systemInstruction": "あなたはHitori Media OSのbuilding-in-public visualをbuilt-in image_gen toolで生成するアシスタントです。trust-building / structured / clean / diagram-friendly のトーンを維持し、AI礼賛・完成断言・数字煽りを避けます。paid OpenAI Images APIを直接叩かず、Python/Node scriptを書かず、ChatGPT OAuth経由のbuilt-in image_gen toolのみを使います。assets/visuals/ への直接書き込みを禁止し、必ずinbox path に v00N.png として保存します。Visual Register Inbox Reviewは唯一のhuman approval gateであり、bypassしません。",
+
+  "userPromptTemplate": "Generate {{numberOfVariants}} variant images for {{contentIdea.slug}} / {{assetType}} on platform {{platform}}.\n\nHard Rules:\n- Use Codex built-in image_gen tool directly. Do not write Python/Node scripts.\n- Do not call OpenAI Images API directly. Use ChatGPT OAuth route only.\n- Do not save to assets/visuals/...\n- Do not save to patches/visual-assets/...\n- Do not write to Sanity from code.\n- Do not auto-post.\n- Do not include face / robot / AI brain / glass flare / gradient overload / clickbait.\n- Do not include secret / project ID / private/ paths / paid PDF content.\n\nTarget asset:\n- contentSlug: {{contentIdea.slug}}\n- visualAssetPlanId: {{visualAssetPlan.id}}\n- platform: {{platform}}\n- assetType: {{assetType}}\n- pixelSize: {{visualStyleProfile.expectedPixelSize}}\n- aspectRatio: {{visualStyleProfile.expectedAspectRatio}}\n\nTone reference:\n- {{visualStyleProfile.referenceImagePaths[0]}}\n- match base/accent/font/node shape\n- decoration density: {{visualStyleProfile.densityGuidance.decorationDensity}} ({{visualStyleProfile.densityGuidance.compareTo}})\n\nLayout (use one of the following layoutPatterns — DO NOT default to centered-title-only):\n{{#each visualStyleProfile.layoutPatterns}}\n  - {{this}}\n{{/each}}\n\nRequired modules:\n- headline: {{headlineText}}\n- subtitle: {{subtitleText}} (small)\n- diagramNodes: minimum {{visualStyleProfile.visualModuleSet.diagramNodesMin}}\n- diagramEdges: minimum {{visualStyleProfile.visualModuleSet.diagramEdgesMin}}\n- iconHintsAllowed: {{visualStyleProfile.visualModuleSet.iconHintsAllowed}}\n- bracketingLine: '{{bracketingLineText}}' (small, e.g. 'Hitori Media OS / development log')\n\nVariation strategy: 3-pattern-default\n- v001: diagram-first — top-headline-bottom-flow OR grid-of-modules, diagramNodes >= 3\n- v002: typography-diagram-hybrid — title-with-single-diagram OR split-left-text-right-diagram, diagramNodes 2〜3\n- v003: metaphor-mix — grid-of-modules OR before-after-comparison, iconHints 1〜2 (no face / no robot / no AI brain)\n\nSelf-review before saving each candidate (use reviewRubric below). If any criterion fails, STOP. Do not save a placeholder.\n\nCandidate save policy:\n- Save only to: assets/inbox/generated/{{contentIdea.slug}}/{{visualAssetPlan.slug}}/v00N.png\n- Start with v001.png. If v001.png exists, save as v002.png, then v003.png. Never overwrite.\n- Do NOT save to assets/visuals/... under any circumstance.\n- Do NOT call approve-and-register API.\n- Do NOT create patches/visual-assets/... files.\n\nHand-off:\n- After saving, output the final paths and pixel sizes only.\n- The human will then run `npm run visual:register` and use Visual Register Inbox Review.",
+
+  "inputVariables": [
+    {
+      "name": "contentIdea.slug",
+      "type": "string",
+      "source": "contentIdea",
+      "required": true,
+      "notes": "例: building-hitori-media-os"
+    },
+    {
+      "name": "contentIdea.coreThesis",
+      "type": "text",
+      "source": "contentIdea",
+      "required": false,
+      "notes": "headline 生成時の指針として使う"
+    },
+    {
+      "name": "visualAssetPlan.id",
+      "type": "reference",
+      "source": "visualAssetPlan",
+      "required": true
+    },
+    {
+      "name": "visualAssetPlan.slug",
+      "type": "string",
+      "source": "visualAssetPlan",
+      "required": true,
+      "notes": "例: x-hook-main-v1"
+    },
+    {
+      "name": "platform",
+      "type": "string",
+      "source": "constant",
+      "required": true,
+      "notes": "x"
+    },
+    {
+      "name": "assetType",
+      "type": "string",
+      "source": "constant",
+      "required": true,
+      "notes": "hook-image"
+    },
+    {
+      "name": "headlineText",
+      "type": "string",
+      "source": "human-input",
+      "required": true,
+      "notes": "例: 発信を頑張るより、発信が回る仕組みを作る。"
+    },
+    {
+      "name": "subtitleText",
+      "type": "string",
+      "source": "human-input",
+      "required": false,
+      "notes": "例: Hitori Media OS / development log"
+    },
+    {
+      "name": "bracketingLineText",
+      "type": "string",
+      "source": "human-input",
+      "required": false
+    },
+    {
+      "name": "numberOfVariants",
+      "type": "number",
+      "source": "constant",
+      "required": true,
+      "notes": "3-pattern-default なら 3"
+    }
+  ],
+
+  "outputContract": "Save 3 PNG files at assets/inbox/generated/<contentIdea.slug>/<visualAssetPlan.slug>/v001.png, v002.png, v003.png.\nEach PNG must be 1200x675 px, 8-bit RGB.\nReturn plain text listing: paths, pixel sizes, file sizes, layoutPattern used per variant, accent color used per variant.\nDo not produce JSON or markdown wrappers around the image files.",
+
+  "negativeInstructions": [
+    "Do not write Python scripts",
+    "Do not write Node.js scripts",
+    "Do not call OpenAI Images API directly",
+    "Do not use OPENAI_API_KEY",
+    "Do not save to assets/visuals/...",
+    "Do not save to patches/visual-assets/...",
+    "Do not modify campaign-hero-v1.png",
+    "Do not write to Sanity from code",
+    "Do not run sanity CLI commands",
+    "Do not auto-post",
+    "Do not create placeholder / fake image files",
+    "Do not bypass Visual Register Inbox Review",
+    "Do not default to centered-title-only layout",
+    "Do not include face photo / avatar / robot / AI brain / glass flare",
+    "Do not include money symbols / fake percentage badges / clickbait"
+  ],
+
+  "reviewRubric": [
+    {
+      "criterion": "headline readable in X preview crop (1.91:1 / 1:1 / 4:5)",
+      "weight": 3,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "tone matches campaign-hero-v1.png (color / font / node shape)",
+      "weight": 3,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "decoration density 1 step lower than note hero",
+      "weight": 2,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "diagramNodes >= 2 (unless layoutPattern == centered-title-only, which is last resort)",
+      "weight": 3,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "no face / robot / AI brain / glass flare / gradient overload",
+      "weight": 5,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "no secret / project ID / private path / paid PDF content",
+      "weight": 5,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "pixel size exactly 1200x675, format PNG, 8-bit RGB",
+      "weight": 3,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "layoutPattern is one of the allowed list (not centered-title-only as default)",
+      "weight": 3,
+      "passThreshold": "pass"
+    }
+  ],
+
+  "successCriteria": [
+    "image is 1200x675",
+    "image is PNG",
+    "diagramNodes >= 2 (if layoutPattern != centered-title-only)",
+    "headline appears in central 70% of the canvas",
+    "candidate path matches assets/inbox/generated/<slug>/<assetSlug>/v00N.png",
+    "no file written under assets/visuals/",
+    "no file written under patches/visual-assets/"
+  ],
+
+  "variationStrategy": "3-pattern-default",
+  "numberOfVariants": 3,
+
+  "imageGenerationConfig": {
+    "defaultLayoutPattern": "title-with-single-diagram",
+    "allowedLayoutPatterns": [
+      "title-with-single-diagram",
+      "split-left-text-right-diagram",
+      "top-headline-bottom-flow",
+      "grid-of-modules",
+      "before-after-comparison"
+    ],
+    "requiredVisualModules": {
+      "headlineRequired": true,
+      "subtitleRequired": true,
+      "diagramNodesMin": 2,
+      "diagramEdgesMin": 1,
+      "iconHintsAllowed": false,
+      "bracketingLineRequired": true
+    },
+    "forbiddenPatterns": [
+      "centered-title-only as default",
+      "text-only title card",
+      "face photo",
+      "AI generated avatar",
+      "AI brain icon",
+      "robot",
+      "generic AI future visual",
+      "glass flare",
+      "gradient overload",
+      "neon",
+      "logo-style marks",
+      "clickbait",
+      "money symbols"
+    ],
+    "selfReviewBeforeSaving": true,
+    "candidateSavePolicy": "Save to assets/inbox/generated/<contentIdea.slug>/<visualAssetPlan.slug>/v00N.png. Start with v001.png. Do NOT overwrite existing v00X files. If v001.png exists, increment.",
+    "finalPathPolicy": "Do NOT write to assets/visuals/... or patches/visual-assets/... under any circumstance. Visual Register `approve & register` is the only path to final asset.",
+    "visualRegisterApprovalRequired": true,
+    "expectedPixelSize": "1200x675",
+    "expectedAspectRatio": "16:9"
+  },
+
+  "version": "0.1.0",
+  "priority": 100,
+  "status": "draft",
+  "notes": "本ファイルは local-only seed。npx sanity documents create で投入していない。promptTemplate schema が activate されるまでは Studio 表示されない。Codex exec + built-in image_gen tool で使うことを想定（gpt-5.4 + --enable image_generation + --dangerously-bypass-approvals-and-sandbox）。",
+  "createdAt": "2026-05-14T00:00:00.000Z",
+  "updatedAt": "2026-05-14T00:00:00.000Z"
+}

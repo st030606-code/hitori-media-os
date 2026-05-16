@@ -1,0 +1,152 @@
+{
+  "_id": "visualStyleProfile.hitori-media-os.x-hook-image",
+  "_type": "visualStyleProfile",
+  "title": "Hitori Media OS / X / hook-image",
+  "slug": {"_type": "slug", "current": "hitori-media-os-x-hook-image"},
+
+  "brandProfile": {
+    "_type": "reference",
+    "_ref": "brandProfile.hitori-media-os-default"
+  },
+
+  "applicablePlatforms": ["x"],
+  "assetTypes": ["hook-image"],
+
+  "layoutPatterns": [
+    "title-with-single-diagram",
+    "split-left-text-right-diagram",
+    "top-headline-bottom-flow",
+    "grid-of-modules",
+    "before-after-comparison"
+  ],
+  "defaultLayoutPattern": "title-with-single-diagram",
+
+  "visualModuleSet": {
+    "headlineRequired": true,
+    "subtitleRequired": true,
+    "diagramNodesMin": 2,
+    "diagramEdgesMin": 1,
+    "iconHintsAllowed": false,
+    "bracketingLineRequired": true,
+    "watermarkOrTagAllowed": false
+  },
+
+  "typographyGuidance": {
+    "headlineSizeHint": "xl",
+    "subtitleSizeHint": "xs",
+    "nodeLabelSizeHint": "small",
+    "density": "balanced",
+    "lineHeightHint": "normal",
+    "fontFamilyHint": "Noto Sans JP / Inter / IBM Plex"
+  },
+
+  "colorGuidance": {
+    "baseColor": "off-white #FAFAFA",
+    "accentColor": "warm terracotta (restrained)",
+    "allowedAccents": [
+      "warm terracotta",
+      "muted teal",
+      "muted indigo"
+    ],
+    "forbiddenColorEffects": [
+      "gradient overload",
+      "neon",
+      "glass flare",
+      "heavy shadows"
+    ]
+  },
+
+  "densityGuidance": {
+    "decorationDensity": "restrained",
+    "compareTo": "note hero（campaign-hero-v1.png）よりも1段階控えめ"
+  },
+
+  "referenceImagePaths": [
+    "assets/visuals/building-hitori-media-os/shared/campaign-hero-v1.png"
+  ],
+  "adoptedCandidatePaths": [
+    "assets/inbox/generated/building-hitori-media-os/x-hook-main-v1/v001.png"
+  ],
+
+  "negativePatterns": [
+    "centered-title-only as default (last resort only)",
+    "text-only title card",
+    "face photo",
+    "AI generated avatar",
+    "AI brain icon",
+    "robot",
+    "generic AI future visual (neural mesh / glowing globe)",
+    "glass flare",
+    "gradient overload",
+    "neon",
+    "heavy shadows",
+    "logo-style marks",
+    "emoji decoration",
+    "clickbait headline",
+    "fake percentage badges (e.g. ↑1000%)",
+    "money symbols"
+  ],
+
+  "reviewRubric": [
+    {
+      "criterion": "見出し『発信を頑張るより、発信が回る仕組みを作る。』が中央70%に収まり、X preview crop (1.91:1 / 1:1 / 4:5) でも文字が切れない",
+      "weight": 3,
+      "passThreshold": "pass",
+      "notes": "X timelineで1秒読みが成立する条件。"
+    },
+    {
+      "criterion": "campaign-hero-v1.png と base / accent / font / ノード形状が一貫",
+      "weight": 3,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "note hero よりも装飾密度が1段階控えめ",
+      "weight": 2,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "layoutPattern が centered-title-only でない（最終手段以外）",
+      "weight": 3,
+      "passThreshold": "pass",
+      "notes": "diagramNodes >= 2 をrequiredModulesに従う形で実現する。"
+    },
+    {
+      "criterion": "diagramNodes >= 2, diagramEdges >= 1",
+      "weight": 3,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "顔写真 / AI generated avatar / robot / AI brain icon / glass flare が含まれない",
+      "weight": 5,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "完成断言 / 数字煽り / clickbait 表現が含まれない",
+      "weight": 5,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "secret / 実project ID / private/ パス / paid PDF教材 内容が映っていない",
+      "weight": 5,
+      "passThreshold": "pass"
+    },
+    {
+      "criterion": "ピクセルサイズが正確に 1200x675、形式PNG",
+      "weight": 3,
+      "passThreshold": "pass"
+    }
+  ],
+  "acceptanceThreshold": 80,
+
+  "variationStrategy": "3-pattern-default",
+  "numberOfVariants": 3,
+
+  "expectedAspectRatio": "16:9",
+  "expectedPixelSize": "1200x675",
+
+  "version": "0.1.0",
+  "status": "draft",
+  "notes": "本ファイルは local-only seed。npx sanity documents create で投入していない。visualStyleProfile schema が activate されるまでは Studio 表示されない。`adoptedCandidatePaths` の v001.png は Visual Register Inbox Review でまだ最終approve されていないため、approve 後に anchor として参照する想定。",
+  "createdAt": "2026-05-14T00:00:00.000Z",
+  "updatedAt": "2026-05-14T00:00:00.000Z"
+}

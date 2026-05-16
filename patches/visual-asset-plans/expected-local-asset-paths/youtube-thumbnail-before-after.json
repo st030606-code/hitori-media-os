@@ -1,0 +1,11 @@
+{
+  "_id": "visualAssetPlan.ai-blog-db.youtube-thumbnail-before-after",
+  "set": {
+    "expectedLocalAssetPath": "assets/visuals/ai-blog-db/youtube/thumbnail/youtube-thumbnail-v1.png"
+  },
+  "meta": {
+    "generatedBy": "codex",
+    "purpose": "Backfill expectedLocalAssetPath from seed/visual-asset-plan-records.json.",
+    "directSanityWrite": false
+  }
+}

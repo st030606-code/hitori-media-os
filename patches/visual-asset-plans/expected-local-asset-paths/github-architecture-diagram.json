@@ -1,0 +1,11 @@
+{
+  "_id": "visualAssetPlan.ai-blog-db.github-architecture-diagram",
+  "set": {
+    "expectedLocalAssetPath": "assets/visuals/ai-blog-db/github/readme/github-architecture-v1.png"
+  },
+  "meta": {
+    "generatedBy": "codex",
+    "purpose": "Backfill expectedLocalAssetPath from seed/visual-asset-plan-records.json.",
+    "directSanityWrite": false
+  }
+}

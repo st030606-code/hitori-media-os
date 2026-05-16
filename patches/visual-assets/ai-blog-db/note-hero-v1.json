@@ -1,0 +1,15 @@
+{
+  "_id": "visualAssetPlan.ai-blog-db.note-hero-v1",
+  "set": {
+    "localAssetPath": "assets/visuals/ai-blog-db/note/hero/note-hero-v1.png",
+    "status": "saved",
+    "updatedAt": "2026-05-13T07:47:32.436Z",
+    "reviewNotes": "Local image saved through Visual Register. Needs visual review. 最初の生成画像はChatGPT上に存在するが、まだローカル保存とSanity登録が必要。localAssetPathは実ファイル保存後に記録する。"
+  },
+  "meta": {
+    "generatedBy": "tools/visual-register",
+    "originalFileName": "note-hero-v1.png",
+    "mimeType": "image/png",
+    "directSanityWrite": false
+  }
+}

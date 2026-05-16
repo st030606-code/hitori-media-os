@@ -1,0 +1,146 @@
+[
+  {
+    "_id": "visualAssetPlan.trail-training-3months.note-hero-v1",
+    "_type": "visualAssetPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.trail-training-3months"
+    },
+    "generatedWith": {
+      "_type": "reference",
+      "_ref": "tool.chatgpt"
+    },
+    "title": "note hero / eye-catch: トレラン初心者の3ヶ月基礎練習",
+    "purpose": "note記事の冒頭で、初心者が距離を増やす前に登り・下り・補強・補給を整えるべきことを一目で伝える。",
+    "targetPlatform": "note",
+    "placement": "note hero / eye-catch",
+    "assetType": "eye-catch",
+    "aspectRatio": "16:9",
+    "reusePolicy": "reusable",
+    "status": "prompt-ready",
+    "imagePrompt": "日本語のシンプルなトレラン初心者向け図解。テーマ: 最初の3ヶ月で整える4つの基礎。中央に山道を走る初心者ランナーのシンプルなイメージ。周囲に4つの要素として「登り」「下り」「補強」「補給」を配置。白背景、黒文字中心、自然を感じる控えめな緑のアクセント。危険な崖、過度なスピード感、根拠のない記録向上表現は避ける。16:9。note hero / eye-catch向け。",
+    "textToInclude": [
+      "最初の3ヶ月",
+      "登り",
+      "下り",
+      "補強",
+      "補給"
+    ],
+    "textToAvoid": [
+      "絶対速くなる",
+      "無理して走る",
+      "根性",
+      "危険な山行"
+    ],
+    "visualDirection": "初心者向けで安心感のある図解。4つの基礎が均等に見える構成。山道の雰囲気は出すが、派手すぎない。",
+    "reviewNotes": "Content Idea filter / grouping検証用のtest visualAssetPlan。実画像はまだ作らない。",
+    "expectedLocalAssetPath": "assets/visuals/trail-training-3months/note/hero/note-hero-v1.png",
+    "localAssetPath": "",
+    "taskFilePath": "tasks/visuals/trail-training-3months/note-hero-v1.md",
+    "publishPackagePath": "publish-packages/note/trail-training-3months/",
+    "generationMode": "semi-automatic",
+    "generationProvider": "chatgpt-manual",
+    "generationJobId": "",
+    "sourcePromptVersion": "test-seed",
+    "apiEnabled": false,
+    "automationNotes": "MVPでは画像生成APIを使わず、人間が必要に応じて手動生成する。これはUI filter検証用のseed。",
+    "createdAt": "2026-05-13T00:00:00.000Z",
+    "updatedAt": "2026-05-13T00:00:00.000Z"
+  },
+  {
+    "_id": "visualAssetPlan.trail-training-3months.x-hook-v1",
+    "_type": "visualAssetPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.trail-training-3months"
+    },
+    "generatedWith": {
+      "_type": "reference",
+      "_ref": "tool.chatgpt"
+    },
+    "title": "X hook image: 距離より4つの基礎",
+    "purpose": "Xの図解ペア投稿で、トレラン初心者が距離より先に4つの基礎を整えるべきことを短く伝える。",
+    "targetPlatform": "x",
+    "placement": "X first post / hook image",
+    "assetType": "hook-image",
+    "aspectRatio": "1:1",
+    "reusePolicy": "variant-required",
+    "status": "prompt-ready",
+    "imagePrompt": "日本語の正方形図解。テーマ: トレラン初心者は距離より4つの基礎。中央に「距離より基礎」。周囲に「登り」「下り」「補強」「補給」。白背景、読みやすい大きな文字、控えめな緑アクセント。過度な煽りや根拠のない記録向上表現は避ける。1:1。X hook画像向け。",
+    "textToInclude": [
+      "距離より基礎",
+      "登り",
+      "下り",
+      "補強",
+      "補給"
+    ],
+    "textToAvoid": [
+      "最短で速くなる",
+      "完全攻略",
+      "根性",
+      "危険な山行"
+    ],
+    "visualDirection": "文字量を少なく、スクロール中でも読める正方形の図解。",
+    "reviewNotes": "Content Idea filter / grouping検証用。実画像はまだ作らない。",
+    "expectedLocalAssetPath": "assets/visuals/trail-training-3months/x/hook/x-hook-v1.png",
+    "localAssetPath": "",
+    "taskFilePath": "tasks/visuals/trail-training-3months/x-hook-v1.md",
+    "publishPackagePath": "publish-packages/x/trail-training-3months/",
+    "generationMode": "semi-automatic",
+    "generationProvider": "chatgpt-manual",
+    "generationJobId": "",
+    "sourcePromptVersion": "test-seed",
+    "apiEnabled": false,
+    "automationNotes": "MVPでは画像生成APIを使わず、人間が必要に応じて手動生成する。これはUI filter検証用のseed。",
+    "createdAt": "2026-05-13T00:00:00.000Z",
+    "updatedAt": "2026-05-13T00:00:00.000Z"
+  },
+  {
+    "_id": "visualAssetPlan.trail-training-3months.instagram-carousel-cover",
+    "_type": "visualAssetPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.trail-training-3months"
+    },
+    "generatedWith": {
+      "_type": "reference",
+      "_ref": "tool.chatgpt"
+    },
+    "title": "Instagram carousel cover: 最初の3ヶ月でやる練習4つ",
+    "purpose": "Instagramカルーセル表紙として、トレラン初心者が保存したくなる形で3ヶ月の基礎練習テーマを提示する。",
+    "targetPlatform": "instagram",
+    "placement": "Instagram carousel cover",
+    "assetType": "carousel-cover",
+    "aspectRatio": "4:5",
+    "reusePolicy": "platform-specific",
+    "status": "prompt-ready",
+    "imagePrompt": "日本語のInstagramカルーセル表紙。テーマ: トレラン初心者が最初の3ヶ月でやる練習4つ。大きな見出し「最初の3ヶ月でやる練習4つ」。小さく「登り・下り・補強・補給」。白背景、黒文字、控えめな緑アクセント。初心者向けで安心感のあるデザイン。危険な山道や過度な煽りは避ける。4:5。",
+    "textToInclude": [
+      "最初の3ヶ月でやる練習4つ",
+      "登り",
+      "下り",
+      "補強",
+      "補給"
+    ],
+    "textToAvoid": [
+      "絶対速くなる",
+      "限界まで追い込む",
+      "根性",
+      "危険な山行"
+    ],
+    "visualDirection": "保存されやすい縦長表紙。情報を詰め込みすぎず、初心者向けの安心感を優先する。",
+    "reviewNotes": "Content Idea filter / grouping検証用。実画像はまだ作らない。",
+    "expectedLocalAssetPath": "assets/visuals/trail-training-3months/instagram/carousel/instagram-carousel-cover-v1.png",
+    "localAssetPath": "",
+    "taskFilePath": "tasks/visuals/trail-training-3months/instagram-carousel-cover-v1.md",
+    "publishPackagePath": "publish-packages/instagram/trail-training-3months/",
+    "generationMode": "semi-automatic",
+    "generationProvider": "chatgpt-manual",
+    "generationJobId": "",
+    "sourcePromptVersion": "test-seed",
+    "apiEnabled": false,
+    "automationNotes": "MVPでは画像生成APIを使わず、人間が必要に応じて手動生成する。これはUI filter検証用のseed。",
+    "createdAt": "2026-05-13T00:00:00.000Z",
+    "updatedAt": "2026-05-13T00:00:00.000Z"
+  }
+]

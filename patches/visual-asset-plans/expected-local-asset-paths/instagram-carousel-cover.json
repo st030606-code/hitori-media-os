@@ -1,0 +1,11 @@
+{
+  "_id": "visualAssetPlan.ai-blog-db.instagram-carousel-cover",
+  "set": {
+    "expectedLocalAssetPath": "assets/visuals/ai-blog-db/instagram/carousel/instagram-carousel-cover-v1.png"
+  },
+  "meta": {
+    "generatedBy": "codex",
+    "purpose": "Backfill expectedLocalAssetPath from seed/visual-asset-plan-records.json.",
+    "directSanityWrite": false
+  }
+}

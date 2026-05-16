@@ -1,0 +1,163 @@
+[
+  {
+    "_id": "platformOutput.ai-blog-db.note",
+    "_type": "platformOutput",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "note",
+    "outputType": "note-article",
+    "title": "これからのブログは、記事を書くより「AIが使えるDB」を作った人が勝つ",
+    "draftBody": "# これからのブログは、記事を書くより「AIが使えるDB」を作った人が勝つ\n\nAI時代のブログは、完成記事の置き場から、複数の発信物を生み出す知識データベースへ変わっていく。\n\n## 導入\n\nブログを書くこと自体は、これからも大事です。\n\nただ、これから差がつくのは「記事を何本書いたか」だけではないと思っています。\n\nむしろ重要になるのは、AIが使える形で自分の考えを保存できているかどうかです。\n\n多くの発信者は、同じアイデアを何度も書き直しています。note用に長く書き、Substack用に少し個人的に書き、Threads用に短く分解し、YouTube用に台本へ直す。\n\nでも、そのたびに主張、根拠、具体例、読者、トーンを思い出しているなら、毎回かなりの文脈づくりが発生しています。\n\nそこで必要になるのが、記事そのものではなく、AIが使える知識DBです。\n\n## 本文\n\n### 記事の山ではなく、AIが使える素材を作る\n\n完成記事だけを保存していると、あとから別の媒体へ展開するときに、もう一度文脈を分解する必要があります。\n\nたとえば、ある記事の中に「主張」「根拠」「具体例」「反論への回答」が混ざっているとします。人間が読むには自然でも、別の出力へ変換するときには扱いにくい。\n\n一方で、元レコードの段階で次のように分かれていたらどうでしょう。\n\n- 中心となる主張\n- 想定読者\n- 読者の悩み\n- 主張ごとの根拠\n- 具体例\n- 反論と回答\n- 媒体別の切り口\n\nこの形なら、AIに渡したときに「note向けには論考として」「Substack向けには制作ログとして」「Threads向けには短い連投として」と変換しやすくなります。\n\nつまり、ブログを完成記事の倉庫として見るのではなく、AIが再利用できる素材置き場として設計するということです。\n\nたとえば、最小のレコードはこれくらいで始められます。\n\n```json\n{\n  \"title\": \"これからのブログはAIが使えるDBになる\",\n  \"coreThesis\": \"記事そのものより、AIが再利用できる元データを持つことが重要になる。\",\n  \"audience\": [\"ひとりメディア運営者\"],\n  \"audiencePain\": \"同じアイデアを媒体ごとに何度も書き直している。\",\n  \"claims\": [\n    {\n      \"claim\": \"完成記事より構造化された元レコードのほうが再利用しやすい。\",\n      \"supportingEvidence\": \"主張、根拠、具体例、反論を分けてAIに渡せるため。\"\n    }\n  ],\n  \"platformAngles\": [\n    {\n      \"platform\": \"note\",\n      \"hook\": \"ブログを記事の山ではなくDBとして見る。\"\n    },\n    {\n      \"platform\": \"Threads\",\n      \"hook\": \"ブログはAIが使う素材置き場になる。\"\n    }\n  ]\n}\n```\n\nこれだけでも、普通の記事メモよりはAIに渡しやすくなります。\n\n大事なのは、最初から完璧なスキーマを作ることではありません。AIが迷わず使えるように、考えの部品を分けて保存することです。\n\n### ひとつの知識レコードから、複数の出力を作る\n\n同じアイデアでも、媒体によって見せ方は変わります。\n\nnoteでは、背景から主張までをじっくり読ませる論考になります。\n\nSubstackでは、最近の気づきや制作過程を交えた手紙に近くなります。\n\nThreadsでは、1投稿につき1メッセージの短い連投になります。\n\nYouTubeでは、章立てされた解説台本になります。\n\nでも、これらの中心にあるものは同じです。主張、読者、根拠、具体例は共通しています。\n\nだからこそ、元になる知識レコードを整える価値があります。ひとつのレコードを作っておけば、媒体ごとにゼロから考え直すのではなく、同じ素材を別の形へ展開できます。\n\nこれは「AIで楽して量産する」という話ではありません。\n\nAIが使える素材を、人間がちゃんと整えるという話です。\n\n### 最初からAPI化しないほうがいい\n\nここで焦って、いきなりOpenAI APIやAnthropic APIを組み込む必要はありません。\n\nむしろMVPでは、Codex、Claude Code、ChatGPT、Claudeアプリに、JSONレコードとプロンプトを手動で渡すくらいで十分です。\n\n理由はシンプルです。\n\nまだ分かっていないからです。\n\nどのフィールドが出力品質に効くのか。どの媒体で追加情報が必要になるのか。どこで人間の編集が必要になるのか。どのプロンプトが弱いのか。\n\nそれらが分からないまま自動化すると、使えない自動化を作る可能性があります。\n\nまずは手動で回して、何が効くかを見る。そのあとで、必要な部分だけ自動化する。\n\nこの順番のほうが、ひとりメディア運営者には合っています。\n\n## 反論への回答\n\n「ブログをDB化すると、創作が重くならないか」という不安は自然です。\n\nすべてを最初から細かく構造化する必要はありません。\n\nまずは、主張、読者、根拠、具体例、反論、トーンだけで十分です。\n\nここで、ObsidianとSanityの役割を分けて考えると分かりやすくなります。\n\nObsidianは、考える場所です。\n\nまだ整理されていないメモ、リサーチ、開発ログ、ふと思いついた言葉、途中の違和感を置いておく場所です。\n\nSanityは、展開する場所です。\n\nObsidianの中から「これは何度も使う」と分かった知識を、主張、根拠、具体例、反論、媒体別の切り口として構造化して保存します。\n\nそう考えると、構造化は創作を縛るものではなく、あとから再利用しやすくするための整理です。\n\n## 締め\n\nこれからのブログは、単に記事を並べる場所ではなくなっていくと思います。\n\n少なくとも、AIを発信ワークフローに入れるなら、完成記事より前の「元になる素材」をどう設計するかが重要になります。\n\n記事を書く前に、まずひとつの知識レコードを作る。\n\nそこに、主張、根拠、具体例、反論、読者、媒体別の切り口を入れる。\n\nそのレコードから、note、Substack、Threads、YouTube、Podcast、図解、GitHubドキュメントへ展開する。\n\nこれが、AI時代のブログ運営の土台になるはずです。\n\n## 人間による確認ポイント\n\n- `coreThesis` が変わっていないか\n- 元レコードにない主張を足していないか\n- note記事として読める自然な流れになっているか\n- 公開前に確認すべき根拠や表現はあるか\n- 保存先は `outputs/note/` でよいか\n",
+    "localOutputPath": "outputs/note/2026-05-11--ai-blog-db--note.md",
+    "status": "drafted",
+    "reviewNotes": "Phase 1で作成したnote下書き。公開前に本人の体験、根拠、表現を確認する。",
+    "generatedFromPrompt": {
+      "_type": "reference",
+      "_ref": "prompt.generate-note-article"
+    },
+    "outputLength": "long",
+    "targetFormat": "article",
+    "primaryCTA": "最初のcontentIdeaレコード作成へ誘導",
+    "contentStatus": "needs-review"
+  },
+  {
+    "_id": "platformOutput.ai-blog-db.substack",
+    "_type": "platformOutput",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "substack",
+    "outputType": "substack-post",
+    "title": "最近、ブログを書くより先に「AIが読める素材」を作っています",
+    "draftBody": "件名: ブログを書く前に、AIが読める素材を作る\n\nプレビュー: 記事を増やすより、ひとつの知識レコードを整えるほうが大事かもしれません。\n\n# 最近、ブログを書くより先に「AIが読める素材」を作っています\n\n## オープニング\n\n最近、ブログを書く前に考えることが少し変わってきました。\n\n以前なら、まず記事の構成を考えて、そのまま本文を書き始めていたと思います。\n\nでも今は、その前に「このアイデアをAIが使える形で保存するとしたら、何を分けておくべきか」を考えています。\n\n主張は何か。\n\n読者は誰か。\n\n根拠はどこにあるか。\n\n具体例は何か。\n\n反論されそうな点は何か。\n\nnote、Substack、Threads、YouTubeでは、それぞれどんな切り口になるか。\n\nこういう項目を先に整理しておくと、ブログを書くというより、発信の元になるデータベースを作っている感覚に近くなります。\n\n## 今週やったこと\n\n今週は、まずリポジトリの中に小さな手動ワークフローを作りました。\n\nSanityもNext.jsもまだ初期化していません。\n\nやったことは、もっと地味です。\n\n- ひとつのサンプルJSONを作る\n- note / Substack / Threads 用のプロンプトを用意する\n- そのJSONをもとに3つの下書きを作る\n- どのフィールドが効いたかをdevlogに残す\n\n自動化というより、まずは「人間が見ながら回せる型」を作った感じです。\n\nこの段階でAPIを入れないのは、まだ何を自動化すべきか分かっていないからです。\n\n## 本文\n\nいろんな場所で発信していると、同じアイデアを何度も書き直すことになります。\n\nnoteでは長い論考にする。Substackでは少し個人的な制作ログとして書く。Threadsでは短く分解する。YouTubeでは章立てされた台本にする。\n\n形式は違うけれど、中心にある主張や根拠は同じです。\n\nそれなら、完成記事だけを保存するより、元になる知識レコードを整えたほうがいい。\n\n今回のサンプルでは、「これからのブログは、記事を書くより『AIが使えるDB』を作った人が勝つ」というテーマを、ひとつのJSONレコードとして整理しています。\n\nその中には、中心主張、読者の悩み、複数の主張、根拠、具体例、反論、トーン、媒体別の切り口が入っています。\n\nこれをCodexやClaude Code、ChatGPT、Claudeアプリに渡すと、毎回ゼロから文脈を説明しなくてよくなります。\n\nもちろん、AIがそのまま完璧な文章を出すわけではありません。\n\n人間の確認は必要です。\n\nでも、毎回「この話は何で、誰に向けていて、何を言いたいのか」を説明し直す負担は減ります。\n\nここが大きいです。\n\n## 読者の疑問への回答\n\nたぶん、「それは創作を構造化しすぎて重くならない？」という疑問が出ると思います。\n\nその感覚はかなり自然です。\n\nなので、最初から全部を細かく管理する必要はないと思っています。\n\nラフな思考やリサーチはObsidianに置く。日々のメモも、まだ形になっていない気づきも、そこに入れておく。\n\nその中から、何度も使いそうなアイデアだけをSanityのような構造化された場所に移す。\n\nつまり、Obsidianは考える場所。Sanityは再利用する知識を保存する場所。\n\nこの役割分担にすると、構造化は創作を縛るものではなく、発信を楽にするための整理になります。\n\n## 締め\n\n今の段階では、OpenAI APIやAnthropic APIを組み込む必要はないと思っています。\n\nまずは、ひとつのJSONとプロンプトを使って、手動でnote、Substack、Threadsの下書きを作ってみる。\n\nそれで、どのフィールドが効いたか、どこが足りなかったか、人間の編集がどれくらい必要かを見る。\n\n自動化は、そのあとでいい。\n\nむしろその順番のほうが、無駄な実装を避けられるはずです。\n\n## 次にテストすること\n\n次は、今回作った3つの下書きを見比べます。\n\n見たいのは、文章のうまさだけではありません。\n\n- noteとSubstackの違いがちゃんと出ているか\n- Threadsが短い投稿として読めるか\n- 元の `coreThesis` が崩れていないか\n- AIが勝手に言っていないことを足していないか\n- 人間がどれくらい編集すれば公開に近づくか\n\nここで見えた不足を、次のJSONやプロンプトに戻します。\n\nYouTube、Shorts、Podcast、図解に進むのは、そのあとでいいと思っています。\n\n## 読者への問い・CTA\n\nあなたが何度も書き直しているテーマは何ですか？\n\nもしひとつ選ぶなら、そのテーマの「主張」「根拠」「具体例」だけでも分けて保存してみると、次の発信が少し楽になるかもしれません。\n\n## 人間による確認ポイント\n\n- `coreThesis` が自然に伝わっているか\n- 個人的な制作ログとして読めるか\n- 元レコードにない主張を足していないか\n- 読者への問い・CTAがSubstack向きか\n- 保存先は `outputs/substack/` でよいか\n",
+    "localOutputPath": "outputs/substack/2026-05-11--ai-blog-db--substack.md",
+    "status": "drafted",
+    "reviewNotes": "Phase 1で作成したSubstack下書き。個人的な制作ログとしての自然さと読者への問いを確認する。",
+    "generatedFromPrompt": {
+      "_type": "reference",
+      "_ref": "prompt.generate-substack-post"
+    },
+    "outputLength": "medium",
+    "targetFormat": "newsletter-post",
+    "primaryCTA": "返信でDB化したい発信テーマを聞く",
+    "contentStatus": "needs-review"
+  },
+  {
+    "_id": "platformOutput.ai-blog-db.threads",
+    "_type": "platformOutput",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "threads",
+    "outputType": "threads-thread",
+    "title": "Threads投稿列: AIが使えるDB",
+    "draftBody": "## メイン投稿列\n\n1. これからのブログは、記事を書いた人より「AIが使えるDB」を作った人が強くなる。\n\n記事を増やすだけでは、毎回文脈を作り直すことになる。\n\n大事なのは、記事を書く前の素材です。\n\n2. 完成記事だけを保存していると、あとから別媒体へ展開するときに分解が必要になります。\n\n主張はどこ？\n根拠はどこ？\n具体例は？\n誰向け？\n\nこれを毎回やるのは重い。\n\n3. だから、元になるアイデアを最初から構造化しておく。\n\n中心主張。\n読者。\n読者の悩み。\n根拠。\n具体例。\n反論。\nトーン。\n媒体別の切り口。\n\nこの形だと、AIに渡しやすい。\n\n4. 同じアイデアでも、媒体で形は変わります。\n\nnoteは論考。\n\nSubstackは制作ログ。\n\nThreadsは短い連投。\n\nYouTubeは章立て台本。\n\nでも中心主張と根拠は共通している。\n\n5. つまり、作るべきなのは「記事の山」ではなく「AIが使えるDB」。\n\nAIで楽して量産する話ではなく、AIが使える素材を人間が整える話です。\n\n6. 最初からAPI化しなくていい。\n\nまずはJSONとプロンプトを用意する。\n\nそれをCodex、Claude Code、ChatGPT、Claudeアプリに手動で渡す。\n\nどの項目が効くかを見てから、自動化すればいい。\n\n7. ObsidianとSanityも役割を分ける。\n\nObsidianは、ラフメモ、思考、リサーチ、開発ログ。\n\nSanityは、そこから再利用できる知識を構造化して保存する場所。\n\n考える場所と、展開する場所を分けると迷いにくい。\n\n8. 「構造化すると創作が重くならない？」という不安はある。\n\nでも最初から全部を細かく管理する必要はない。\n\nまずは、主張、根拠、具体例、反論、読者、トーンだけで十分。\n\n9. 次にブログを書く前に、いきなり本文を書かない。\n\nまずは1つのアイデアを、AIが使える元レコードとして保存してみる。\n\nそのあとで、note、Substack、Threadsへ展開する。\n\nこれだけで発信の作り方が変わる。\n\n## 別案フック\n\n1. これからのブログは、記事を書いた人ではなく「AIが使えるDB」を作った人が強い。\n2. AI時代に必要なのは、投稿を量産することより、投稿の元になる知識を整えること。\n3. ブログを記事の倉庫にしておくのはもったいない。AIが使える知識DBにしたほうがいい。\n\n## 人間による確認ポイント\n\n- 1投稿目だけで問題提起が伝わるか\n- `coreThesis` が連投全体で保たれているか\n- 元レコードにない主張を足していないか\n- Threads向けに短く読みやすいか\n- 保存先は `outputs/threads/` でよいか\n",
+    "localOutputPath": "outputs/threads/2026-05-11--ai-blog-db--threads.md",
+    "status": "drafted",
+    "reviewNotes": "Phase 1で作成したThreads下書き。1投稿1メッセージになっているか、断定が強すぎないかを確認する。",
+    "generatedFromPrompt": {
+      "_type": "reference",
+      "_ref": "prompt.generate-threads-post"
+    },
+    "outputLength": "thread",
+    "targetFormat": "social-thread",
+    "primaryCTA": "自分の発信テーマを1つ構造化する",
+    "contentStatus": "needs-review"
+  },
+  {
+    "_id": "platformOutput.ai-blog-db.x",
+    "_type": "platformOutput",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "x",
+    "outputType": "x-post",
+    "title": "X投稿案: AIが使えるDB",
+    "draftBody": "# X投稿案\n\n## 単発投稿案\n\n1. これからのブログは、記事数だけでなく「AIが使えるDB」を持っているかが大事になると思う。\n\n主張、根拠、具体例、反論、媒体別の切り口。\n\nこれを分けて保存すると、note、Substack、X、YouTubeへ展開しやすい。\n\n2. ブログを「完成記事の置き場」として見ると、毎回文脈を作り直すことになる。\n\nブログを「AIが使える知識DB」として見ると、1つの元レコードから複数の下書きを作れる。\n\n3. AIで発信を楽にするなら、最初に整えるべきなのはプロンプトだけではない。\n\nAIに渡す元データ。\n\n主張、根拠、具体例、読者、反論が分かれているだけで、出力の安定感が変わる。\n\n4. Obsidianは考える場所。\nSanityは展開する場所。\n\nラフメモはObsidianに置く。\n何度も使う知識はSanityで構造化する。\n\nこの分け方が、AI時代の発信には合っていそう。\n\n5. API連携は、最初から入れなくていい。\n\nまずはJSONとプロンプトを手動で使う。\n\nどの項目が効くか。\nどこで人間の編集が必要か。\n\nそれを見てから自動化する。\n\n## Xスレッド\n\n1. AI時代のブログは、「記事の山」より「AIが使えるDB」として考えたほうがよさそう。\n\n完成記事を増やすだけだと、別媒体へ展開するたびに文脈を作り直すことになる。\n\n2. 先に分けて保存しておきたいもの:\n\n- 中心主張\n- 読者\n- 読者の悩み\n- 根拠\n- 具体例\n- 反論\n- トーン\n- 媒体別の切り口\n\nこれがあると、AIに渡しやすい。\n\n3. 同じ元レコードから、\n\nnoteは論考。\nSubstackはビルドログ。\nXは短い主張。\nYouTubeは章立て台本。\nPodcastはひとり語り。\n\n形式は違っても、中心の主張と根拠は共通している。\n\n4. 大事なのは、AIに完成稿を丸投げすることではない。\n\n人間が元になる知識を整える。\nAIには媒体別の初稿を作らせる。\n人間が最後に判断する。\n\nこの順番が現実的。\n\n5. なので、いきなりAPI化しない。\n\nまずはローカルJSONと保存済みプロンプトで手動検証する。\n\n何が効くか分かってから、必要な部分だけSanityや自動化へ進める。\n\n## 図解ペア投稿案\n\n1. 図解タイトル:\n記事の山 → AIが使えるDB\n\n投稿文:\nブログを記事の置き場ではなく、AIが使える知識DBとして見る。\n\n1つの元レコードから、note、Substack、X、YouTube、Podcastへ展開するイメージです。\n\n2. 図解タイトル:\nObsidian = 考える / Sanity = 展開する\n\n投稿文:\nラフメモやリサーチはObsidian。\n何度も使う知識はSanity。\n\n考える場所と、AIに渡す構造化データの場所を分けると、発信ワークフローが整理しやすい。\n\n3. 図解タイトル:\nManual first, API later\n\n投稿文:\n最初からAPI連携しない。\n\nまずはJSONとプロンプトで手動検証する。\n\nどのフィールドが効くか分かってから、自動化する。\n\nこの順番のほうが、無駄な実装を避けやすい。\n\n## CTA案\n\n### GitHub向け\n\n- GitHubに、Sanity AI Content OSのno-API MVPワークフローを整理しています。まずは1つのJSONから複数出力を作るところまで。\n- リポジトリでは、`contentIdea` から note / Substack / X / YouTube / Podcast へ展開する手動ワークフローを検証中です。\n\n### note向け\n\n- 詳しくはnoteで、AI時代のブログを「記事の山」ではなく「知識DB」として見る話を書きます。\n- noteでは、ミニJSON例つきで「AIが使えるブログDB」の考え方を整理する予定です。\n\n### Substack向け\n\n- Substackでは、このワークフローを作っている過程をビルドログとして書いていきます。\n- 今週は、1つのJSONから複数媒体の下書きを作る実験をしています。\n\n## 人間による確認ポイント\n\n- `coreThesis` が保たれているか\n- 元レコードにない主張を足していないか\n- Threadsより短く鋭いX投稿になっているか\n- 釣り表現や大げさな断定になっていないか\n- 図解、GitHub、note、Substackへの導線が自然か\n- 保存先は `outputs/x/` でよいか\n\n",
+    "localOutputPath": "outputs/x/2026-05-11--ai-blog-db--x.md",
+    "status": "drafted",
+    "reviewNotes": "Phase 1で作成したX下書き。Threadsより短く鋭いが、釣り表現や過度な断定になっていないかを確認する。",
+    "generatedFromPrompt": {
+      "_type": "reference",
+      "_ref": "prompt.generate-x-post"
+    },
+    "outputLength": "5 single posts + 1 thread + 3 diagram-paired posts",
+    "targetFormat": "single-posts-and-thread",
+    "primaryCTA": "GitHub / note / Substackへの導線",
+    "contentStatus": "needs-review"
+  },
+  {
+    "_id": "platformOutput.ai-blog-db.youtube",
+    "_type": "platformOutput",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "youtube",
+    "outputType": "youtube-script",
+    "title": "AI時代のブログは「記事」より「DB」で差がつく",
+    "draftBody": "# 動画タイトル案\n\nAI時代のブログは「記事」より「DB」で差がつく\n\n## コールドオープン\n\nAI時代にブログで強くなる人は、文章を書くのが速い人だけではありません。\n\nむしろ重要なのは、AIが使える形で、自分の考えを保存できているかです。\n\n同じアイデアを、note、Substack、Threads、YouTube、Podcastへ毎回書き直しているなら、問題は文章力ではなく、元になる素材の管理かもしれません。\n\n今日は、ブログを「記事の山」ではなく「AIが使えるDB」として設計する話をします。\n\n## イントロ\n\nこの動画は、ひとりで発信している人、noteやSubstackを書いている人、YouTubeやPodcastにも展開したい人向けです。\n\n結論はシンプルです。\n\nこれからのブログ運営で差がつくのは、記事をたくさん書くことだけではありません。\n\nAIが使える形で、主張、根拠、具体例、反論、読者、媒体別の切り口を保存し、ひとつの知識レコードから複数の発信物を作れる状態を持つことが強みになります。\n\nこれは、AIで楽して量産する話ではありません。\n\nAIが使える素材を、人間がちゃんと整える話です。\n\n## Chapter 1\n\nまず、今までのブログを「完成記事の置き場」として見てみます。\n\n記事を書いて公開する。次の記事を書く。また次の記事を書く。\n\nもちろん、それ自体は悪くありません。\n\nただ、複数媒体で発信しようとすると、同じアイデアを何度も変換することになります。\n\nnoteでは論考にする。\n\nSubstackでは制作ログにする。\n\nThreadsでは短い投稿に分解する。\n\nYouTubeでは章立てされた台本にする。\n\nPodcastではひとり語りにする。\n\n形式は違いますが、中心の主張や根拠は同じです。\n\nそれなら、完成記事だけを保存するより、元になる知識レコードを作ったほうが再利用しやすい。\n\n映像メモ: 画面左に「記事の山」、画面右に「AIが使えるDB」。記事の山からは矢印が絡まっている。DBからはnote、Substack、Threads、YouTube、Podcastへ矢印が伸びる。\n\n## Chapter 2\n\nでは、AIが使えるDBには何を入れるのか。\n\n最初から複雑にする必要はありません。\n\n最低限なら、次の項目で始められます。\n\n- タイトル\n- 中心主張\n- 想定読者\n- 読者の悩み\n- 主張\n- 根拠\n- 具体例\n- 反論\n- トーン\n- 媒体別の切り口\n\nたとえば「これからのブログは、記事を書くよりAIが使えるDBを作った人が勝つ」というアイデアなら、中心主張はこうです。\n\n記事をたくさん書くだけではなく、AIが使える形で主張や根拠を保存し、複数媒体へ展開できる状態を作ることが重要になる。\n\nこれをJSONやSanityのレコードとして保存しておくと、AIに渡しやすくなります。\n\n映像メモ: 実際のJSON風カードを表示。「coreThesis」「claims」「examples」「platformAngles」だけをハイライトする。細かいコードではなく、構造が分かる見せ方にする。\n\n## Chapter 3\n\nここで大事なのが、ObsidianとSanityの役割分担です。\n\nObsidianは、考える場所です。\n\nラフメモ、リサーチ、開発ログ、まだ整理されていない気づきを置いておく。\n\nSanityは、展開する場所です。\n\nObsidianの中から「これは何度も使う」と分かった知識を、構造化されたレコードとして保存する。\n\nつまり、Obsidianは思考の倉庫。\n\nSanityは、発信に使う知識DB。\n\nこの分け方をすると、創作の自由度を残しながら、AIが使いやすい素材も作れます。\n\n映像メモ: Obsidianを「ラフメモ・思考・リサーチ」、Sanityを「構造化・再利用・複数出力」として2カラムで表示する。\n\n## Chapter 4\n\nそして、最初からAPI化しないことも大事です。\n\nOpenAI APIやAnthropic APIを組み込む前に、まず手動で試します。\n\nサンプルJSONを作る。\n\nnote、Substack、Threads、YouTube用のプロンプトを用意する。\n\nCodex、Claude Code、ChatGPT、Claudeアプリに貼り付ける。\n\n出てきた下書きを人間が確認する。\n\nこれで十分に学べます。\n\nどのフィールドが効いたか。\n\nどの出力で情報が足りなかったか。\n\nどこに人間の編集が必要か。\n\nこれが分かってから自動化したほうが、無駄な実装を避けられます。\n\n映像メモ: 「Manual first」「API later」という短いステップ図。API連携にバツを付けるのではなく、後工程として置く。\n\n## 反論への回答\n\nここで「ブログをDB化すると、創作が重くならないか」と思うかもしれません。\n\nその不安は自然です。\n\nでも、全部を最初から細かく管理する必要はありません。\n\nまずは、主張、根拠、具体例、反論、読者、トーンだけで十分です。\n\nしかも、これは創作を縛るためではありません。\n\nあとから何度も使うための整理です。\n\n自由に考える場所はObsidianに残す。\n\n再利用する知識だけSanityに昇格させる。\n\nこのくらいの分け方で始めれば、十分に回せます。\n\n## 締め・CTA\n\n次にブログを書く前に、いきなり本文を書かず、まずひとつの知識レコードを作ってみてください。\n\nタイトル。\n\n中心主張。\n\n読者。\n\n根拠。\n\n具体例。\n\n反論。\n\n媒体別の切り口。\n\nこの形で保存してから、noteやSubstack、Threadsへ展開してみる。\n\nAI時代のブログは、記事の山ではなく、AIが使えるDBになっていくはずです。\n\n## 映像メモ\n\n- 冒頭: 記事の山とAIが使えるDBの対比\n- Chapter 1: note / Substack / Threads / YouTube / Podcast への分岐図\n- Chapter 2: ミニJSON風の構造カード\n- Chapter 3: ObsidianとSanityの2カラム比較\n- Chapter 4: Manual first / API later のワークフロー図\n- 締め: 1つの知識レコードから複数出力が出る全体図\n\n## 人間による確認ポイント\n\n- `coreThesis` が動画全体の軸になっているか\n- 章立てが視聴者の理解順になっているか\n- 元レコードにない主張を足していないか\n- 映像メモが制作に使える具体性を持っているか\n- 保存先は `outputs/youtube/` でよいか\n\n",
+    "localOutputPath": "outputs/youtube/2026-05-11--ai-blog-db--youtube.md",
+    "status": "drafted",
+    "reviewNotes": "Phase 1で作成したYouTube長尺台本下書き。章立て、視聴維持、映像メモの具体性を確認する。",
+    "generatedFromPrompt": {
+      "_type": "reference",
+      "_ref": "prompt.generate-youtube-script"
+    },
+    "outputLength": "10-15min",
+    "targetFormat": "long-form-script",
+    "primaryCTA": "自分のアイデアを1つJSONまたはMarkdownで構造化する",
+    "contentStatus": "needs-review"
+  },
+  {
+    "_id": "platformOutput.ai-blog-db.shorts",
+    "_type": "platformOutput",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "shorts",
+    "outputType": "shorts-script",
+    "title": "Shorts台本案: AIが使えるDB",
+    "draftBody": "## Short 1\n\nフック:\nブログは、もう「記事の置き場」だけじゃない。\n\n台本:\nAI時代のブログで大事なのは、記事を増やすことだけではありません。\n\nむしろ、AIが使える形で自分の考えを保存できているか。\n\n主張、根拠、具体例、反論、読者、媒体別の切り口。\n\nこれをひとつの元レコードにしておくと、note、Substack、Threads、YouTubeへ展開しやすくなります。\n\n記事の山ではなく、AIが使えるDBを作る。\n\n映像:\n左に積み上がる記事カード。右にDBカードがあり、複数媒体へ矢印が伸びる。\n\n画面テキスト:\n記事の山 → AIが使えるDB\n\nCTA:\n次の記事を書く前に、まず主張と根拠を分けてメモしてみてください。\n\n## Short 2\n\nフック:\n同じアイデア、何回も書き直していませんか？\n\n台本:\nnoteでは長く書く。\n\nSubstackでは制作ログにする。\n\nThreadsでは短く分解する。\n\nYouTubeでは台本にする。\n\nでも、中心の主張と根拠は同じです。\n\nだから先に、元になる知識レコードを作ったほうがいい。\n\nAIに渡す素材を整えると、毎回ゼロから文脈を作らなくてよくなります。\n\n映像:\n同じアイデアカードが、note、Substack、Threads、YouTubeへ変換されるアニメーション風の構成。\n\n画面テキスト:\n同じアイデアを毎回ゼロから作らない\n\nCTA:\n自分が何度も話しているテーマを1つだけ構造化してみてください。\n\n## Short 3\n\nフック:\nObsidianとSanityは、役割を分けると使いやすい。\n\n台本:\nObsidianは考える場所。\n\nラフメモ、リサーチ、開発ログ、まだ整理されていない気づきを置く。\n\nSanityは展開する場所。\n\n何度も使う知識を、AIが使える形で構造化して保存する。\n\n考える場所と、展開する場所を分ける。\n\nこれだけで、AI発信のワークフローはかなり整理しやすくなります。\n\n映像:\n2カラム比較。左にObsidian、右にSanity。左から右へ「昇格」する矢印。\n\n画面テキスト:\nObsidian = 考える\nSanity = 展開する\n\nCTA:\nまずはObsidianのメモから、何度も使うアイデアを1つ選んでみてください。\n\n## 人間による確認ポイント\n\n- 1本につき1主張に絞れているか\n- `coreThesis` からズレていないか\n- 元レコードにない主張を足していないか\n- 画面テキストが短く見やすいか\n- 保存先は `outputs/shorts/` でよいか\n\n",
+    "localOutputPath": "outputs/shorts/2026-05-11--ai-blog-db--shorts.md",
+    "status": "drafted",
+    "reviewNotes": "Phase 1で作成したShorts下書き。1本1主張、画面テキストの短さ、元レコードからの逸脱がないかを確認する。",
+    "generatedFromPrompt": {
+      "_type": "reference",
+      "_ref": "prompt.generate-shorts-script"
+    },
+    "outputLength": "3 shorts / 30-45sec each",
+    "targetFormat": "short-form-script",
+    "primaryCTA": "主張と根拠を分けてメモする",
+    "contentStatus": "needs-review"
+  },
+  {
+    "_id": "platformOutput.ai-blog-db.podcast",
+    "_type": "platformOutput",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "podcast",
+    "outputType": "podcast-script",
+    "title": "ブログを「記事」ではなく「AIが使えるDB」として見る",
+    "draftBody": "# エピソードタイトル案\n\nブログを「記事」ではなく「AIが使えるDB」として見る\n\n## 冒頭フック\n\n今日は、ブログを記事ではなくデータベースとして見る話をします。\n\nたくさん記事を書くことも大事なんですが、AI時代にはもうひとつ大事な視点があります。\n\nそれは、AIが使える形で、自分の考えを保存できているかどうかです。\n\n## イントロ\n\nひとりで発信していると、同じアイデアをいろんな形に直すことがあります。\n\nnote用に長く書く。\n\nSubstack用に少し個人的に書く。\n\nThreads用に短く分解する。\n\nYouTube用に台本にする。\n\nPodcast用に話し言葉にする。\n\nこのとき、毎回ゼロから考えていると、かなり疲れます。\n\nなので、今回のテーマは「これからのブログは、記事を書くよりAIが使えるDBを作った人が強くなる」という話です。\n\nこれは完成稿をAIに丸投げする話ではありません。\n\n人間が元になる素材を整えて、AIには媒体別の初稿を作ってもらう、という考え方です。\n\n## Segment 1\n\nまず、完成記事だけを保存するやり方には限界があります。\n\n記事は人間が読むには自然です。\n\nでも、あとから別媒体へ展開しようとすると、記事の中から主張や根拠をもう一度取り出す必要があります。\n\nこの記事で何を言っていたのか。\n\n誰に向けていたのか。\n\n根拠はどこにあったのか。\n\n具体例は何だったのか。\n\n反論への回答は入っていたのか。\n\nこういうことを毎回思い出す必要がある。\n\nそれなら、最初から元データとして分けて保存しておくほうが扱いやすいです。\n\n## Segment 2\n\nAIが使える知識レコードには、最初は最低限の項目だけで十分です。\n\nたとえば、タイトル、中心主張、読者、読者の悩み、主張、根拠、具体例、反論、トーン、媒体別の切り口。\n\nこのくらいあれば、AIに渡したときに「noteとして書いて」「Substackとして書いて」「Threadsに分解して」と依頼しやすくなります。\n\n実際、同じテーマでも、媒体によって形は変わります。\n\nnoteは論考。\n\nSubstackはビルドログ。\n\nThreadsは短い連投。\n\nYouTubeは章立て台本。\n\nPodcastはこういうひとり語り。\n\nでも、中心の主張や根拠は同じです。\n\nだから、元になるレコードを整えておく意味があります。\n\n## Segment 3\n\nもうひとつ大事なのが、ObsidianとSanityの役割分担です。\n\nObsidianは考える場所です。\n\nラフメモ、リサーチ、開発ログ、まだ言葉になりきっていない気づき。\n\nそういうものを置いておくのに向いています。\n\n一方でSanityは、展開する場所です。\n\n何度も使う知識を、構造化された形で保存する。\n\nあとからnote、Substack、Threads、YouTube、Podcastに展開しやすいようにしておく。\n\nこの分け方をすると、創作の自由さと、AIが使いやすい構造の両方を残せます。\n\n## よくある疑問への回答\n\n「それって構造化しすぎて、創作が重くならない？」という疑問はあると思います。\n\nこれは本当にそうで、最初から全部を細かくやろうとすると重くなります。\n\nなので、最初は小さくていいです。\n\n主張、根拠、具体例、反論、読者、トーン。\n\nまずはこのくらいで十分です。\n\nもうひとつ、「最初からAPIで自動化したほうが早くない？」という疑問もあります。\n\nでも、今はまだ何を自動化すべきかを見極める段階です。\n\n手動で回して、どのフィールドが効くのか、どこで人間の編集が必要なのかを見たほうがいい。\n\n自動化は、そのあとで十分です。\n\n## 締め\n\n今日できる小さな行動としては、次の記事を書く前に、まず元レコードを1つ作ってみることです。\n\nいきなり完璧なデータベースを作らなくていいです。\n\nタイトル。\n\n中心主張。\n\n読者。\n\n根拠。\n\n具体例。\n\n反論。\n\n媒体別の切り口。\n\nこれだけでも、AIに渡す素材としてはかなり使いやすくなります。\n\nブログを記事の山にするのではなく、AIが使える知識DBにしていく。\n\n今日はそんな話でした。\n\n## 話し手のための確認質問\n\n- 自分の実体験として、何度も書き直しているテーマを1つ入れられるか\n- ObsidianとSanityの役割分担を、より自分の言葉で話せるか\n- 「AIで量産」ではなく「AIが使える素材を整える」という立場が伝わるか\n- 音声で聞いたときに、専門用語が多すぎないか\n\n## 人間による確認ポイント\n\n- 声に出して自然に聞こえるか\n- `coreThesis` が会話の軸として残っているか\n- 元レコードにない主張を足していないか\n- 聞き手が今日できる行動が明確か\n- 保存先は `outputs/podcast/` でよいか\n\n",
+    "localOutputPath": "outputs/podcast/2026-05-11--ai-blog-db--podcast.md",
+    "status": "drafted",
+    "reviewNotes": "Phase 1で作成したPodcast台本下書き。声に出した自然さ、個人的な体験の追加余地、聞き手の次アクションを確認する。",
+    "generatedFromPrompt": {
+      "_type": "reference",
+      "_ref": "prompt.generate-podcast-script"
+    },
+    "outputLength": "episode script",
+    "targetFormat": "solo-podcast-script",
+    "primaryCTA": "発信テーマを1つ選び主張と根拠を書き出す",
+    "contentStatus": "needs-review"
+  }
+]

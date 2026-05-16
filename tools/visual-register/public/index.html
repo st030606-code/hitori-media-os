@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Visual Register</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topBar">
+        <div>
+          <p class="eyebrow">Sanity AI Content OS</p>
+          <h1>Visual Register</h1>
+        </div>
+        <div class="topActions">
+          <span id="serverStatus" class="statusChip">確認中（Checking）</span>
+          <a class="ghostLink" href="/api/health" target="_blank" rel="noreferrer">Health</a>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="mainColumn">
+          <section class="card uploadCard">
+            <div>
+              <h2>画像を選択</h2>
+              <p class="subText">
+                手動生成した画像を複数選択できます。各画像に登録先プランを割り当ててから登録します。
+              </p>
+              <p id="testSeedNotice" class="modeNotice" hidden>
+                Test seed mode: 追加のvisualAssetPlan seedを読み込んでいます。
+              </p>
+            </div>
+            <label class="fileDrop" for="imageInput">
+              <span class="fileDropTitle">画像ファイルを選択</span>
+              <span class="fileDropText">PNG / JPG / WebPなど。画像生成はこのUIでは行いません。</span>
+              <input id="imageInput" type="file" accept="image/*" multiple />
+            </label>
+          </section>
+
+          <section class="card inboxCard">
+            <div class="sectionHeader">
+              <div>
+                <h2>Inbox Review（候補画像レビュー）</h2>
+                <p class="subText">
+                  <code>assets/inbox/generated/&lt;content-slug&gt;/</code> に置かれた候補画像を、承認 / 却下 / 再生成依頼で管理します。
+                </p>
+              </div>
+              <button id="reloadInboxButton" class="secondaryButton" type="button">再読み込み</button>
+            </div>
+
+            <div class="inboxSummaryBar">
+              <span id="inboxSummary" class="inboxSummary">読み込み中…</span>
+              <label class="filterControl" for="inboxStatusFilter">
+                <span>レビュー状態</span>
+                <select id="inboxStatusFilter">
+                  <option value="all">すべて</option>
+                  <option value="candidate">candidate</option>
+                  <option value="approved">approved</option>
+                  <option value="rejected">rejected</option>
+                  <option value="needs-regeneration">needs-regeneration</option>
+                  <option value="registered">registered</option>
+                </select>
+              </label>
+              <label class="filterControl" for="inboxSlugFilter">
+                <span>Content Slug</span>
+                <select id="inboxSlugFilter">
+                  <option value="all">すべて</option>
+                </select>
+              </label>
+            </div>
+
+            <div id="inboxEmpty" class="emptyState">
+              まだ候補画像がありません。<code>assets/inbox/generated/&lt;content-slug&gt;/</code> に画像を置いてから「再読み込み」を押してください。
+            </div>
+
+            <div id="inboxList" class="inboxList" hidden></div>
+          </section>
+
+          <section class="card">
+            <div class="sectionHeader">
+              <div>
+                <h2>登録キュー</h2>
+                <p class="subText">画像ごとに登録先プランと保存予定パスを確認します。</p>
+              </div>
+              <button id="registerAllButton" class="primaryButton" type="button" disabled>まとめて登録</button>
+            </div>
+
+            <div class="filterBar" aria-label="Content Idea filter">
+              <label class="filterControl" for="contentIdeaFilter">
+                <span>コンテンツアイデア（Content Idea）</span>
+                <select id="contentIdeaFilter"></select>
+              </label>
+              <label class="filterControl" for="platformFilter">
+                <span>媒体（Platform）</span>
+                <select id="platformFilter"></select>
+              </label>
+              <label class="filterControl" for="assetTypeFilter">
+                <span>画像種別（Asset Type）</span>
+                <select id="assetTypeFilter"></select>
+              </label>
+              <div id="contentIdeaSummary" class="filterSummary">Content Ideaを読み込み中です。</div>
+            </div>
+
+            <div id="queueEmpty" class="emptyState">
+              まだ画像が選択されていません。まず「画像を選択」からファイルを追加してください。
+            </div>
+
+            <div class="tableWrap" aria-live="polite">
+              <table id="queueTable" class="queueTable" hidden>
+                <thead>
+                  <tr>
+                    <th>画像</th>
+                    <th>登録先プラン</th>
+                    <th>保存予定パス</th>
+                    <th>ステータス</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="queueBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="card patchReviewCard">
+            <div class="sectionHeader">
+              <div>
+                <h2>Patch Review</h2>
+                <p class="subText">Sanity Studioへ反映する前に、patch JSONとローカル画像の存在を確認します。</p>
+              </div>
+              <button id="reloadPatchesButton" class="secondaryButton" type="button">再読み込み</button>
+            </div>
+
+            <div id="patchEmpty" class="emptyState">
+              patch JSONがまだありません。
+            </div>
+
+            <div class="patchReviewGrid" id="patchReviewGrid" hidden>
+              <div class="tableWrap">
+                <table class="patchTable">
+                  <thead>
+                    <tr>
+                      <th>Patch JSON</th>
+                      <th>対象ID</th>
+                      <th>状態</th>
+                      <th>画像</th>
+                    </tr>
+                  </thead>
+                  <tbody id="patchBody"></tbody>
+                </table>
+              </div>
+
+              <div class="patchDetailPanel">
+                <h3>Patch詳細</h3>
+                <div id="patchDetails" class="patchDetails">patchを選択してください。</div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <aside class="sidePanel">
+          <section class="card stickyCard">
+            <div class="sectionHeader compact">
+              <div>
+                <h2>プレビュー</h2>
+                <p class="subText">選択中の画像とplan情報を確認します。</p>
+              </div>
+            </div>
+
+            <img id="preview" class="preview" alt="選択中画像のプレビュー" />
+            <div id="previewEmpty" class="previewEmpty">キューの行を選ぶとプレビューが表示されます。</div>
+
+            <div id="planDetails" class="details"></div>
+
+            <div class="patchBox">
+              <h3>Patch JSON</h3>
+              <p id="patchPath" class="monoText">-</p>
+            </div>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <template id="planOptionsTemplate"></template>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,309 @@
+{
+  "_id": "contentIdea.building-hitori-media-os",
+  "_type": "contentIdea",
+  "title": "AIで「ひとりメディア運営OS」を作っている裏側",
+  "slug": {
+    "_type": "slug",
+    "current": "building-hitori-media-os"
+  },
+  "status": "idea",
+  "rawInput": "発信を頑張るだけでは、ひとりメディア運営の制作工程はどんどん重くなる。ひとつのアイデアをnote、Substack、X、Threads、YouTube、Podcastへ展開できる仕組みを、Sanity、Visual Register、Publish Package Builder、release-prep folderを使って手動・半自動で組み立てている。自動投稿やAPI生成は最後で、まずは手動で回る型を作る。",
+  "summary": "発信を頑張る時代から、発信が回る仕組みを作る時代へ。Hitori Media OSの開発過程そのものをコンテンツ素材にし、ひとつのContent Ideaを複数媒体へ展開する裏側を共有する。",
+  "coreThesis": "発信を頑張るより、発信が回る仕組みを作る。AIで記事を量産する前に、AIが使える知識DBと制作ワークフローを設計したほうが、ひとりメディア運営は長く続けやすい。",
+  "audience": [
+    "ひとりメディア運営者",
+    "note / X / Substack / YouTube / Podcastを横断して発信したい人",
+    "同じテーマを媒体ごとに何度も書き直している発信者",
+    "API自動化より先に、発信の型を整えたい個人クリエイター",
+    "AIワークフローを自分の運営に取り入れたい開発者・編集者"
+  ],
+  "audiencePain": "発信を増やすほど制作工程が重くなり、同じテーマを媒体ごとに作り直している。AI記事生成だけ取り入れても再利用が効かず、結局ひとりで全部抱えてしまう。仕組み化の手前で疲れてしまう発信者が多い。",
+  "contentPillars": [
+    "発信を頑張るより仕組みを作る",
+    "Hitori Media OS",
+    "Content Idea中心の知識DB",
+    "手動 / 半自動 / 自動化の順番",
+    "AIで使える素材設計"
+  ],
+  "claims": [
+    {
+      "_key": "claim-system-over-effort",
+      "_type": "object",
+      "claim": "発信を頑張るより、発信が回る仕組みを作るほうが、ひとりメディア運営は続けやすい。",
+      "supportingEvidence": "毎回ゼロから書く制作は属人化しやすく、媒体が増えるほど工数が線形に増える。仕組み化すると、1つの元レコードから複数媒体へ展開できる。",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "_key": "claim-db-before-articles",
+      "_type": "object",
+      "claim": "AIに記事を書かせる前に、AIが読めるDBを作ったほうが、出力の一貫性と再利用性が上がる。",
+      "supportingEvidence": "主張・読者・根拠・反論・トーンが分かれた構造化レコードがあると、媒体ごとに毎回文脈を再構成する必要がなくなる。",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "_key": "claim-manual-first",
+      "_type": "object",
+      "claim": "自動化は最後にする。まず手動で回る型を作ったほうが、不要な自動化を避けられる。",
+      "supportingEvidence": "Phase 1ではCodex、Claude Code、ChatGPT、Sanity、ローカルファイルで手動運用を回すことで、本当に繰り返し発生する作業だけが自動化候補になる。",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "_key": "claim-show-the-build",
+      "_type": "object",
+      "claim": "ツールが完成する前に開発過程を公開するほうが、完成品をいきなり売るより信頼が作りやすい。",
+      "supportingEvidence": "設計判断、迷い、手動運用の現実を見せることで、読者は自分の発信に取り入れやすくなり、最終的なoffer候補にもつながる。",
+      "confidence": "medium",
+      "needsVerification": false
+    }
+  ],
+  "tone": {
+    "voice": "落ち着いた、実用的、設計思想がある、ひとり運営者に寄り添う、煽らない",
+    "styleNotes": [
+      "AIで楽して量産ではなく、AIで再利用できる素材を整えるという立場で書く",
+      "完成したツールの宣伝ではなく、開発過程の判断や迷いを共有する",
+      "読者の発信運用に1つだけ持ち帰ってもらえる具体性を入れる"
+    ],
+    "avoid": [
+      "派手な自動化の煽り",
+      "ツール名や流行語の羅列",
+      "根拠のない生産性主張",
+      "人間レビューをなくすような言い方",
+      "完成版を急いで売り込むトーン"
+    ]
+  },
+  "platformAngles": [
+    {
+      "_key": "angle-x",
+      "_type": "object",
+      "platform": "x",
+      "targetReader": "短い気づきや進捗共有から興味を持つ発信者・開発者",
+      "hook": "発信を頑張るより、発信が回る仕組みを作っている。",
+      "formatNotes": "単発投稿、短いスレッド、進捗共有、note / Substackへの導線。完成品の宣伝ではなく開発中の判断を見せる。",
+      "callToAction": "Substack / noteの最新記事へ自然に誘導する。"
+    },
+    {
+      "_key": "angle-threads",
+      "_type": "object",
+      "platform": "threads",
+      "targetReader": "会話調の短い投稿で関心を持つ個人クリエイター",
+      "hook": "1つのアイデアから、note、Substack、X、YouTube、Podcastまで展開するOSを作っている。",
+      "formatNotes": "5〜7投稿の連投。完成度より、開発中の気づきや迷いを混ぜる。",
+      "callToAction": "読者に「自分が仕組み化したい発信作業」を投げかける。"
+    },
+    {
+      "_key": "angle-note",
+      "_type": "object",
+      "platform": "note",
+      "targetReader": "発信思想や設計背景を日本語で読み込みたいクリエイター",
+      "hook": "AIで「ひとりメディア運営OS」を作っている裏側。",
+      "formatNotes": "設計思想 → なぜAPIをまだ入れないか → 手動で回す型 → 今週作ったもの の順。実験ログとしての一文を冒頭に入れる。",
+      "callToAction": "次に作る予定の機能と、読者が真似できる最初の1ステップを示す。"
+    },
+    {
+      "_key": "angle-substack",
+      "_type": "object",
+      "platform": "substack",
+      "targetReader": "制作ログや判断の背景まで読みたいビルドイン・パブリック読者",
+      "hook": "今週、ひとりメディア運営OSにこれを足しました。",
+      "formatNotes": "build log調。今週やったこと、なぜこの順で作ったか、どこをまだ手動に残しているか、次に検証することを書く。読者への問いで締める。",
+      "callToAction": "返信で「自分が最初に仕組み化したい作業」を教えてもらう。"
+    },
+    {
+      "_key": "angle-youtube",
+      "_type": "object",
+      "platform": "youtube",
+      "targetReader": "画面付きで運用OSを学びたいクリエイター・開発者",
+      "hook": "AI時代のひとりメディア運営は、記事を増やすより仕組みを作ったほうが続けやすい。",
+      "formatNotes": "10〜15分。Sanity Studio、Visual Register、Patch Review、Publish Package Builder、release-prep folderを画面録画で見せ、Next.js dashboardをまだ作らない理由も話す。",
+      "callToAction": "視聴者に、自分の発信のうちどの作業から仕組み化したいかコメントを促す。"
+    },
+    {
+      "_key": "angle-shorts",
+      "_type": "object",
+      "platform": "shorts",
+      "targetReader": "短尺で発信改善のヒントが欲しい人",
+      "hook": "発信を増やすより、発信が増える仕組みを作る。",
+      "formatNotes": "30〜45秒。1つの強い考えだけに絞る。記事の量産ではなくDB化の対比を見せる。",
+      "callToAction": "long-form / Substack / noteへの導線を1つだけ置く。"
+    },
+    {
+      "_key": "angle-podcast",
+      "_type": "object",
+      "platform": "podcast",
+      "targetReader": "作業しながら開発思想を聞きたい個人運営者",
+      "hook": "今日は、ひとりメディア運営OSを作っている裏側を話します。",
+      "formatNotes": "ひとり語り。なぜContent OSを作り始めたか、ひとり運営のしんどさ、自動化より前に設計を作る理由、人間レビューを残す理由。",
+      "callToAction": "Substack購読またはnoteフォローを自然に促す。"
+    },
+    {
+      "_key": "angle-instagram",
+      "_type": "object",
+      "platform": "instagram",
+      "targetReader": "図解・カルーセルで概念を理解したい発信者",
+      "hook": "発信を頑張る時代から、発信が回る仕組みを作る時代へ。",
+      "formatNotes": "カルーセル7枚想定。1: タイトル、2: 1つのContent Idea、3: text / visual / video / audio展開、4: Visual Register、5: Publish Package、6: API自動化をまだしない理由、7: Hitori Media OSとして育てる。",
+      "callToAction": "保存して、自分の発信運用に1つだけ取り入れる。"
+    },
+    {
+      "_key": "angle-github",
+      "_type": "object",
+      "platform": "github",
+      "targetReader": "リポジトリから設計思想と運用フローを読み解きたい開発者",
+      "hook": "This repository is a working build-log of a single-operator media OS.",
+      "formatNotes": "READMEとdocsへ転用。Phase 1 → v0.2への進化、no-API方針、手動運用とdevlogの蓄積を整理する。",
+      "callToAction": "サンプルseedとPublish Package Builderで、最初の手動公開準備フローを試す。"
+    },
+    {
+      "_key": "angle-newsletter",
+      "_type": "object",
+      "platform": "newsletter",
+      "targetReader": "メールで定期的に開発ログを受け取りたい読者",
+      "hook": "今週のHitori Media OS開発ログ。",
+      "formatNotes": "汎用ニュースレター / メール配信用。今週作ったもの、判断、迷い、次にやることを短くまとめる。",
+      "callToAction": "返信またはアンケートで、読者の発信運用の悩みを集める。"
+    },
+    {
+      "_key": "angle-paid",
+      "_type": "object",
+      "platform": "paid",
+      "targetReader": "ひとりメディア運営OSをテンプレート化して取り入れたい読者",
+      "hook": "Hitori Media OSを、自分の発信運用に組み込むための実践設計書。",
+      "formatNotes": "有料記事 / 講座 / コホート向けの構成案。Sanity schema、prompt pack、Visual Register / Publish Package workflow、運用マニュアルへ展開する素地として整理する。",
+      "callToAction": "テンプレート / starterへの興味を、まずは無料Substackでの会話から集める。"
+    }
+  ],
+  "outputChecklist": [
+    {
+      "_key": "output-note-article",
+      "_type": "object",
+      "outputType": "note-article",
+      "status": "planned",
+      "localOutputPath": "outputs/note/",
+      "notes": "設計思想と開発ログを混ぜたbuilding-in-public記事。"
+    },
+    {
+      "_key": "output-substack-post",
+      "_type": "object",
+      "outputType": "substack-post",
+      "status": "planned",
+      "localOutputPath": "outputs/substack/",
+      "notes": "週次build log。読者との会話導線を含める。"
+    },
+    {
+      "_key": "output-threads-thread",
+      "_type": "object",
+      "outputType": "threads-thread",
+      "status": "planned",
+      "localOutputPath": "outputs/threads/",
+      "notes": "会話調の連投。完成度より気づきを優先する。"
+    },
+    {
+      "_key": "output-x-post",
+      "_type": "object",
+      "outputType": "x-post",
+      "status": "planned",
+      "localOutputPath": "outputs/x/",
+      "notes": "進捗共有、短い主張、Substackへの導線。"
+    },
+    {
+      "_key": "output-youtube-script",
+      "_type": "object",
+      "outputType": "youtube-script",
+      "status": "planned",
+      "localOutputPath": "outputs/youtube/",
+      "notes": "画面録画つき長尺解説。録音前の人間レビュー必須。"
+    },
+    {
+      "_key": "output-shorts-script",
+      "_type": "object",
+      "outputType": "shorts-script",
+      "status": "planned",
+      "localOutputPath": "outputs/shorts/",
+      "notes": "1つの主張だけを30〜45秒で見せる短尺。"
+    },
+    {
+      "_key": "output-podcast-script",
+      "_type": "object",
+      "outputType": "podcast-script",
+      "status": "planned",
+      "localOutputPath": "outputs/podcast/",
+      "notes": "ひとり語りの収録台本。録音は手動。"
+    },
+    {
+      "_key": "output-instagram-carousel",
+      "_type": "object",
+      "outputType": "instagram-carousel",
+      "status": "planned",
+      "localOutputPath": "outputs/diagrams/",
+      "notes": "7枚構成のカルーセル。図解はVisual Register経由で管理する。"
+    },
+    {
+      "_key": "output-github-doc",
+      "_type": "object",
+      "outputType": "github-doc",
+      "status": "planned",
+      "localOutputPath": "examples/",
+      "notes": "README / docsへの転用。"
+    },
+    {
+      "_key": "output-newsletter",
+      "_type": "object",
+      "outputType": "newsletter",
+      "status": "planned",
+      "localOutputPath": "outputs/newsletter/",
+      "notes": "Substack固有ではない汎用メール配信用の下書き。"
+    },
+    {
+      "_key": "output-paid-article-outline",
+      "_type": "object",
+      "outputType": "paid-article-outline",
+      "status": "planned",
+      "localOutputPath": "outputs/paid/",
+      "notes": "テンプレート / コホート / 講座構成案。"
+    }
+  ],
+  "examples": [
+    {
+      "_key": "example-effort-to-system",
+      "_type": "object",
+      "title": "発信を頑張る から 発信が回る仕組みを作る への移行",
+      "description": "毎回ゼロから書くのではなく、Content Ideaを中心に主張・読者・根拠・反論を保存し、複数媒体へ展開する。"
+    },
+    {
+      "_key": "example-manual-before-api",
+      "_type": "object",
+      "title": "自動化より前に手動で回す",
+      "description": "Codex、Claude Code、Sanity、ローカルファイルで手動運用を回し、本当に繰り返し発生する作業だけを後から自動化する。"
+    },
+    {
+      "_key": "example-show-the-build",
+      "_type": "object",
+      "title": "完成版を売る前に開発過程を見せる",
+      "description": "ツール完成を待たず、設計判断、迷い、release-prep folderの中身を共有して、読者が自分でも取り入れやすくする。"
+    }
+  ],
+  "objections": [
+    {
+      "_key": "objection-overengineered",
+      "_type": "object",
+      "objection": "ひとり運営でここまで設計するのは過剰では？",
+      "response": "全部を一度に作る必要はない。Content Ideaと手動Publish Packageだけでも、媒体ごとの書き直し負担はかなり減らせる。"
+    },
+    {
+      "_key": "objection-not-fancy-enough",
+      "_type": "object",
+      "objection": "派手な自動投稿やAI記事生成のほうが分かりやすいのでは？",
+      "response": "自動化は最後の段階で十分。手動で回る型がない状態で自動化を載せると、検証も改善もしづらくなる。"
+    },
+    {
+      "_key": "objection-too-early-to-show",
+      "_type": "object",
+      "objection": "完成していないのに公開するのは早くないか？",
+      "response": "むしろ完成前の判断や迷いのほうが読者の参考になる。完成版だけ売り込むより信頼が作りやすい。"
+    }
+  ],
+  "personalContext": "ai-blog-dbのfirst public releaseに続く2本目のbuilding-in-publicキャンペーン。Hitori Media OSを「APIなしMVP → v0.2」へ拡張してきた経緯と、これから足す機能、判断、迷いを、note / Substack / X / Threads / YouTube / Shorts / Podcast / Instagramへ展開するための元レコード。手動運用と人間レビューを残す方針を守る。"
+}

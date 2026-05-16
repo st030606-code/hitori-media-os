@@ -1,0 +1,269 @@
+[
+  {
+    "_id": "visualAssetPlan.ai-blog-db.note-hero-v1",
+    "_type": "visualAssetPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "sourceDiagramPlan": {
+      "_type": "reference",
+      "_ref": "diagramPlan.ai-blog-db.before-after"
+    },
+    "generatedWith": {
+      "_type": "reference",
+      "_ref": "tool.chatgpt"
+    },
+    "title": "note hero / eye-catch v1: 記事の山からAIが使えるDBへ",
+    "purpose": "note記事の冒頭で、記事を増やす発想からAIが使えるDBを作る発想への転換を一目で伝える。",
+    "targetPlatform": "note",
+    "placement": "note hero / eye-catch",
+    "assetType": "eye-catch",
+    "aspectRatio": "16:9",
+    "reusePolicy": "reusable",
+    "status": "generated-needs-save",
+    "imagePrompt": "日本語のシンプルなBefore / After図解。テーマ: 記事の山からAIが使えるDBへ。左側はBefore。散らばったnote下書き、SNSメモ、動画台本、音声メモ、リサーチメモを「記事の山」として見せる。右側はAfter。中央に「AIが使えるDB」または「1つの知識レコード」を置き、そこからnote、Substack、X、YouTube、Podcastへ整理された矢印が伸びる。白背景、黒文字中心、控えめなアクセントカラー。派手なAI未来感、根拠のない数値、過度な煽りは避ける。 16:9。note hero / eye-catch向け。文字は大きく読みやすく、図内テキストは短くする。",
+    "textToInclude": [
+      "Before",
+      "記事の山",
+      "毎回文脈を作り直す",
+      "After",
+      "AIが使えるDB",
+      "1つの知識レコード",
+      "複数媒体へ展開"
+    ],
+    "textToAvoid": [
+      "OpenAI API",
+      "Anthropic API",
+      "自動投稿",
+      "完全自動化",
+      "記事を書く人は負ける"
+    ],
+    "visualDirection": "左右比較。左は散らかった記事やメモの山、右は整理された知識DBと複数媒体への矢印。明るい背景、黒文字、控えめなアクセントカラー。",
+    "reviewNotes": "最初の生成画像はChatGPT上に存在するが、まだローカル保存とSanity登録が必要。localAssetPathは実ファイル保存後に記録する。",
+    "expectedLocalAssetPath": "assets/visuals/ai-blog-db/note/hero/note-hero-v1.png",
+    "localAssetPath": "",
+    "taskFilePath": "tasks/visuals/ai-blog-db/note-hero-eye-catch-v1.md",
+    "publishPackagePath": "publish-packages/note/ai-blog-db/",
+    "generationMode": "semi-automatic",
+    "generationProvider": "chatgpt-manual",
+    "generationJobId": "",
+    "sourcePromptVersion": "docs/13-first-visual-generation-brief.md",
+    "apiEnabled": false,
+    "automationNotes": "MVPではCodex/Claude Codeがプロンプト、ファイル名、保存先、レビュー項目を準備し、人間がChatGPT画像生成などで手動生成する。将来API化する場合のみgenerationJobIdを使う。",
+    "createdAt": "2026-05-12T00:00:00.000Z",
+    "updatedAt": "2026-05-12T00:00:00.000Z",
+    "pairedPlatformOutput": {
+      "_type": "reference",
+      "_ref": "platformOutput.ai-blog-db.note"
+    }
+  },
+  {
+    "_id": "visualAssetPlan.ai-blog-db.x-hook-before-after",
+    "_type": "visualAssetPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "sourceDiagramPlan": {
+      "_type": "reference",
+      "_ref": "diagramPlan.ai-blog-db.before-after"
+    },
+    "generatedWith": {
+      "_type": "reference",
+      "_ref": "tool.chatgpt"
+    },
+    "title": "X hook image: 記事の山からAIが使えるDBへ",
+    "purpose": "Xの1投稿目または図解ペア投稿で、スクロール中にBefore / Afterの対比を短く伝える。",
+    "targetPlatform": "x",
+    "placement": "X first post / hook image",
+    "assetType": "hook-image",
+    "aspectRatio": "1:1",
+    "reusePolicy": "variant-required",
+    "status": "prompt-ready",
+    "imagePrompt": "日本語のシンプルなBefore / After図解。テーマ: 記事の山からAIが使えるDBへ。左側はBefore。散らばったnote下書き、SNSメモ、動画台本、音声メモ、リサーチメモを「記事の山」として見せる。右側はAfter。中央に「AIが使えるDB」または「1つの知識レコード」を置き、そこからnote、Substack、X、YouTube、Podcastへ整理された矢印が伸びる。白背景、黒文字中心、控えめなアクセントカラー。派手なAI未来感、根拠のない数値、過度な煽りは避ける。 1:1。X hook画像向け。文字量は最小にし、「記事の山 → AIが使えるDB」を中心に見せる。",
+    "textToInclude": [
+      "記事の山",
+      "AIが使えるDB"
+    ],
+    "textToAvoid": [
+      "完全自動化",
+      "自動投稿",
+      "API連携",
+      "根拠のない数値"
+    ],
+    "visualDirection": "正方形で強い対比。文字は少なく、左右または上下でBefore / Afterを見せる。",
+    "reviewNotes": "note heroの方向性が良ければ、X向けに文字量を減らして再構成する。",
+    "expectedLocalAssetPath": "assets/visuals/ai-blog-db/x/hook/x-hook-before-after-v1.png",
+    "localAssetPath": "",
+    "taskFilePath": "tasks/visuals/ai-blog-db/x-hook-before-after.md",
+    "publishPackagePath": "publish-packages/x/ai-blog-db/",
+    "generationMode": "semi-automatic",
+    "generationProvider": "chatgpt-manual",
+    "generationJobId": "",
+    "sourcePromptVersion": "docs/13-first-visual-generation-brief.md",
+    "apiEnabled": false,
+    "automationNotes": "MVPではCodex/Claude Codeがプロンプト、ファイル名、保存先、レビュー項目を準備し、人間がChatGPT画像生成などで手動生成する。将来API化する場合のみgenerationJobIdを使う。",
+    "createdAt": "2026-05-12T00:00:00.000Z",
+    "updatedAt": "2026-05-12T00:00:00.000Z",
+    "pairedPlatformOutput": {
+      "_type": "reference",
+      "_ref": "platformOutput.ai-blog-db.x"
+    }
+  },
+  {
+    "_id": "visualAssetPlan.ai-blog-db.instagram-carousel-cover",
+    "_type": "visualAssetPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "sourceDiagramPlan": {
+      "_type": "reference",
+      "_ref": "diagramPlan.ai-blog-db.before-after"
+    },
+    "generatedWith": {
+      "_type": "reference",
+      "_ref": "tool.chatgpt"
+    },
+    "title": "Instagram carousel cover: これからのブログはAIが使えるDBになる",
+    "purpose": "Instagramカルーセル表紙として、保存したくなる形でテーマを提示する。",
+    "targetPlatform": "instagram",
+    "placement": "Instagram carousel cover",
+    "assetType": "carousel-cover",
+    "aspectRatio": "4:5",
+    "reusePolicy": "platform-specific",
+    "status": "prompt-ready",
+    "imagePrompt": "日本語のシンプルなBefore / After図解。テーマ: 記事の山からAIが使えるDBへ。左側はBefore。散らばったnote下書き、SNSメモ、動画台本、音声メモ、リサーチメモを「記事の山」として見せる。右側はAfter。中央に「AIが使えるDB」または「1つの知識レコード」を置き、そこからnote、Substack、X、YouTube、Podcastへ整理された矢印が伸びる。白背景、黒文字中心、控えめなアクセントカラー。派手なAI未来感、根拠のない数値、過度な煽りは避ける。 4:5。Instagramカルーセル表紙向け。主見出しは「これからのブログはAIが使えるDBになる」。装飾は控えめで保存向け。",
+    "textToInclude": [
+      "これからのブログはAIが使えるDBになる"
+    ],
+    "textToAvoid": [
+      "記事を書く人は負ける",
+      "完全自動化",
+      "自動投稿",
+      "根拠のない数値"
+    ],
+    "visualDirection": "縦長カルーセル表紙。大きな日本語見出しと、記事の山からDBへ変わる抽象的な対比。",
+    "reviewNotes": "最初から8枚作らず、表紙と最初の3枚だけで検証する方針。",
+    "expectedLocalAssetPath": "assets/visuals/ai-blog-db/instagram/carousel/instagram-carousel-cover-v1.png",
+    "localAssetPath": "",
+    "taskFilePath": "tasks/visuals/ai-blog-db/instagram-carousel-cover.md",
+    "publishPackagePath": "publish-packages/instagram/ai-blog-db/",
+    "generationMode": "semi-automatic",
+    "generationProvider": "chatgpt-manual",
+    "generationJobId": "",
+    "sourcePromptVersion": "docs/13-first-visual-generation-brief.md",
+    "apiEnabled": false,
+    "automationNotes": "MVPではCodex/Claude Codeがプロンプト、ファイル名、保存先、レビュー項目を準備し、人間がChatGPT画像生成などで手動生成する。将来API化する場合のみgenerationJobIdを使う。",
+    "createdAt": "2026-05-12T00:00:00.000Z",
+    "updatedAt": "2026-05-12T00:00:00.000Z"
+  },
+  {
+    "_id": "visualAssetPlan.ai-blog-db.github-architecture-diagram",
+    "_type": "visualAssetPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "sourceDiagramPlan": {
+      "_type": "reference",
+      "_ref": "diagramPlan.ai-blog-db.content-os-pipeline"
+    },
+    "generatedWith": {
+      "_type": "reference",
+      "_ref": "tool.chatgpt"
+    },
+    "title": "GitHub architecture diagram: Content OS pipeline",
+    "purpose": "GitHub READMEやdocsで、contentIdeaからprompt、platformOutput、diagramPlan、workflowへつながる全体像を説明する。",
+    "targetPlatform": "github",
+    "placement": "GitHub README architecture section",
+    "assetType": "architecture-diagram",
+    "aspectRatio": "16:9",
+    "reusePolicy": "reusable",
+    "status": "prompt-ready",
+    "imagePrompt": "GitHub README向けの日本語アーキテクチャ図。中央にcontentIdea、周辺にprompt、platformOutput、diagramPlan、visualAssetPlan、workflow、toolを配置する。矢印はシンプルにし、白背景、黒文字、控えめなアクセントカラー。実装済みと将来拡張が混ざりすぎないようにする。",
+    "textToInclude": [
+      "contentIdea",
+      "prompt",
+      "platformOutput",
+      "diagramPlan",
+      "visualAssetPlan",
+      "workflow",
+      "tool"
+    ],
+    "textToAvoid": [
+      "完全自動化",
+      "API必須",
+      "自動投稿",
+      "秘密情報"
+    ],
+    "visualDirection": "開発者がREADMEで理解できる構造図。正確さを優先し、装飾は控えめにする。",
+    "reviewNotes": "GitHub向けは見た目よりも構造の正確さを優先する。",
+    "expectedLocalAssetPath": "assets/visuals/ai-blog-db/github/readme/github-architecture-v1.png",
+    "localAssetPath": "",
+    "taskFilePath": "tasks/visuals/ai-blog-db/github-architecture-diagram.md",
+    "publishPackagePath": "publish-packages/github/ai-blog-db/",
+    "generationMode": "semi-automatic",
+    "generationProvider": "chatgpt-manual",
+    "generationJobId": "",
+    "sourcePromptVersion": "docs/13-first-visual-generation-brief.md",
+    "apiEnabled": false,
+    "automationNotes": "MVPではCodex/Claude Codeがプロンプト、ファイル名、保存先、レビュー項目を準備し、人間がChatGPT画像生成などで手動生成する。将来API化する場合のみgenerationJobIdを使う。",
+    "createdAt": "2026-05-12T00:00:00.000Z",
+    "updatedAt": "2026-05-12T00:00:00.000Z"
+  },
+  {
+    "_id": "visualAssetPlan.ai-blog-db.youtube-thumbnail-before-after",
+    "_type": "visualAssetPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "sourceDiagramPlan": {
+      "_type": "reference",
+      "_ref": "diagramPlan.ai-blog-db.before-after"
+    },
+    "generatedWith": {
+      "_type": "reference",
+      "_ref": "tool.chatgpt"
+    },
+    "title": "YouTube thumbnail: 記事よりDBで差がつく",
+    "purpose": "YouTube長尺動画のサムネイルとして、ブログをDBとして見る発想を短く伝える。",
+    "targetPlatform": "youtube",
+    "placement": "YouTube thumbnail",
+    "assetType": "thumbnail",
+    "aspectRatio": "16:9",
+    "reusePolicy": "platform-specific",
+    "status": "prompt-ready",
+    "imagePrompt": "YouTubeサムネイル向けの日本語ビジュアル。左に散らかった記事の山、右に整理されたAIが使えるDB。大きな短い文字で「記事よりDB」。明るく見やすいが、煽りすぎない。顔写真なし、ロゴなし、API自動化を連想させない。",
+    "textToInclude": [
+      "記事よりDB",
+      "AIが使えるDB"
+    ],
+    "textToAvoid": [
+      "完全自動化",
+      "自動投稿",
+      "APIだけでOK",
+      "稼げる"
+    ],
+    "visualDirection": "YouTubeサムネイルとして視認性を優先。文字は大きく、要素は少なく、Before / Afterの差が一瞬で分かるようにする。",
+    "reviewNotes": "note heroよりも文字を大きく、情報量を少なくする必要がある。",
+    "expectedLocalAssetPath": "assets/visuals/ai-blog-db/youtube/thumbnail/youtube-thumbnail-v1.png",
+    "localAssetPath": "",
+    "taskFilePath": "tasks/visuals/ai-blog-db/youtube-thumbnail-before-after.md",
+    "publishPackagePath": "publish-packages/youtube/ai-blog-db/",
+    "generationMode": "semi-automatic",
+    "generationProvider": "chatgpt-manual",
+    "generationJobId": "",
+    "sourcePromptVersion": "docs/13-first-visual-generation-brief.md",
+    "apiEnabled": false,
+    "automationNotes": "MVPではCodex/Claude Codeがプロンプト、ファイル名、保存先、レビュー項目を準備し、人間がChatGPT画像生成などで手動生成する。将来API化する場合のみgenerationJobIdを使う。",
+    "createdAt": "2026-05-12T00:00:00.000Z",
+    "updatedAt": "2026-05-12T00:00:00.000Z",
+    "pairedPlatformOutput": {
+      "_type": "reference",
+      "_ref": "platformOutput.ai-blog-db.youtube"
+    }
+  }
+]

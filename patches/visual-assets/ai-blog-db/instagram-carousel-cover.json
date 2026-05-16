@@ -1,0 +1,15 @@
+{
+  "_id": "visualAssetPlan.ai-blog-db.instagram-carousel-cover",
+  "set": {
+    "localAssetPath": "assets/visuals/ai-blog-db/instagram/carousel/instagram-carousel-cover-v1.png",
+    "status": "saved",
+    "updatedAt": "2026-05-13T07:15:24.696Z",
+    "reviewNotes": "Local image saved through Visual Register. Needs visual review. 最初から8枚作らず、表紙と最初の3枚だけで検証する方針。"
+  },
+  "meta": {
+    "generatedBy": "tools/visual-register",
+    "originalFileName": "スクリーンショット 2026-05-13 9.35.11.png",
+    "mimeType": "image/png",
+    "directSanityWrite": false
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "_id": "visualAssetPlan.ai-blog-db.x-hook-before-after",
+  "set": {
+    "expectedLocalAssetPath": "assets/visuals/ai-blog-db/x/hook/x-hook-before-after-v1.png"
+  },
+  "meta": {
+    "generatedBy": "codex",
+    "purpose": "Backfill expectedLocalAssetPath from seed/visual-asset-plan-records.json.",
+    "directSanityWrite": false
+  }
+}

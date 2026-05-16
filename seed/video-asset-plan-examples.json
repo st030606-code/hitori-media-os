@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "videoAssetPlan.ai-blog-db.youtube-longform-human-shot-v1",
+    "_type": "videoAssetPlanExample",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "youtube",
+    "assetType": "youtube-longform",
+    "productionMode": "human-shot",
+    "scriptPath": "outputs/youtube/2026-05-11--ai-blog-db--youtube.md",
+    "expectedLocalAssetPath": "assets/video/ai-blog-db/youtube/longform/youtube-longform-v1.mp4",
+    "status": "planned",
+    "notes": "Talking head with screen inserts showing the Content OS pipeline and local-first workflow.",
+    "safetyNotes": "No auto-upload. Human reviews script, visuals, and final export before publishing."
+  },
+  {
+    "_id": "videoAssetPlan.ai-blog-db.shorts-ai-assisted-v1",
+    "_type": "videoAssetPlanExample",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "shorts",
+    "assetType": "shorts-video",
+    "productionMode": "hybrid",
+    "scriptPath": "outputs/shorts/2026-05-11--ai-blog-db--shorts.md",
+    "expectedLocalAssetPath": "assets/video/ai-blog-db/shorts/shorts-v1.mp4",
+    "status": "planned",
+    "notes": "AI-assisted short script, manually edited with captions and existing diagrams.",
+    "safetyNotes": "No API generation. Manual edit and human review required."
+  },
+  {
+    "_id": "videoAssetPlan.ai-blog-db.instagram-reel-v1",
+    "_type": "videoAssetPlanExample",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "instagram",
+    "assetType": "reel",
+    "productionMode": "b-roll-plus-narration",
+    "scriptPath": "outputs/shorts/2026-05-11--ai-blog-db--shorts.md",
+    "expectedLocalAssetPath": "assets/video/ai-blog-db/instagram/reels/reel-v1.mp4",
+    "status": "planned",
+    "notes": "Short hook with visual captions based on the AI-usable DB concept.",
+    "safetyNotes": "Manual publishing only. Confirm caption and claims before posting."
+  }
+]

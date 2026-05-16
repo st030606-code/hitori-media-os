@@ -1,0 +1,149 @@
+{
+  "_id": "brandProfile.hitori-media-os-default",
+  "_type": "brandProfile",
+  "title": "Hitori Media OS（building-in-public default）",
+  "slug": {"_type": "slug", "current": "hitori-media-os-default"},
+  "brandName": "Hitori Media OS",
+  "ownerType": "solo",
+
+  "voiceTone": {
+    "voice": "実装者目線、断定せず、迷いをそのまま書く。一人称『私』。語尾は丁寧寄りだが過度に硬くしない。",
+    "expertiseLevel": "intermediate",
+    "styleNotes": [
+      "building-in-public（進行形）",
+      "完成断言を避ける",
+      "数字煽りを避ける",
+      "短い段落で改行を多めに",
+      "AI礼賛・AI万能感を避ける",
+      "個人の判断を残す（『ここは悩み中』を許す）"
+    ],
+    "avoidPhrasings": [
+      "完全自動化",
+      "全自動化",
+      "稼げる",
+      "誰でも",
+      "保証",
+      "完成しました",
+      "AIに任せる時代",
+      "AIで全部やる",
+      "革命",
+      "破壊的"
+    ]
+  },
+
+  "audience": [
+    "ひとりメディア運営者",
+    "個人発信エンジニア",
+    "editor / writer",
+    "AI時代の個人クリエイター"
+  ],
+
+  "contentPrinciples": [
+    "1つの構造化されたContent Ideaを起点にする",
+    "発信を頑張るのではなく、発信が回る仕組みを作る",
+    "AIに記事を書かせる前に、AIが読めるDBを作る",
+    "手動 → 半自動 → 自動 の順で段階化する",
+    "Visual Register / 公開判断は人間レビュー必須",
+    "paid PDF教材本文を引用しない",
+    "secret / API key / 実project ID / private/ファイル名は出さない"
+  ],
+  "defaultContentModes": [
+    "build-log",
+    "building-in-public",
+    "educational"
+  ],
+  "defaultPlatforms": [
+    "x",
+    "threads",
+    "note",
+    "substack"
+  ],
+
+  "visualDefaults": {
+    "visualVocabulary": [
+      "structured",
+      "app-like",
+      "modern",
+      "clean",
+      "diagram-friendly",
+      "trust-building",
+      "building-in-public"
+    ],
+    "defaultBaseColor": "off-white #FAFAFA",
+    "defaultAccentColor": "warm terracotta (restrained)",
+    "allowedAccentColors": [
+      "warm terracotta",
+      "muted teal",
+      "muted indigo"
+    ],
+    "defaultFontFamily": "Noto Sans JP / Inter / IBM Plex",
+    "defaultNodeShape": "rounded-square",
+    "defaultLineWeight": "thin",
+    "decorationDensity": "restrained"
+  },
+
+  "negativeStyleList": [
+    "face photo",
+    "AI generated avatar",
+    "AI clone face",
+    "robot",
+    "AI brain icon",
+    "generic AI future visual (neural network mesh / glowing globe / circuit board)",
+    "glass flare",
+    "gradient overload",
+    "neon",
+    "heavy shadows",
+    "logo-style marks",
+    "brand-mark imitations",
+    "emoji decoration",
+    "clickbait headline",
+    "money symbol",
+    "fake percentage badges (e.g. ↑1000%)",
+    "text-only title card as default (only allowed as last resort)"
+  ],
+
+  "platformToneOverrides": [
+    {
+      "platform": "x",
+      "voiceOverride": "短く、1〜3文。リプライ歓迎の語尾。",
+      "styleNotesOverride": [
+        "見出しは中央70%に収める想定",
+        "建前のCTAを避ける",
+        "数字を出すなら根拠を別に書く"
+      ],
+      "ctaApproachOverride": "soft CTA（『気が向いたら覗いてみてください』程度）。販売感ゼロ。"
+    },
+    {
+      "platform": "substack",
+      "voiceOverride": "メール配信前提。冒頭は読者に話しかける形。",
+      "styleNotesOverride": [
+        "About Page と Welcome Email は別途整理",
+        "paid_offerをまだ出さない",
+        "Notes計画から最終1本選ぶ"
+      ],
+      "ctaApproachOverride": "subscribe を煽らない。あくまで開発過程の共有として案内。"
+    }
+  ],
+
+  "reviewPrinciples": [
+    "元レコード（contentIdea / 元メモ）の主張を改変していないか",
+    "完成断言になっていないか（building-in-publicを維持）",
+    "paid PDF教材の本文・図版を引用していないか",
+    "secret / 実project ID / private/ファイル名 が画像/本文に映っていないか",
+    "顔写真 / AI generated avatar / AI brain icon が出ていないか",
+    "数字 / 割合 / ↑XXX% の煽りが根拠なく出ていないか",
+    "text-only title card に倒れていないか（layoutPatternをdefaultにしない）"
+  ],
+
+  "ctaDefaults": {
+    "softCtaTemplate": "Hitori Media OS の開発過程は Substack に書いています。気が向いたら覗いてみてください。",
+    "avoidHardSell": true,
+    "paidOfferStatus": "none"
+  },
+
+  "version": "0.1.0",
+  "status": "draft",
+  "notes": "本ファイルは local-only seed。npx sanity documents create で投入していない。brandProfile schema が activate されるまでは Studio 表示されない。",
+  "createdAt": "2026-05-14T00:00:00.000Z",
+  "updatedAt": "2026-05-14T00:00:00.000Z"
+}

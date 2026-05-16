@@ -1,0 +1,64 @@
+{
+  "_id": "substackPostPlan.building-hitori-media-os.first-post",
+  "_type": "substackPostPlan",
+  "title": "AIで「ひとりメディア運営OS」を作っている裏側",
+  "sourceContentIdea": {
+    "_type": "reference",
+    "_ref": "contentIdea.building-hitori-media-os"
+  },
+  "publicationStrategy": {
+    "_type": "reference",
+    "_ref": "substackPublicationStrategy.building-hitori-media-os"
+  },
+  "campaignSlug": "building-hitori-media-os",
+  "titleOptions": [
+    "AIで「ひとりメディア運営OS」を作っている裏側",
+    "発信を頑張るより、発信が回る仕組みを作る",
+    "ひとりメディア運営を、AIとローカルツールで仕組み化する"
+  ],
+  "emailSubjectOptions": [
+    "AIで「ひとりメディア運営OS」を作っています",
+    "発信を頑張るより、発信が回る仕組みを作る",
+    "今つくっている、ひとりメディア運営OSの話"
+  ],
+  "previewText": "発信を増やす前に、発信が回る仕組みを作る実験ログです。",
+  "openingAngle": "完成品の発表ではなく、作っている途中の記録として共有する。現在地・迷い・手動運用に残している作業をそのまま見せる。",
+  "mainSections": [
+    {
+      "_key": "section-why-system",
+      "_type": "object",
+      "heading": "なぜ仕組みを作るか",
+      "body": "ひとり運営は「発信量」より「制作の型」で詰みやすい。媒体が増えても作業時間は伸びないので、1つのテーマから複数媒体に展開できる仕組みのほうを先に整える。"
+    },
+    {
+      "_key": "section-content-idea",
+      "_type": "object",
+      "heading": "中心にあるContent Idea",
+      "body": "主張・読者・反論・媒体別の切り口を構造化したレコードを1つ置く。Sanityに保存して、媒体ごとの下書きはここから派生させる。"
+    },
+    {
+      "_key": "section-manual-first",
+      "_type": "object",
+      "heading": "自動化は最後",
+      "body": "API投稿、画像生成API、Sanity direct writeはまだ入れていない。手動で1キャンペーン回ってみないと、自動化すべき作業が見えない。"
+    }
+  ],
+  "readerQuestion": "下書き作成、公開判断、素材保存のうち、最初に仕組み化したいのはどれですか？",
+  "subscriberCTA": "この実験の続きを追いたい人は購読してください。",
+  "relatedNotesPlan": {
+    "_type": "reference",
+    "_ref": "substackNotesPlan.building-hitori-media-os.first-post-notes"
+  },
+  "repurposeNotes": "X: hookだけ抽出して短い主張に分解。\nThreads: 会話調の連投にする。\nnote: 同テーマの日本語アーカイブに変換、章立てを増やす。\nYouTube: 画面録画を含む解説に展開。\nShorts: 1主張だけを30-45秒で。\nPodcast: ひとり語りで背景と判断を話す。",
+  "publishPackagePath": "publish-packages/substack/building-hitori-media-os/",
+  "humanReviewChecklist": [
+    "subscribe CTAは soft に留めた",
+    "paid offerを含めていない",
+    "教材本文の引用が混ざっていない",
+    "coreThesis『発信を頑張るより、発信が回る仕組みを作る』を中心に据えた",
+    "Reader Questionが返信したくなる形になっている",
+    "公開前に音読チェック"
+  ],
+  "status": "ready-for-human-edit",
+  "reviewNotes": "Initial test seed for the first building-hitori-media-os Substack post plan. Public URL is empty until manual publish."
+}

@@ -1,0 +1,250 @@
+[
+  {
+    "_id": "prompt.generate-note-article",
+    "_type": "prompt",
+    "title": "note記事を生成する",
+    "targetPlatform": "note",
+    "outputType": "note-article",
+    "localFilePath": "prompts/generate-note-article.md",
+    "requiredInputFields": [
+      "title",
+      "summary",
+      "coreThesis",
+      "audience",
+      "audiencePain",
+      "claims",
+      "evidence",
+      "examples",
+      "objections",
+      "tone",
+      "platformAngles"
+    ],
+    "humanReviewChecklist": [
+      "coreThesisが変わっていないか",
+      "元レコードにない主張を足していないか",
+      "note記事として読める自然な流れになっているか",
+      "公開前に確認すべき根拠や表現はあるか",
+      "保存先はoutputs/note/でよいか"
+    ],
+    "outputPathPattern": "outputs/note/YYYY-MM-DD--source-slug--note.md",
+    "version": "0.1.0",
+    "status": "active",
+    "notes": "Markdownファイルを正本として扱う。promptBodyはMVPでは複製しない。"
+  },
+  {
+    "_id": "prompt.generate-substack-post",
+    "_type": "prompt",
+    "title": "Substack投稿を生成する",
+    "targetPlatform": "substack",
+    "outputType": "substack-post",
+    "localFilePath": "prompts/generate-substack-post.md",
+    "requiredInputFields": [
+      "title",
+      "summary",
+      "coreThesis",
+      "audience",
+      "audiencePain",
+      "claims",
+      "evidence",
+      "examples",
+      "objections",
+      "tone",
+      "platformAngles"
+    ],
+    "humanReviewChecklist": [
+      "coreThesisが自然に伝わっているか",
+      "個人的な制作ログとして読めるか",
+      "元レコードにない主張を足していないか",
+      "読者への問い・CTAがSubstack向きか",
+      "platform=newsletterと混同せずSubstack固有の投稿として書けているか",
+      "保存先はoutputs/substack/でよいか"
+    ],
+    "outputPathPattern": "outputs/substack/YYYY-MM-DD--source-slug--substack.md",
+    "version": "0.1.0",
+    "status": "active",
+    "notes": "Substack固有の投稿・読者関係・制作ログ向け。汎用newsletterとは分ける。"
+  },
+  {
+    "_id": "prompt.generate-threads-post",
+    "_type": "prompt",
+    "title": "Threads投稿を生成する",
+    "targetPlatform": "threads",
+    "outputType": "threads-thread",
+    "localFilePath": "prompts/generate-threads-post.md",
+    "requiredInputFields": [
+      "title",
+      "summary",
+      "coreThesis",
+      "audiencePain",
+      "claims",
+      "examples",
+      "objections",
+      "tone",
+      "platformAngles"
+    ],
+    "humanReviewChecklist": [
+      "1投稿目だけで問題提起が伝わるか",
+      "coreThesisが連投全体で保たれているか",
+      "元レコードにない主張を足していないか",
+      "Threads向けに短く読みやすいか",
+      "保存先はoutputs/threads/でよいか"
+    ],
+    "outputPathPattern": "outputs/threads/YYYY-MM-DD--source-slug--threads.md",
+    "version": "0.1.0",
+    "status": "active",
+    "notes": "Threads向けの短い連投を作る。Markdownファイルを正本として扱う。"
+  },
+  {
+    "_id": "prompt.generate-x-post",
+    "_type": "prompt",
+    "title": "X投稿を生成する",
+    "targetPlatform": "x",
+    "outputType": "x-post",
+    "localFilePath": "prompts/generate-x-post.md",
+    "requiredInputFields": [
+      "title",
+      "summary",
+      "coreThesis",
+      "audiencePain",
+      "claims",
+      "examples",
+      "objections",
+      "tone",
+      "platformAngles",
+      "outputChecklist"
+    ],
+    "humanReviewChecklist": [
+      "coreThesisが保たれているか",
+      "元レコードにない主張を足していないか",
+      "Threadsより短く鋭いX投稿になっているか",
+      "釣り表現や大げさな断定になっていないか",
+      "図解、GitHub、note、Substackへの導線が自然か",
+      "保存先はoutputs/x/でよいか"
+    ],
+    "outputPathPattern": "outputs/x/YYYY-MM-DD--source-slug--x.md",
+    "version": "0.1.0",
+    "status": "active",
+    "notes": "単発X投稿、Xスレッド、図解ペア投稿、CTA案を作る。Markdownファイルを正本として扱う。"
+  },
+  {
+    "_id": "prompt.generate-youtube-script",
+    "_type": "prompt",
+    "title": "YouTube長尺台本を生成する",
+    "targetPlatform": "youtube",
+    "outputType": "youtube-script",
+    "localFilePath": "prompts/generate-youtube-script.md",
+    "requiredInputFields": [
+      "title",
+      "summary",
+      "coreThesis",
+      "audience",
+      "audiencePain",
+      "claims",
+      "evidence",
+      "examples",
+      "objections",
+      "tone",
+      "platformAngles"
+    ],
+    "humanReviewChecklist": [
+      "coreThesisが動画全体の軸になっているか",
+      "章立てが視聴者の理解順になっているか",
+      "元レコードにない主張を足していないか",
+      "映像メモが制作に使える具体性を持っているか",
+      "保存先はoutputs/youtube/でよいか"
+    ],
+    "outputPathPattern": "outputs/youtube/YYYY-MM-DD--source-slug--youtube.md",
+    "version": "0.1.0",
+    "status": "active",
+    "notes": "10から15分程度の教育・解説動画台本向け。Markdownファイルを正本として扱う。"
+  },
+  {
+    "_id": "prompt.generate-shorts-script",
+    "_type": "prompt",
+    "title": "Shorts台本を生成する",
+    "targetPlatform": "shorts",
+    "outputType": "shorts-script",
+    "localFilePath": "prompts/generate-shorts-script.md",
+    "requiredInputFields": [
+      "title",
+      "coreThesis",
+      "audiencePain",
+      "claims",
+      "examples",
+      "tone",
+      "platformAngles"
+    ],
+    "humanReviewChecklist": [
+      "1本につき1主張に絞れているか",
+      "coreThesisからズレていないか",
+      "元レコードにない主張を足していないか",
+      "画面テキストが短く見やすいか",
+      "保存先はoutputs/shorts/でよいか"
+    ],
+    "outputPathPattern": "outputs/shorts/YYYY-MM-DD--source-slug--shorts.md",
+    "version": "0.1.0",
+    "status": "active",
+    "notes": "30から45秒程度のShorts案を作る。Markdownファイルを正本として扱う。"
+  },
+  {
+    "_id": "prompt.generate-podcast-script",
+    "_type": "prompt",
+    "title": "Podcast台本を生成する",
+    "targetPlatform": "podcast",
+    "outputType": "podcast-script",
+    "localFilePath": "prompts/generate-podcast-script.md",
+    "requiredInputFields": [
+      "title",
+      "summary",
+      "coreThesis",
+      "audience",
+      "audiencePain",
+      "claims",
+      "evidence",
+      "examples",
+      "objections",
+      "tone",
+      "platformAngles"
+    ],
+    "humanReviewChecklist": [
+      "声に出して自然に聞こえるか",
+      "coreThesisが会話の軸として残っているか",
+      "元レコードにない主張を足していないか",
+      "聞き手が今日できる行動が明確か",
+      "保存先はoutputs/podcast/でよいか"
+    ],
+    "outputPathPattern": "outputs/podcast/YYYY-MM-DD--source-slug--podcast.md",
+    "version": "0.1.0",
+    "status": "active",
+    "notes": "ひとり語りのPodcast台本または進行表を作る。Markdownファイルを正本として扱う。"
+  },
+  {
+    "_id": "prompt.generate-diagram-plan",
+    "_type": "prompt",
+    "title": "図解・画像案を生成する",
+    "targetPlatform": "diagram",
+    "outputType": "diagram-plan",
+    "localFilePath": "prompts/generate-diagram-plan.md",
+    "requiredInputFields": [
+      "title",
+      "summary",
+      "coreThesis",
+      "audiencePain",
+      "claims",
+      "examples",
+      "tone",
+      "platformAngles"
+    ],
+    "humanReviewChecklist": [
+      "coreThesisが一目で伝わる設計になっているか",
+      "元レコードにない主張を足していないか",
+      "note / Instagram / YouTube のどこで使う図か明確か",
+      "図内テキストが短く制作しやすいか",
+      "保存先はoutputs/diagrams/でよいか"
+    ],
+    "outputPathPattern": "outputs/diagrams/YYYY-MM-DD--source-slug--diagram-plan.md",
+    "version": "0.1.0",
+    "status": "active",
+    "notes": "図解、画像、カルーセル案の制作メモを作る。Markdownファイルを正本として扱う。"
+  }
+]

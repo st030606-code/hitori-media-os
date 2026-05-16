@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "audioAssetPlan.ai-blog-db.podcast-human-recorded-v1",
+    "_type": "audioAssetPlanExample",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "podcast",
+    "assetType": "podcast-episode",
+    "productionMode": "human-recorded",
+    "scriptPath": "outputs/podcast/2026-05-11--ai-blog-db--podcast.md",
+    "expectedLocalAssetPath": "assets/audio/ai-blog-db/podcast/episode-v1.wav",
+    "status": "planned",
+    "notes": "Human-recorded commentary based on the podcast script.",
+    "safetyNotes": "Manual recording, editing, and publishing only."
+  },
+  {
+    "_id": "audioAssetPlan.ai-blog-db.ai-voice-summary-v1",
+    "_type": "audioAssetPlanExample",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "podcast",
+    "assetType": "audio-summary",
+    "productionMode": "ai-clone",
+    "scriptPath": "outputs/podcast/2026-05-11--ai-blog-db--podcast.md",
+    "expectedLocalAssetPath": "assets/audio/ai-blog-db/summaries/ai-voice-summary-v1.wav",
+    "status": "planned-future",
+    "notes": "Future AI clone voice summary mode.",
+    "safetyNotes": "Requires explicit consent, voice rights review, and human approval before any use."
+  },
+  {
+    "_id": "audioAssetPlan.ai-blog-db.tts-internal-review-v1",
+    "_type": "audioAssetPlanExample",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "platform": "internal",
+    "assetType": "tts-draft",
+    "productionMode": "tts",
+    "scriptPath": "outputs/podcast/2026-05-11--ai-blog-db--podcast.md",
+    "expectedLocalAssetPath": "assets/audio/ai-blog-db/internal/tts-review-v1.wav",
+    "status": "planned-future",
+    "notes": "TTS draft for internal review of pacing and script flow.",
+    "safetyNotes": "Internal review only. Do not publish without human review."
+  }
+]

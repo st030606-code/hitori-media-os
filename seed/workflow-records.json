@@ -1,0 +1,542 @@
+[
+  {
+    "_id": "workflow.ai-blog-db.sample-record-and-prompts",
+    "_type": "workflow",
+    "title": "サンプルレコードと媒体別プロンプト整備",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "promptsUsed": [
+      {
+        "_key": "prompt-note-article",
+        "_type": "reference",
+        "_ref": "prompt.generate-note-article"
+      },
+      {
+        "_key": "prompt-substack-post",
+        "_type": "reference",
+        "_ref": "prompt.generate-substack-post"
+      },
+      {
+        "_key": "prompt-threads-post",
+        "_type": "reference",
+        "_ref": "prompt.generate-threads-post"
+      },
+      {
+        "_key": "prompt-x-post",
+        "_type": "reference",
+        "_ref": "prompt.generate-x-post"
+      },
+      {
+        "_key": "prompt-youtube-script",
+        "_type": "reference",
+        "_ref": "prompt.generate-youtube-script"
+      },
+      {
+        "_key": "prompt-shorts-script",
+        "_type": "reference",
+        "_ref": "prompt.generate-shorts-script"
+      },
+      {
+        "_key": "prompt-podcast-script",
+        "_type": "reference",
+        "_ref": "prompt.generate-podcast-script"
+      },
+      {
+        "_key": "prompt-diagram-plan",
+        "_type": "reference",
+        "_ref": "prompt.generate-diagram-plan"
+      }
+    ],
+    "toolsUsed": [
+      {
+        "_key": "tool-codex",
+        "_type": "reference",
+        "_ref": "tool.codex"
+      },
+      {
+        "_key": "tool-local-files",
+        "_type": "reference",
+        "_ref": "tool.local-files"
+      },
+      {
+        "_key": "tool-docs-devlog",
+        "_type": "reference",
+        "_ref": "tool.docs-devlog"
+      }
+    ],
+    "outputFiles": [
+      "inputs/content-ideas/example-ai-blog-db.json",
+      "prompts/generate-note-article.md",
+      "prompts/generate-substack-post.md",
+      "prompts/generate-threads-post.md",
+      "prompts/generate-x-post.md",
+      "prompts/generate-youtube-script.md",
+      "prompts/generate-shorts-script.md",
+      "prompts/generate-podcast-script.md",
+      "prompts/generate-diagram-plan.md"
+    ],
+    "workflowMode": "manual",
+    "observations": "1つの構造化レコードから複数媒体の初稿を作れるか検証するため、サンプルJSONと媒体別プロンプトを整備した。プロンプト本文はローカルMarkdownを正本にする方針が固まった。",
+    "devlogReference": "docs/devlog/0002-sample-record-and-prompts.md",
+    "reviewRequired": true
+  },
+  {
+    "_id": "workflow.ai-blog-db.first-text-social-outputs",
+    "_type": "workflow",
+    "title": "文章系3媒体の下書き検証",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "promptsUsed": [
+      {
+        "_key": "prompt-note-article",
+        "_type": "reference",
+        "_ref": "prompt.generate-note-article"
+      },
+      {
+        "_key": "prompt-substack-post",
+        "_type": "reference",
+        "_ref": "prompt.generate-substack-post"
+      },
+      {
+        "_key": "prompt-threads-post",
+        "_type": "reference",
+        "_ref": "prompt.generate-threads-post"
+      }
+    ],
+    "toolsUsed": [
+      {
+        "_key": "tool-codex",
+        "_type": "reference",
+        "_ref": "tool.codex"
+      },
+      {
+        "_key": "tool-chatgpt",
+        "_type": "reference",
+        "_ref": "tool.chatgpt"
+      },
+      {
+        "_key": "tool-local-files",
+        "_type": "reference",
+        "_ref": "tool.local-files"
+      },
+      {
+        "_key": "tool-docs-devlog",
+        "_type": "reference",
+        "_ref": "tool.docs-devlog"
+      }
+    ],
+    "platformOutputs": [
+      {
+        "_key": "output-note",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.note"
+      },
+      {
+        "_key": "output-substack",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.substack"
+      },
+      {
+        "_key": "output-threads",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.threads"
+      }
+    ],
+    "outputFiles": [
+      "outputs/note/2026-05-11--ai-blog-db--note.md",
+      "outputs/substack/2026-05-11--ai-blog-db--substack.md",
+      "outputs/threads/2026-05-11--ai-blog-db--threads.md",
+      "docs/devlog/0003-first-three-outputs.md"
+    ],
+    "workflowMode": "manual",
+    "observations": "noteは思想・論考、Substackはビルドログ、Threadsは短い連投として役割が分かれた。AIは最終稿ではなく媒体別初稿を作る用途が現実的だと分かった。",
+    "devlogReference": "docs/devlog/0003-first-three-outputs.md",
+    "reviewRequired": true
+  },
+  {
+    "_id": "workflow.ai-blog-db.x-output-addition",
+    "_type": "workflow",
+    "title": "X出力追加と図解ペア投稿検証",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "promptsUsed": [
+      {
+        "_key": "prompt-x-post",
+        "_type": "reference",
+        "_ref": "prompt.generate-x-post"
+      }
+    ],
+    "toolsUsed": [
+      {
+        "_key": "tool-codex",
+        "_type": "reference",
+        "_ref": "tool.codex"
+      },
+      {
+        "_key": "tool-local-files",
+        "_type": "reference",
+        "_ref": "tool.local-files"
+      },
+      {
+        "_key": "tool-docs-devlog",
+        "_type": "reference",
+        "_ref": "tool.docs-devlog"
+      }
+    ],
+    "platformOutputs": [
+      {
+        "_key": "output-x",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.x"
+      }
+    ],
+    "outputFiles": [
+      "prompts/generate-x-post.md",
+      "outputs/x/2026-05-11--ai-blog-db--x.md",
+      "docs/devlog/0005-add-x-output.md"
+    ],
+    "workflowMode": "manual",
+    "observations": "XはThreadsより短く鋭い単発投稿、スレッド、図解ペア投稿、GitHub/note/SubstackへのCTA案を扱う媒体として追加した。図解ペア投稿が後のdiagramPlanとvisual asset strategyにつながった。",
+    "devlogReference": "docs/devlog/0005-add-x-output.md",
+    "reviewRequired": true
+  },
+  {
+    "_id": "workflow.ai-blog-db.video-audio-visual-test",
+    "_type": "workflow",
+    "title": "動画・音声・図解下書き検証",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "promptsUsed": [
+      {
+        "_key": "prompt-youtube-script",
+        "_type": "reference",
+        "_ref": "prompt.generate-youtube-script"
+      },
+      {
+        "_key": "prompt-shorts-script",
+        "_type": "reference",
+        "_ref": "prompt.generate-shorts-script"
+      },
+      {
+        "_key": "prompt-podcast-script",
+        "_type": "reference",
+        "_ref": "prompt.generate-podcast-script"
+      },
+      {
+        "_key": "prompt-diagram-plan",
+        "_type": "reference",
+        "_ref": "prompt.generate-diagram-plan"
+      }
+    ],
+    "toolsUsed": [
+      {
+        "_key": "tool-codex",
+        "_type": "reference",
+        "_ref": "tool.codex"
+      },
+      {
+        "_key": "tool-local-files",
+        "_type": "reference",
+        "_ref": "tool.local-files"
+      },
+      {
+        "_key": "tool-docs-devlog",
+        "_type": "reference",
+        "_ref": "tool.docs-devlog"
+      }
+    ],
+    "platformOutputs": [
+      {
+        "_key": "output-youtube",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.youtube"
+      },
+      {
+        "_key": "output-shorts",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.shorts"
+      },
+      {
+        "_key": "output-podcast",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.podcast"
+      }
+    ],
+    "diagramPlans": [
+      {
+        "_key": "diagram-before-after",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.before-after"
+      },
+      {
+        "_key": "diagram-obsidian-sanity-split",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.obsidian-sanity-split"
+      },
+      {
+        "_key": "diagram-manual-first-api-later",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.manual-first-api-later"
+      },
+      {
+        "_key": "diagram-content-os-pipeline",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.content-os-pipeline"
+      },
+      {
+        "_key": "diagram-instagram-carousel",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.instagram-carousel"
+      }
+    ],
+    "outputFiles": [
+      "outputs/youtube/2026-05-11--ai-blog-db--youtube.md",
+      "outputs/shorts/2026-05-11--ai-blog-db--shorts.md",
+      "outputs/podcast/2026-05-11--ai-blog-db--podcast.md",
+      "outputs/diagrams/2026-05-11--ai-blog-db--diagram-plan.md",
+      "docs/devlog/0004-video-audio-visual-outputs.md"
+    ],
+    "workflowMode": "manual",
+    "observations": "YouTube、Shorts、Podcastは同じcoreThesisを保ちながらフォーマットが大きく変わった。図解は本文下書きではなく制作計画として扱う方が自然だったため、diagramPlanに分離した。",
+    "devlogReference": "docs/devlog/0004-video-audio-visual-outputs.md; docs/devlog/0020-diagram-plan-seeds.md",
+    "reviewRequired": true
+  },
+  {
+    "_id": "workflow.ai-blog-db.sanity-seed-creation",
+    "_type": "workflow",
+    "title": "Sanity seed作成とStudio確認フロー",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "promptsUsed": [
+      {
+        "_key": "prompt-note-article",
+        "_type": "reference",
+        "_ref": "prompt.generate-note-article"
+      },
+      {
+        "_key": "prompt-substack-post",
+        "_type": "reference",
+        "_ref": "prompt.generate-substack-post"
+      },
+      {
+        "_key": "prompt-threads-post",
+        "_type": "reference",
+        "_ref": "prompt.generate-threads-post"
+      },
+      {
+        "_key": "prompt-x-post",
+        "_type": "reference",
+        "_ref": "prompt.generate-x-post"
+      },
+      {
+        "_key": "prompt-youtube-script",
+        "_type": "reference",
+        "_ref": "prompt.generate-youtube-script"
+      },
+      {
+        "_key": "prompt-shorts-script",
+        "_type": "reference",
+        "_ref": "prompt.generate-shorts-script"
+      },
+      {
+        "_key": "prompt-podcast-script",
+        "_type": "reference",
+        "_ref": "prompt.generate-podcast-script"
+      },
+      {
+        "_key": "prompt-diagram-plan",
+        "_type": "reference",
+        "_ref": "prompt.generate-diagram-plan"
+      }
+    ],
+    "toolsUsed": [
+      {
+        "_key": "tool-sanity-cli",
+        "_type": "reference",
+        "_ref": "tool.sanity-cli"
+      },
+      {
+        "_key": "tool-sanity-studio",
+        "_type": "reference",
+        "_ref": "tool.sanity-studio"
+      },
+      {
+        "_key": "tool-codex",
+        "_type": "reference",
+        "_ref": "tool.codex"
+      },
+      {
+        "_key": "tool-local-files",
+        "_type": "reference",
+        "_ref": "tool.local-files"
+      },
+      {
+        "_key": "tool-docs-devlog",
+        "_type": "reference",
+        "_ref": "tool.docs-devlog"
+      }
+    ],
+    "platformOutputs": [
+      {
+        "_key": "output-note",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.note"
+      },
+      {
+        "_key": "output-substack",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.substack"
+      },
+      {
+        "_key": "output-threads",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.threads"
+      },
+      {
+        "_key": "output-x",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.x"
+      },
+      {
+        "_key": "output-youtube",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.youtube"
+      },
+      {
+        "_key": "output-shorts",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.shorts"
+      },
+      {
+        "_key": "output-podcast",
+        "_type": "reference",
+        "_ref": "platformOutput.ai-blog-db.podcast"
+      }
+    ],
+    "diagramPlans": [
+      {
+        "_key": "diagram-before-after",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.before-after"
+      },
+      {
+        "_key": "diagram-obsidian-sanity-split",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.obsidian-sanity-split"
+      },
+      {
+        "_key": "diagram-manual-first-api-later",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.manual-first-api-later"
+      },
+      {
+        "_key": "diagram-content-os-pipeline",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.content-os-pipeline"
+      },
+      {
+        "_key": "diagram-instagram-carousel",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.instagram-carousel"
+      }
+    ],
+    "outputFiles": [
+      "seed/contentIdea-ai-blog-db.json",
+      "seed/prompt-records.json",
+      "seed/platform-output-records.json",
+      "seed/diagram-plan-records.json",
+      "docs/04-first-content-entry.md",
+      "docs/06-prompt-seeds.md",
+      "docs/07-platform-output-seeds.md",
+      "docs/08-diagram-plan-seeds.md"
+    ],
+    "workflowMode": "manual",
+    "observations": "contentIdeaとpromptはCLI作成とStudio確認が成功済み。platformOutputとdiagramPlanはCLI投入前のseed準備段階。seedベースの流れにより、Studio手入力よりも再現しやすい初期データ作成ができる。",
+    "devlogReference": "docs/devlog/0017-first-content-seed.md; docs/devlog/0018-prompt-seeds.md; docs/devlog/0019-platform-output-seeds.md; docs/devlog/0020-diagram-plan-seeds.md",
+    "reviewRequired": true
+  },
+  {
+    "_id": "workflow.ai-blog-db.visual-asset-strategy",
+    "_type": "workflow",
+    "title": "ビジュアルアセット配置戦略の整理",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "promptsUsed": [
+      {
+        "_key": "prompt-diagram-plan",
+        "_type": "reference",
+        "_ref": "prompt.generate-diagram-plan"
+      },
+      {
+        "_key": "prompt-x-post",
+        "_type": "reference",
+        "_ref": "prompt.generate-x-post"
+      }
+    ],
+    "toolsUsed": [
+      {
+        "_key": "tool-codex",
+        "_type": "reference",
+        "_ref": "tool.codex"
+      },
+      {
+        "_key": "tool-local-files",
+        "_type": "reference",
+        "_ref": "tool.local-files"
+      },
+      {
+        "_key": "tool-docs-devlog",
+        "_type": "reference",
+        "_ref": "tool.docs-devlog"
+      }
+    ],
+    "diagramPlans": [
+      {
+        "_key": "diagram-before-after",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.before-after"
+      },
+      {
+        "_key": "diagram-obsidian-sanity-split",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.obsidian-sanity-split"
+      },
+      {
+        "_key": "diagram-manual-first-api-later",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.manual-first-api-later"
+      },
+      {
+        "_key": "diagram-content-os-pipeline",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.content-os-pipeline"
+      },
+      {
+        "_key": "diagram-instagram-carousel",
+        "_type": "reference",
+        "_ref": "diagramPlan.ai-blog-db.instagram-carousel"
+      }
+    ],
+    "outputFiles": [
+      "docs/09-visual-asset-strategy.md",
+      "docs/05-future-dashboard.md",
+      "docs/devlog/0021-visual-asset-strategy.md"
+    ],
+    "workflowMode": "manual",
+    "observations": "diagramPlanは概念レベルの図解案、ビジュアルアセット配置計画は媒体別の使用場所、枚数、比率、再利用方針を扱うものとして分離した。実画像生成はまだ行わず、先に配置戦略を固めた。",
+    "devlogReference": "docs/devlog/0021-visual-asset-strategy.md",
+    "reviewRequired": true
+  }
+]

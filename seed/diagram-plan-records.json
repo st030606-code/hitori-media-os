@@ -1,0 +1,138 @@
+[
+  {
+    "_id": "diagramPlan.ai-blog-db.before-after",
+    "_type": "diagramPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "visualType": "diagram",
+    "targetPlatform": "x",
+    "title": "記事の山からAIが使えるDBへ",
+    "layoutIdea": "左右比較。左にBefore「記事の山」としてnote下書き、SNSメモ、動画台本、音声メモ、リサーチメモを散らして配置する。右にAfter「AIが使えるDB」として1つの知識レコード、媒体別プロンプト、複数出力を整理された矢印で配置する。",
+    "labels": [
+      "記事の山",
+      "毎回文脈を作り直す",
+      "AIが使えるDB",
+      "1つの知識レコード",
+      "複数媒体へ展開"
+    ],
+    "imagePrompt": "シンプルで実用的な日本語図解。左側は散らかった記事・SNS・動画・音声メモの山、右側は整理されたAIが使える知識DB。中央に矢印。白背景、読みやすい黒文字、アクセントカラーは控えめ。AI未来感を強くしすぎない。",
+    "pairedPostText": "ブログを記事の置き場ではなく、AIが使える知識DBとして見る。1つの元レコードから、note、Substack、X、YouTube、Podcastへ展開するイメージです。",
+    "status": "planned",
+    "aspectRatio": "1:1",
+    "reviewNotes": "元出力: outputs/diagrams/2026-05-11--ai-blog-db--diagram-plan.md。最初に作るおすすめ案。読者の悩みである「同じアイデアを何度も書き直している」を視覚化する。"
+  },
+  {
+    "_id": "diagramPlan.ai-blog-db.obsidian-sanity-split",
+    "_type": "diagramPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "visualType": "diagram",
+    "targetPlatform": "note",
+    "title": "Obsidianは考える場所、Sanityは展開する場所",
+    "layoutIdea": "2カラム構成。左にObsidian、右にSanity。Obsidian側には未整理メモ、リサーチ、日々の気づき、devlogを置く。Sanity側には構造化された知識レコード、platformAngles、outputChecklist、媒体別出力を置く。下部に「考える」と「展開する」の役割差を一言で示す。",
+    "labels": [
+      "Obsidian = 考える",
+      "Sanity = 展開する",
+      "未整理メモ",
+      "リサーチ",
+      "開発ログ",
+      "構造化された知識",
+      "媒体別出力"
+    ],
+    "imagePrompt": "日本語の2カラム説明図。左はObsidianの役割として思考・リサーチ・ラフメモ、右はSanityの役割として構造化・再利用・媒体展開。公式ロゴは使わず、抽象アイコンとテキストだけで表現する。落ち着いた実用的なデザイン。",
+    "pairedPostText": "ラフメモやリサーチはObsidian。何度も使う知識はSanity。考える場所と、AIに渡す構造化データの場所を分けると、発信ワークフローが整理しやすい。",
+    "status": "planned",
+    "aspectRatio": "16:9",
+    "reviewNotes": "元出力: outputs/diagrams/2026-05-11--ai-blog-db--diagram-plan.md。note本文内やYouTube説明スライド向け。ロゴや商標表現を使う場合は公式素材の扱いを確認する。"
+  },
+  {
+    "_id": "diagramPlan.ai-blog-db.manual-first-api-later",
+    "_type": "diagramPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "visualType": "paired-post",
+    "targetPlatform": "x",
+    "title": "Manual first, API later",
+    "layoutIdea": "3ステップの横並びまたは縦並び。1: ローカルJSONと保存済みプロンプトで手動検証。2: どのフィールドが効くか、人間レビューが必要な箇所を確認。3: 有効性が見えた部分だけSanityや自動化へ進める。",
+    "labels": [
+      "Manual first",
+      "API later",
+      "まず手動検証",
+      "効くフィールドを確認",
+      "必要な部分だけ自動化"
+    ],
+    "imagePrompt": "日本語の3ステップ図解。Manual firstからAPI laterへ進む段階的な制作ワークフロー。JSON、プロンプト、人間レビュー、必要な部分だけ自動化という流れを簡潔に表す。過度な未来感や派手なAI表現は避ける。",
+    "pairedPostText": "最初からAPI連携しない。まずはJSONとプロンプトで手動検証する。どのフィールドが効くか分かってから、自動化する。この順番のほうが、無駄な実装を避けやすい。",
+    "status": "planned",
+    "aspectRatio": "1:1",
+    "reviewNotes": "元出力: outputs/diagrams/2026-05-11--ai-blog-db--diagram-plan.md。no-API MVPの思想を短く伝える図解ペア投稿向け。"
+  },
+  {
+    "_id": "diagramPlan.ai-blog-db.content-os-pipeline",
+    "_type": "diagramPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "visualType": "diagram",
+    "targetPlatform": "github",
+    "title": "Sanity AI Content OS パイプライン",
+    "layoutIdea": "中央にcontentIdeaカードを置き、カード内にcoreThesis、audiencePain、claims、evidence、examples、objections、platformAnglesを短く表示する。外側にnote、Substack、Threads、X、YouTube、Shorts、Podcast、Diagram、GitHub Docsへの矢印を伸ばす。",
+    "labels": [
+      "contentIdea",
+      "coreThesis",
+      "audiencePain",
+      "claims",
+      "evidence",
+      "examples",
+      "objections",
+      "platformAngles",
+      "note",
+      "Substack",
+      "Threads",
+      "X",
+      "YouTube",
+      "Shorts",
+      "Podcast",
+      "Diagram",
+      "GitHub Docs"
+    ],
+    "imagePrompt": "READMEやGitHubドキュメント向けの構造図。中央にcontentIdeaのカード、外側に複数媒体の出力先。白背景、読みやすい日本語ラベル、実用的で落ち着いたデザイン。矢印は複雑にしすぎない。",
+    "status": "planned",
+    "aspectRatio": "16:9",
+    "reviewNotes": "元出力: outputs/diagrams/2026-05-11--ai-blog-db--diagram-plan.md。README、GitHub Docs、YouTube説明スライドで使いやすい全体構造図。フィールド名を増やしすぎないこと。"
+  },
+  {
+    "_id": "diagramPlan.ai-blog-db.instagram-carousel",
+    "_type": "diagramPlan",
+    "sourceContentIdea": {
+      "_type": "reference",
+      "_ref": "contentIdea.ai-blog-db"
+    },
+    "visualType": "carousel",
+    "targetPlatform": "instagram",
+    "title": "これからのブログはAIが使えるDBになる",
+    "layoutIdea": "8枚構成。1表紙、2問題、3Before、4解決、5中身、6展開、7Manual first API later、8CTA。各スライドは1メッセージだけに絞り、図内テキストを短くする。",
+    "labels": [
+      "これからのブログはAIが使えるDBになる",
+      "同じアイデアを何度も書き直している",
+      "記事・SNS・動画台本がバラバラ",
+      "元になる知識レコードを作る",
+      "主張 / 根拠 / 具体例 / 反論 / 読者 / トーン",
+      "note / Substack / Threads / YouTube / Podcast",
+      "Manual first, API later",
+      "まず1つの元レコードを作る"
+    ],
+    "imagePrompt": "Instagramカルーセル用の8枚構成案。白背景、短い日本語見出し、保存したくなる実用的な図解。各ページ1メッセージで、過度な装飾や根拠のない数値を避ける。",
+    "pairedPostText": "次の記事を書く前に、まず1つの元レコードを作る。主張、根拠、具体例、反論、読者、トーンを分けておくと、AIに渡しやすくなる。",
+    "status": "planned",
+    "aspectRatio": "4:5",
+    "reviewNotes": "元出力: outputs/diagrams/2026-05-11--ai-blog-db--diagram-plan.md。Instagram、LinkedIn、note補助図向け。保存されやすさを狙うが、煽りや断定を強くしすぎない。"
+  }
+]

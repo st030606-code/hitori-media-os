@@ -1,0 +1,42 @@
+{
+  "contentSlug": "building-hitori-media-os",
+  "updatedAt": "2026-05-14T13:47:16.466Z",
+  "candidates": [
+    {
+      "relativePath": "assets/inbox/generated/building-hitori-media-os/note-hero-v1-attempt-1.png",
+      "fileName": "note-hero-v1-attempt-1.png",
+      "suggestedAssetPlanId": "visualAssetPlan.building-hitori-media-os.note-hero-v1",
+      "reviewStatus": "registered",
+      "reviewNotes": "",
+      "finalAssetPath": "assets/visuals/building-hitori-media-os/shared/campaign-hero-v1.png",
+      "patchPath": "patches/visual-assets/building-hitori-media-os/note-hero-v1.json",
+      "registeredAt": "2026-05-14T05:37:28.594Z",
+      "createdAt": "2026-05-14T05:37:28.594Z",
+      "updatedAt": "2026-05-14T05:37:28.594Z"
+    },
+    {
+      "relativePath": "assets/inbox/generated/building-hitori-media-os/note-hero-v1/v001.png",
+      "fileName": "v001.png",
+      "suggestedAssetPlanId": "visualAssetPlan.building-hitori-media-os.note-hero-v1",
+      "reviewStatus": "registered",
+      "reviewNotes": "Selected v001 as first production hero candidate. Stronger visual balance than earlier minimal versions. Suitable for note hero and Substack header shared master.",
+      "finalAssetPath": "assets/visuals/building-hitori-media-os/shared/campaign-hero-v1.png",
+      "patchPath": "patches/visual-assets/building-hitori-media-os/note-hero-v1.json",
+      "registeredAt": "2026-05-14T07:59:49.920Z",
+      "createdAt": "2026-05-14T07:59:49.920Z",
+      "updatedAt": "2026-05-14T07:59:49.920Z"
+    },
+    {
+      "relativePath": "assets/inbox/generated/building-hitori-media-os/x-hook-main-v1/v001.png",
+      "fileName": "v001.png",
+      "suggestedAssetPlanId": "visualAssetPlan.building-hitori-media-os.x-hook-main-v1",
+      "reviewStatus": "registered",
+      "reviewNotes": "",
+      "finalAssetPath": "assets/visuals/building-hitori-media-os/x/hook/x-hook-main-v1.png",
+      "patchPath": "patches/visual-assets/building-hitori-media-os/x-hook-main-v1.json",
+      "registeredAt": "2026-05-14T13:47:16.465Z",
+      "createdAt": "2026-05-14T13:47:16.465Z",
+      "updatedAt": "2026-05-14T13:47:16.465Z"
+    }
+  ]
+}
