@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import {notFound} from 'next/navigation'
 import {sanityClient, sanityConfig, studioDocumentUrl} from '@/lib/sanity'
 import {campaignDetailBySlugQuery, type CampaignPlanDetail} from '@/lib/groq/campaign'
@@ -10,6 +11,8 @@ import {PublishPackageLinks} from '@/components/PublishPackageLinks'
 import {ManualPublishingStatusList} from '@/components/ManualPublishingStatusList'
 import {NextActionSummary} from '@/components/NextActionSummary'
 import {ReadOnlyBanner} from '@/components/ReadOnlyBanner'
+import {PublishReadinessBoard} from '@/components/PublishReadinessBoard'
+import {ReleaseReviewLinks} from '@/components/ReleaseReviewLinks'
 
 // Force dynamic rendering — campaignPlan data is expected to change as the
 // human moves visual / publish gates forward, and Phase Admin 1 should reflect
@@ -38,6 +41,27 @@ export default async function CampaignDetailPage({params}: PageProps) {
       <ReadOnlyBanner />
 
       <CampaignStatusCard campaign={campaign} />
+
+      <PublishReadinessBoard />
+
+      <section className="rounded-lg border border-emerald-300 bg-emerald-50 p-5 shadow-sm">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+          <div>
+            <h2 className="text-base font-semibold text-emerald-950">公開パッケージを開く</h2>
+            <p className="mt-0.5 text-xs text-emerald-900">
+              各媒体への投稿文コピーと画像確認をこの 1 画面で。
+            </p>
+          </div>
+          <Link
+            href={`/publish-package/${campaign.slug ?? campaign._id}`}
+            className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-700"
+          >
+            公開パッケージを開く →
+          </Link>
+        </div>
+      </section>
+
+      <ReleaseReviewLinks />
 
       <NextActionSummary campaign={campaign} />
 

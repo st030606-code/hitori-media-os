@@ -11,13 +11,14 @@ interface NavItem {
 
 function buildItems(flags: {enableDiagnostics: boolean; enableLocalFsRoutes: boolean}): NavItem[] {
   return [
-    {href: '/', label: 'Home', enabled: true},
-    {href: '/campaigns', label: 'Campaigns', enabled: true},
-    {href: '/human-review-gates', label: 'Human Review Gates', enabled: true},
-    {href: '/visual-assets', label: 'Visual Assets', enabled: true},
-    {href: '/publish-packages', label: 'Publish Packages', enabled: flags.enableLocalFsRoutes},
-    {href: '/diagnostics', label: 'Diagnostics', enabled: flags.enableDiagnostics},
-    {href: '/activity-log', label: 'Activity Log', enabled: true},
+    {href: '/', label: 'ダッシュボード', enabled: true},
+    {href: '/campaigns', label: 'キャンペーン', enabled: true},
+    {href: '/human-review-gates', label: '確認待ち', enabled: true},
+    {href: '/visual-assets', label: '画像・図解素材', enabled: true},
+    {href: '/publish-package/building-hitori-media-os', label: '公開パッケージ', enabled: flags.enableLocalFsRoutes},
+    {href: '/publish-packages', label: '配布物一覧', enabled: flags.enableLocalFsRoutes},
+    {href: '/diagnostics', label: '診断', enabled: flags.enableDiagnostics},
+    {href: '/activity-log', label: '作業ログ', enabled: true},
   ]
 }
 
