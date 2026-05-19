@@ -243,6 +243,46 @@ export const visualAssetPlanListQuery = /* groq */ `
 }
 `
 
+// Single visualAssetPlan by _id, used by /visual-assets/[assetId] detail page.
+// The companion `sourceCampaign` subquery walks the campaignPlan documents that
+// reference this asset via `requiredVisualAssets[].visualAssetPlanId` (which is
+// a string ID, not a Sanity reference — so the standard `^._id in ...` form is
+// not enough; we instead match against the array on the campaign side).
+export const visualAssetPlanByIdQuery = /* groq */ `
+*[_type == "visualAssetPlan" && _id == $assetId][0] {
+  _id,
+  title,
+  "slug": slug.current,
+  targetPlatform,
+  assetType,
+  placement,
+  aspectRatio,
+  status,
+  reusePolicy,
+  generationMode,
+  generationProvider,
+  expectedLocalAssetPath,
+  localAssetPath,
+  taskFilePath,
+  publishPackagePath,
+  imagePrompt,
+  textToInclude,
+  textToAvoid,
+  visualDirection,
+  reviewNotes,
+  sourcePromptVersion,
+  updatedAt,
+  createdAt,
+  "sourceContentIdea": sourceContentIdea->{_id, title, "slug": slug.current},
+  "sourceCampaign": *[_type == "campaignPlan" && $assetId in requiredVisualAssets[].visualAssetPlanId][0]{
+    _id,
+    title,
+    "slug": slug.current,
+    coreThesis
+  }
+}
+`
+
 // ---------- TypeScript types for the new queries ----------
 
 export interface CampaignListItem {
@@ -296,6 +336,15 @@ export interface VisualAssetPlanListItem {
   updatedAt?: string
   createdAt?: string
   sourceContentIdea?: {_id: string; title?: string; slug?: string} | null
+}
+
+export interface VisualAssetPlanDetail extends VisualAssetPlanListItem {
+  imagePrompt?: string
+  textToInclude?: string[]
+  textToAvoid?: string[]
+  visualDirection?: string
+  sourcePromptVersion?: string
+  sourceCampaign?: {_id: string; title?: string; slug?: string; coreThesis?: string} | null
 }
 
 export interface PendingGatesByCampaign {

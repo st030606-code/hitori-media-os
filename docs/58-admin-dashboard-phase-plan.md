@@ -1,21 +1,28 @@
 # 58 — Admin Dashboard Phase Plan (design)
 
 Date: 2026-05-14
+Last updated: 2026-05-18 (Phase Admin 1 complete / Phase Admin 2 subphases 2A-2D 追加)
 Status: **design-only**, no implementation
 
 Phase Admin 1〜4 の段階的ロードマップと、各 Phase の着手 trigger / 完了基準 / 永続 deferred を明示する。
 
+Phase Admin 2 の詳細（2A / 2B / 2C / 2D）は [docs/62](62-admin-phase-2-visual-generation-admin-design.md) が canonical。本 doc は roadmap 全体俯瞰、docs/62 は Phase Admin 2 の design 本体。
+
 ## 0. 全体俯瞰
 
 ```
-Phase Admin 0:  design only            ← 現在地（本 doc を含む docs/47〜58）
-Phase Admin 1:  read-only dashboard    ← Next.js 初導入の最小スコープ
-Phase Admin 2:  Visual Register 統合   ← inbox approve / patch review を dashboard で
+Phase Admin 0:  design only            ← 完了（docs/47〜61）
+Phase Admin 1:  read-only dashboard    ← 完了（2026-05-16、app.hitorimedia.com production）
+Phase Admin 2:  Visual Register 統合 + Visual Generation Quality
+  Phase 2A:  dashboard-integrated review (read-only)
+  Phase 2B:  local self-host write mode (filesystem)
+  Phase 2C:  Sanity write mode (mutation + audit log + Auth 切替)
+  Phase 2D:  product / SaaS-ready mode (storage / DB / provider 抽象化)
 Phase Admin 3:  generation 統合         ← campaign 生成 + promptTemplate runner
 Phase Admin 4:  publish 統合            ← 公開URL記録 + reactionNotes（auto-posting は依然 deferred）
 ```
 
-各 Phase は **完全に独立**: 後の Phase に行かなくても前 Phase は単独で使い物になる。
+各 Phase は **完全に独立**: 後の Phase に行かなくても前 Phase は単独で使い物になる。Phase 2 の 4 sub-phase も同様に独立に完了できる。
 
 ## 1. Phase Admin 0 — Design Only（現在地）
 
@@ -92,45 +99,64 @@ Phase Admin 4:  publish 統合            ← 公開URL記録 + reactionNotes（
 
 ### 2.4 完了基準（Phase Admin 1 → 2 の trigger）
 
-- [ ] 全画面が読み込みできる
-- [ ] Sanity dataset を read-only で読める
-- [ ] Visual Register 外部リンクが動く
-- [ ] 1 週間以上 daily で使い、判断負荷が下がったことを実感
-- [ ] 「読みでは足りない、書きが欲しい」具体的な 3 ケースが言える
+- [x] 全画面が読み込みできる（8 page + `/api/asset-thumb`）
+- [x] Sanity dataset を read-only で読める（CDN + optional read token）
+- [x] Visual Register 外部リンクが動く（`/visual-assets` から localhost:3334 へ）
+- [x] Vercel に preview deploy 済 → `app.hitorimedia.com` に production deploy 完了（2026-05-15）
+- [x] Basic Auth で production が守られている
+- [x] TLS / HSTS 健全（Let's Encrypt R13、HSTS 2 年）
+- [x] secret leak grep 0 hits、`b60a8a5` まで push 済
+- [x] 1 週間以上 daily で使う → **継続中**（2026-05-16 production 開始）
+- [x] 「読みでは足りない、書きが欲しい」具体不便を蓄積 → 本格的にやるのは Phase 2A 完了後の運用フェーズ
 
-## 3. Phase Admin 2 — Visual Register Integration
+**Phase Admin 1 完了済**（2026-05-16、batch d3、[docs/handoff/0119](handoff/0119-admin-phase-1-batch-d3-post-deploy-verification.md)）。Phase Admin 2 design へ移行可能。
 
-**目的**: Inbox Review / Patch Review を dashboard で完結させる。
+## 3. Phase Admin 2 — Visual Register Integration + Visual Generation Quality System
 
-### 3.1 追加機能
+**目的**: dashboard を開いたままで「inbox 確認 → approve → final 反映 → Sanity 更新」を完走できる。Visual generation の品質を schema / UI で仕組み化する。productization も視野。
 
-- Inbox Review カードを dashboard 内に統合（Visual Register 機能の取り込み）
-- candidate v00N.png の側 by 側 比較表示
-- approve & register / mark needs-regeneration / drop の3 action
-- Patch JSON view + Sanity Studio に手動反映するためのコピー UI
-- reviewRubric を inline 表示（promptTemplate / visualStyleProfile から引く）
+詳細は [docs/62](62-admin-phase-2-visual-generation-admin-design.md) を参照。本節は roadmap 抜粋。
 
-### 3.2 制約（変わらないもの）
+### 3.1 4 sub-phase 構成
 
-- **Sanity write は依然なし**（patch JSON は filesystem に書く、Sanity への反映は手動）
-- **auto-posting なし**
-- **paid API なし**
+| Sub-phase | スコープ | Write 解禁 | 完了の意味 |
+| --- | --- | --- | --- |
+| **2A** Dashboard-integrated visual review (read-only) | inbox candidate を dashboard で listing / side-by-side 比較 / review rubric inline | なし | Visual Register と並走、見比べは dashboard に寄せる |
+| **2B** Local self-host write mode | dashboard から approve & register / patch JSON 生成 / publish-package dry-run（localhost only） | filesystem | Visual Register をほぼ使わなくなる、localhost で完結 |
+| **2C** Sanity write mode | confirmation gate 付きで visualAssetPlan を Sanity mutate / audit log / undo | Sanity | Sanity Studio の手動反映が消える、Auth 切り替え必須 |
+| **2D** Product / SaaS-ready mode | storage / content DB / generation provider / design profile を plug-in 化、tenant 境界 | （tenant scoped） | boss 以外の 1 user が同じ dashboard で運用できる |
+
+### 3.2 各 sub-phase の制約
+
+- **2A**: 既存 production dashboard 挙動 不変、Auth は Basic Auth のまま、書き込みゼロ。
+- **2B**: localhost only、production には write endpoint を含めない（feature flag で gate）、Sanity mutation なし。
+- **2C**: Auth 切り替え後にのみ着手。write token は env 経由、repo / build に含めない。
+- **2D**: SaaS 化判断後に着手。Phase 2C 完了 + 6 ヶ月運用後に再評価。
 
 ### 3.3 Auth 着手 trigger
 
-Phase Admin 2 に入った時点で **Auth が必要**:
-- dashboard で approve action が起こると、誰がやったかの監査が必要
-- production preview を出せるようになる（自分以外には access させない）
+**Phase 2C 着手前** に Auth design batch（docs/63 候補）を挟む:
 
-候補: Sanity session / GitHub OAuth / magic link。Phase Admin 2 着手時に別 design doc で決定。
+- 候補: Sanity session / GitHub OAuth / magic link
+- 2A / 2B では Basic Auth のまま
+- Auth 実装は本 Phase Admin 2 design batch（[docs/62](62-admin-phase-2-visual-generation-admin-design.md)）では扱わない
 
 ### 3.4 完了基準（Phase Admin 2 → 3 の trigger）
 
-- [ ] approve & register が dashboard でできる
-- [ ] patch JSON が dashboard で生成・閲覧できる
-- [ ] Sanity 反映の手動コピー UI が動く
-- [ ] Visual Register（旧）をほぼ起動しなくて済むようになる
-- [ ] Auth が稼働している
+- [ ] 2A: dashboard で v001/v002/v003 を side-by-side 比較できる
+- [ ] 2A: review rubric が candidate と同じ画面に出る
+- [ ] 2B: dashboard 1 action で approve & register が動く（localhost）
+- [ ] 2B: Visual Register を 1 ヶ月以上起動しなくて済む
+- [ ] 2C: dashboard から Sanity の visualAssetPlan を確認付き mutation できる
+- [ ] 2C: audit log に who / when / what / before / after が残る
+- [ ] 2C: Auth が Basic Auth から切り替わっている
+- [ ] 2D: 着手判断は別途（必須ではない、最低でも 2C 完了が前提）
+
+### 3.5 永続 deferred（Phase 2 全体）
+
+- auto-posting（X / Substack / note / Threads API 直投稿）
+- AI auto-approval（人間 review が唯一の gate）
+- paid LLM / image API integration（ChatGPT OAuth + Codex で完結）
 
 ## 4. Phase Admin 3 — Generation Integration
 

@@ -1,6 +1,6 @@
 {
   "contentSlug": "building-hitori-media-os",
-  "updatedAt": "2026-05-14T13:47:16.466Z",
+  "updatedAt": "2026-05-18T12:01:45.593Z",
   "candidates": [
     {
       "relativePath": "assets/inbox/generated/building-hitori-media-os/note-hero-v1-attempt-1.png",
@@ -37,6 +37,66 @@
       "registeredAt": "2026-05-14T13:47:16.465Z",
       "createdAt": "2026-05-14T13:47:16.465Z",
       "updatedAt": "2026-05-14T13:47:16.465Z"
+    },
+    {
+      "relativePath": "assets/inbox/generated/building-hitori-media-os/note-inline-content-os-flow-v1/v004.png",
+      "fileName": "v004.png",
+      "suggestedAssetPlanId": "visualAssetPlan.building-hitori-media-os.note-inline-content-os-flow-v1",
+      "reviewStatus": "registered",
+      "reviewNotes": "",
+      "finalAssetPath": "assets/visuals/building-hitori-media-os/note/inline/note-inline-content-os-flow-v1.png",
+      "patchPath": "patches/visual-assets/building-hitori-media-os/note-inline-content-os-flow-v1.json",
+      "registeredAt": "2026-05-18T11:34:44.833Z",
+      "createdAt": "2026-05-18T11:34:44.833Z",
+      "updatedAt": "2026-05-18T11:34:44.833Z"
+    },
+    {
+      "relativePath": "assets/inbox/generated/building-hitori-media-os/threads-support-diagram-v1/v004.png",
+      "fileName": "v004.png",
+      "suggestedAssetPlanId": "visualAssetPlan.building-hitori-media-os.threads-support-diagram-v1",
+      "reviewStatus": "registered",
+      "reviewNotes": "",
+      "finalAssetPath": "assets/visuals/building-hitori-media-os/threads/support/threads-support-diagram-v1.png",
+      "patchPath": "patches/visual-assets/building-hitori-media-os/threads-support-diagram-v1.json",
+      "registeredAt": "2026-05-18T11:35:32.973Z",
+      "createdAt": "2026-05-18T11:35:32.973Z",
+      "updatedAt": "2026-05-18T11:35:32.973Z"
+    },
+    {
+      "relativePath": "assets/inbox/generated/building-hitori-media-os/substack-inline-reader-system-v1/v001.png",
+      "fileName": "v001.png",
+      "suggestedAssetPlanId": "visualAssetPlan.building-hitori-media-os.substack-inline-reader-system-v1",
+      "reviewStatus": "registered",
+      "reviewNotes": "Recovery 2026-05-18: register substack-inline-reader-system-v1 with v001.png (japanese-editorial-v1, Reader-list funnel, self-rubric 35/35). Previous Visual Register session accidentally bound this candidate to substack-header-v1. See docs/handoff/0127.",
+      "finalAssetPath": "assets/visuals/building-hitori-media-os/substack/inline/substack-inline-reader-system-v1.png",
+      "patchPath": "patches/visual-assets/building-hitori-media-os/substack-inline-reader-system-v1.json",
+      "registeredAt": "2026-05-18T12:01:45.586Z",
+      "createdAt": "2026-05-18T11:37:03.322Z",
+      "updatedAt": "2026-05-18T12:01:45.586Z"
+    },
+    {
+      "relativePath": "assets/inbox/generated/building-hitori-media-os/note-inline-human-judgment-v1/v001.png",
+      "fileName": "v001.png",
+      "suggestedAssetPlanId": "visualAssetPlan.building-hitori-media-os.note-inline-human-judgment-v1",
+      "reviewStatus": "registered",
+      "reviewNotes": "",
+      "finalAssetPath": "assets/visuals/building-hitori-media-os/note/inline/note-inline-human-judgment-v1.png",
+      "patchPath": "patches/visual-assets/building-hitori-media-os/note-inline-human-judgment-v1.json",
+      "registeredAt": "2026-05-18T11:37:27.190Z",
+      "createdAt": "2026-05-18T11:37:27.190Z",
+      "updatedAt": "2026-05-18T11:37:27.190Z"
+    },
+    {
+      "relativePath": "assets/inbox/generated/building-hitori-media-os/note-hero-v1/v001.png",
+      "fileName": "v001.png",
+      "suggestedAssetPlanId": "visualAssetPlan.building-hitori-media-os.substack-header-v1",
+      "reviewStatus": "registered",
+      "reviewNotes": "Recovery 2026-05-18: re-approved substack-header-v1 with note-hero-v1/v001.png (master shared source) to restore shared/campaign-hero-v1.png after previous mis-selection overwrote it with substack-inline-reader-system-v1/v001.png. See docs/handoff/0127.",
+      "finalAssetPath": "assets/visuals/building-hitori-media-os/shared/campaign-hero-v1.png",
+      "patchPath": "patches/visual-assets/building-hitori-media-os/substack-header-v1.json",
+      "registeredAt": "2026-05-18T12:01:45.585Z",
+      "createdAt": "2026-05-18T12:01:45.585Z",
+      "updatedAt": "2026-05-18T12:01:45.585Z"
     }
   ]
 }

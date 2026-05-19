@@ -1,0 +1,16 @@
+{
+  "_id": "visualAssetPlan.building-hitori-media-os.note-inline-content-os-flow-v1",
+  "set": {
+    "localAssetPath": "assets/visuals/building-hitori-media-os/note/inline/note-inline-content-os-flow-v1.png",
+    "status": "saved",
+    "updatedAt": "2026-05-18T11:34:44.833Z",
+    "reviewNotes": "Approved via Visual Register inbox and copied to final local asset path. 第2章本文の Sanity フィールド名（claims / audience / tone / platformAngles）を直接見せたい場合は英字フィールド名も小さく併記してOK。ただし日本語ラベルを主役にする。"
+  },
+  "meta": {
+    "generatedBy": "tools/visual-register/inbox",
+    "inboxSource": "assets/inbox/generated/building-hitori-media-os/note-inline-content-os-flow-v1/v004.png",
+    "originalFileName": "v004.png",
+    "mimeType": "image/png",
+    "directSanityWrite": false
+  }
+}

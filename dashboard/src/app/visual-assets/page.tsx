@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import {sanityClient} from '@/lib/sanity'
 import {visualAssetPlanListQuery, type VisualAssetPlanListItem} from '@/lib/groq/campaign'
 import {enableLocalFsRoutes} from '@/lib/featureFlags'
@@ -7,6 +8,8 @@ import {SummaryCard} from '@/components/SummaryCard'
 import {EmptyState} from '@/components/EmptyState'
 import {FilePathBlock} from '@/components/FilePathBlock'
 import {SectionHeader} from '@/components/SectionHeader'
+import {statusLabelJa} from '@/lib/statusJa'
+import {assetRoleJa, assetSlugFromId} from '@/lib/assetRoleJa'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -15,15 +18,17 @@ export const revalidate = 0
 // page doesn't show 10 thin slices for what is really "done / in flight / not
 // started". Schema enum source: schemas/visualAssetPlan.ts.
 const DONE_STATES = new Set(['saved', 'reviewed', 'approved', 'packaged', 'published'])
+const SKIPPED_STATES = new Set(['skipped'])
 const PENDING_STATES = new Set(['generated-needs-save'])
 const PROGRESS_STATES = new Set(['prompt-ready']) // brief was prepared but no candidate yet
 const PLANNED_STATES = new Set(['planned', 'brief-ready'])
 
-type Bucket = 'done' | 'pending' | 'progress' | 'planned' | 'other'
+type Bucket = 'done' | 'skipped' | 'pending' | 'progress' | 'planned' | 'other'
 
 function bucketize(status?: string): Bucket {
   if (!status) return 'other'
   if (DONE_STATES.has(status)) return 'done'
+  if (SKIPPED_STATES.has(status)) return 'skipped'
   if (PENDING_STATES.has(status)) return 'pending'
   if (PROGRESS_STATES.has(status)) return 'progress'
   if (PLANNED_STATES.has(status)) return 'planned'
@@ -48,7 +53,7 @@ export default async function VisualAssetsPage() {
       acc[b] = (acc[b] ?? 0) + 1
       return acc
     },
-    {done: 0, pending: 0, progress: 0, planned: 0, other: 0} as Record<Bucket, number>,
+    {done: 0, skipped: 0, pending: 0, progress: 0, planned: 0, other: 0} as Record<Bucket, number>,
   )
   const total = items.length
 
@@ -59,28 +64,33 @@ export default async function VisualAssetsPage() {
   }> = [
     {
       key: 'pending',
-      title: 'Pending review',
-      description: 'generated but not yet saved — needs Visual Register approve & register.',
+      title: '保存待ち',
+      description: '生成済みだが Visual Register での approve & register 待ち。',
     },
     {
       key: 'progress',
-      title: 'In flight',
-      description: 'prompt prepared, awaiting candidate generation.',
+      title: '作業中',
+      description: 'プロンプト準備済み、候補画像はまだ生成されていない。',
     },
     {
       key: 'planned',
-      title: 'Planned / brief-ready',
-      description: 'asset has a plan but no production candidate yet.',
+      title: '計画中 / 生成前',
+      description: 'プランはあるが本番候補がまだない。',
     },
     {
       key: 'done',
-      title: 'Done',
-      description: 'saved / reviewed / approved / packaged / published.',
+      title: '完了',
+      description: '保存済み / 確認済み / 承認済み / 配布準備済み / 公開済み。',
+    },
+    {
+      key: 'skipped',
+      title: '今回は保留',
+      description: '本フェーズでは生成しない判断をした素材。後のフェーズで再評価。',
     },
     {
       key: 'other',
-      title: 'Other / no status',
-      description: 'unexpected or missing status value.',
+      title: 'その他 / 不明',
+      description: '想定外、もしくはステータスなし。',
     },
   ]
 
@@ -89,37 +99,40 @@ export default async function VisualAssetsPage() {
       <ReadOnlyBanner />
 
       <header>
-        <h1 className="text-2xl font-semibold text-slate-900">Visual Assets</h1>
+        <h1 className="text-2xl font-semibold text-slate-900">画像・図解素材</h1>
         <p className="mt-1 text-sm text-slate-600">
-          Full listing of <code>visualAssetPlan</code> documents in the Sanity dataset.
-          {total === 0 ? ' No assets found.' : ` ${total} asset${total === 1 ? '' : 's'} total.`}
+          Sanity データセット内の <code>visualAssetPlan</code> ドキュメント一覧。
+          {total === 0
+            ? ' 素材はまだ登録されていません。'
+            : ` 全 ${total} 件。完了 ${counts.done} 件 / 今回は保留 ${counts.skipped} 件。`}
         </p>
       </header>
 
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        <SummaryCard label="Total" primary={total} />
-        <SummaryCard label="Done" primary={counts.done} secondary="saved / reviewed / approved / packaged / published" />
-        <SummaryCard label="Pending" primary={counts.pending} secondary="generated-needs-save" />
-        <SummaryCard label="In flight" primary={counts.progress} secondary="prompt-ready" />
-        <SummaryCard label="Planned" primary={counts.planned} secondary="planned / brief-ready" />
+      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        <SummaryCard label="合計" primary={total} />
+        <SummaryCard label="完了" primary={counts.done} secondary="保存・確認・公開済み" />
+        <SummaryCard label="今回は保留" primary={counts.skipped} secondary="後のフェーズで再評価" />
+        <SummaryCard label="保存待ち" primary={counts.pending} secondary="生成済み・未保存" />
+        <SummaryCard label="作業中" primary={counts.progress} secondary="プロンプト準備済み" />
+        <SummaryCard label="計画中" primary={counts.planned} secondary="生成前 / 計画中" />
       </section>
 
       {enableLocalFsRoutes ? (
         <section className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
           <p>
-            <strong className="font-semibold">Local thumbnails are enabled.</strong> Images under{' '}
-            <code>assets/visuals/</code> are served via the dev-only{' '}
-            <code>/api/asset-thumb</code> route (8&nbsp;MB cap, prefix-restricted). Production builds
-            disable this route by default; see <code>docs/60</code>.
+            <strong className="font-semibold">ローカルサムネイル表示が有効です。</strong>{' '}
+            <code>assets/visuals/</code> 配下の画像は dev 専用の <code>/api/asset-thumb</code>{' '}
+            経由で表示しています (8&nbsp;MB cap, prefix-restricted)。本番ビルドではこのルートは
+            既定で無効化されます。<code>docs/60</code> 参照。
           </p>
         </section>
       ) : (
         <section className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
           <p>
-            <strong className="font-semibold">Thumbnails are disabled.</strong> Set{' '}
-            <code>ENABLE_LOCAL_FS_ROUTES=true</code> on localhost to enable the{' '}
-            <code>/api/asset-thumb</code> handler. Production deploys keep thumbnails off until the
-            build-time snapshot strategy (Batch D2) is wired up.
+            <strong className="font-semibold">サムネイル表示は無効です。</strong> ローカル環境では{' '}
+            <code>ENABLE_LOCAL_FS_ROUTES=true</code> を設定すると{' '}
+            <code>/api/asset-thumb</code> ハンドラが有効になります。本番デプロイでは
+            ビルド時スナップショット戦略 (Batch D2) ができるまで無効のままです。
           </p>
         </section>
       )}
@@ -154,18 +167,21 @@ export default async function VisualAssetsPage() {
       })}
 
       {items.length === 0 && (
-        <EmptyState title="No visual asset plans found in the dataset." body="Insert seeds via npx sanity documents create, or check that SANITY_READ_TOKEN is set if the dataset is private." />
+        <EmptyState
+          title="データセットに visualAssetPlan が登録されていません。"
+          body="npx sanity documents create でシードを投入するか、データセットが private の場合は SANITY_READ_TOKEN を確認してください。"
+        />
       )}
 
       <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
         <SectionHeader
-          title="Where Visual Asset review actually happens"
-          description="Phase Admin 1 is read-only; approval continues in the local Visual Register."
+          title="承認作業は Visual Register で行います"
+          description="Phase Admin 1 は読み取り専用。approve & register はローカルの Visual Register に残しています。"
         />
         <ul className="space-y-2 text-sm text-slate-700">
           <li>
-            Inbox Review (<code className="rounded bg-slate-100 px-1">approve &amp; register</code>) is in
-            local{' '}
+            Inbox Review（<code className="rounded bg-slate-100 px-1">approve &amp; register</code>）は
+            ローカルの{' '}
             <a
               className="text-sky-700 underline underline-offset-2 hover:text-sky-900"
               href="http://localhost:3334"
@@ -174,10 +190,11 @@ export default async function VisualAssetsPage() {
             >
               Visual Register
             </a>{' '}
-            at <code>http://localhost:3334</code>.
+            (<code>http://localhost:3334</code>) で行います。
           </li>
           <li>
-            Start it from the repo root with <code className="rounded bg-slate-100 px-1">npm run visual:register</code>.
+            リポジトリルートで <code className="rounded bg-slate-100 px-1">npm run visual:register</code>{' '}
+            を実行して起動します。
           </li>
         </ul>
       </section>
@@ -197,14 +214,14 @@ function VisualAssetTable({
       <table className="min-w-full divide-y divide-slate-200 text-sm">
         <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500">
           <tr>
-            {thumbsEnabled && <th className="px-3 py-2 font-medium">Thumb</th>}
-            <th className="px-3 py-2 font-medium">Asset</th>
-            <th className="px-3 py-2 font-medium">Platform</th>
-            <th className="px-3 py-2 font-medium">Type</th>
-            <th className="px-3 py-2 font-medium">Status</th>
+            {thumbsEnabled && <th className="px-3 py-2 font-medium">サムネ</th>}
+            <th className="px-3 py-2 font-medium">役割 / 素材</th>
+            <th className="px-3 py-2 font-medium">媒体</th>
+            <th className="px-3 py-2 font-medium">種別</th>
+            <th className="px-3 py-2 font-medium">状態</th>
             <th className="px-3 py-2 font-medium">Content Idea</th>
-            <th className="px-3 py-2 font-medium">Local Path</th>
-            <th className="px-3 py-2 font-medium">Updated</th>
+            <th className="px-3 py-2 font-medium">更新</th>
+            <th className="px-3 py-2 font-medium">候補</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-100">
@@ -220,6 +237,8 @@ function VisualAssetTable({
               thumbsEnabled && it.localAssetPath && it.localAssetPath.startsWith('assets/visuals/')
                 ? `/api/asset-thumb?path=${encodeURIComponent(it.localAssetPath)}`
                 : null
+            const slug = it.slug ?? assetSlugFromId(it._id)
+            const roleJa = assetRoleJa(slug)
             return (
               <tr key={it._id}>
                 {thumbsEnabled && (
@@ -241,13 +260,21 @@ function VisualAssetTable({
                   </td>
                 )}
                 <td className="px-3 py-2 align-top">
-                  <div className="font-medium text-slate-900">{it.title ?? '(untitled)'}</div>
-                  <div className="text-xs text-slate-500 break-all">
-                    <code>{it._id}</code>
-                  </div>
-                  {it.placement && (
-                    <div className="mt-0.5 text-xs text-slate-500">placement: {it.placement}</div>
+                  <div className="font-medium text-slate-900">{roleJa ?? it.title ?? '(無題)'}</div>
+                  {roleJa && it.title && (
+                    <div className="text-xs text-slate-500">{it.title}</div>
                   )}
+                  {it.placement && (
+                    <div className="mt-0.5 text-xs text-slate-500">配置: {it.placement}</div>
+                  )}
+                  <details className="mt-1 text-xs text-slate-400">
+                    <summary className="cursor-pointer">詳細情報</summary>
+                    <div className="mt-1 flex flex-col gap-1 break-all">
+                      <code className="text-[11px]">id: {it._id}</code>
+                      {slug && <code className="text-[11px]">slug: {slug}</code>}
+                      <FilePathBlock path={pathToShow} detail={pathLabel} />
+                    </div>
+                  </details>
                 </td>
                 <td className="px-3 py-2 align-top text-slate-700">{it.targetPlatform ?? '—'}</td>
                 <td className="px-3 py-2 align-top text-slate-700">
@@ -255,7 +282,7 @@ function VisualAssetTable({
                   {it.aspectRatio && <div className="text-xs text-slate-500">{it.aspectRatio}</div>}
                 </td>
                 <td className="px-3 py-2 align-top">
-                  <StatusBadge state={it.status} />
+                  <StatusBadge state={it.status} label={statusLabelJa(it.status)} />
                   {it.reusePolicy && (
                     <div className="mt-1 text-[11px] text-slate-500">reuse: {it.reusePolicy}</div>
                   )}
@@ -269,13 +296,18 @@ function VisualAssetTable({
                       </span>
                     </span>
                   ) : (
-                    <span className="text-rose-700 text-xs">Reference unresolved</span>
+                    <span className="text-rose-700 text-xs">参照解決できず</span>
                   )}
                 </td>
-                <td className="px-3 py-2 align-top text-xs">
-                  <FilePathBlock path={pathToShow} detail={pathLabel} />
-                </td>
                 <td className="px-3 py-2 align-top text-xs text-slate-500">{updated ?? '—'}</td>
+                <td className="px-3 py-2 align-top text-xs">
+                  <Link
+                    href={`/visual-assets/${encodeURIComponent(it._id)}/candidates`}
+                    className="text-sky-700 underline underline-offset-2 hover:text-sky-900"
+                  >
+                    候補を見る
+                  </Link>
+                </td>
               </tr>
             )
           })}

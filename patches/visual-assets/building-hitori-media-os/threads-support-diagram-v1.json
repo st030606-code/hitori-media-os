@@ -1,0 +1,16 @@
+{
+  "_id": "visualAssetPlan.building-hitori-media-os.threads-support-diagram-v1",
+  "set": {
+    "localAssetPath": "assets/visuals/building-hitori-media-os/threads/support/threads-support-diagram-v1.png",
+    "status": "saved",
+    "updatedAt": "2026-05-18T11:35:32.973Z",
+    "reviewNotes": "Approved via Visual Register inbox and copied to final local asset path. Threads の preview crop は 1.91:1 / 4:5 / 1:1 が混在しがち。重要要素は中央 60% に収め、上下のクロップで主張が崩れないようにする。"
+  },
+  "meta": {
+    "generatedBy": "tools/visual-register/inbox",
+    "inboxSource": "assets/inbox/generated/building-hitori-media-os/threads-support-diagram-v1/v004.png",
+    "originalFileName": "v004.png",
+    "mimeType": "image/png",
+    "directSanityWrite": false
+  }
+}

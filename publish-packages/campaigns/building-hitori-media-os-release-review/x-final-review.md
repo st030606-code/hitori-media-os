@@ -8,6 +8,32 @@ Not auto-posted.
 - [publish-packages/x/building-hitori-media-os/posts.md](../../x/building-hitori-media-os/posts.md)
 - [outputs/x/2026-05-14--building-hitori-media-os--x.md](../../../outputs/x/2026-05-14--building-hitori-media-os--x.md)
 
+## Working Pipeline Step F Status (3-axis readiness)
+
+Working Pipeline 1 周完走の最終 verification。boss が手動公開する前に各 axis を 1 度通す。
+
+### Visual assets ✅
+
+- [x] `x-hook-main-v1.png` registered in Visual Register（2026-05-14T13:47:16.465Z）
+- [x] Sanity `visualAssetPlan.building-hitori-media-os.x-hook-main-v1` is `status: saved`（Step E atomic transaction `spvtGcqRbreWFzrmNCgxGn`、2026-05-18）
+- [x] `publish-packages/x/building-hitori-media-os/images/x-hook-main-v1.png` distributed（655,963 bytes、Step F、本 file は 2026-05-14 配布から idempotent skip で内容不変）
+
+### Text draft ✅
+
+- [x] `outputs/x/2026-05-14--building-hitori-media-os--x.md` exists（draftStatus: ready-for-human-edit）
+- [x] `publish-packages/x/building-hitori-media-os/posts.md` is the canonical post copy
+- [x] redact 不要（secret / 実 project ID / private/ パス なし）
+
+### Manual publish readiness ⏳ pending-human-fill
+
+- [ ] 採用 main post を 1 案に確定
+- [ ] CTA を 1 つに絞る
+- [ ] thread を出すか単発かを決める
+- [ ] 投稿前に音読
+- [ ] [post-publication-log-template.md](post-publication-log-template.md) を `docs/devlog/` に複製して post-publication log 準備
+- [ ] X アカウントが open
+- [ ] 公開予定日（boss 記入）
+
 ## Recommended Main Post
 
 > 発信を頑張るより、発信が回る仕組みを作っている。
