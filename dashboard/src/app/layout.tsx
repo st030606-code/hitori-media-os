@@ -1,17 +1,21 @@
 import type {Metadata} from 'next'
-import {Geist, Geist_Mono} from 'next/font/google'
+import {Inter, Noto_Sans_JP} from 'next/font/google'
 import './globals.css'
-import {AppNav} from '@/components/AppNav'
-import {getNavFlags} from '@/lib/featureFlags'
+import {AppShell} from '@/components/app-shell/AppShell'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+// Inter for Latin / numerics / code, Noto Sans JP for 日本語.
+// CSS variable fallback chain in globals.css:
+//   --font-sans : "Inter", "Noto Sans JP", system-ui, sans-serif
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
+  display: 'swap',
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const notoSansJp = Noto_Sans_JP({
+  variable: '--font-noto-sans-jp',
   subsets: ['latin'],
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -26,12 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="ja"
+      className={`${inter.variable} ${notoSansJp.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900">
-        <AppNav {...getNavFlags()} />
-        <div className="flex-1">{children}</div>
+      <body className="min-h-full bg-slate-50 text-slate-900">
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   )

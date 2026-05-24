@@ -9,6 +9,7 @@
 export const campaignDetailBySlugQuery = /* groq */ `
 *[_type == "campaignPlan" && slug.current == $slug][0] {
   _id,
+  _rev,
   _type,
   title,
   "slug": slug.current,
@@ -135,12 +136,16 @@ export const dashboardHomeQuery = /* groq */ `
     automationLevel,
     progressStatus,
     "selectedPlatforms": selectedPlatforms[]{platform, priority, enabled},
+    "selectedPlatformsCount": count(selectedPlatforms[enabled == true]),
     "pendingGatesCount": count(humanReviewGates[
       state == "pending-review" || state == "in-progress" || state == "blocked"
     ]),
     "doneVisualsCount": count(requiredVisualAssets[state == "done"]),
     "totalVisualsCount": count(requiredVisualAssets),
-    "manualPublishingDoneCount": count(manualPublishingStatus[defined(publishedUrl)])
+    "manualPublishingDoneCount": count(manualPublishingStatus[defined(publishedUrl)]),
+    "manualPublishingNotStartedCount": count(
+      manualPublishingStatus[!defined(publishedUrl) && (state == "not-started" || !defined(state))]
+    )
   },
   "campaignTotal": count(*[_type == "campaignPlan"]),
   "campaignsActive": count(*[
@@ -163,6 +168,10 @@ export const dashboardHomeQuery = /* groq */ `
   "manualPublishingDone": count(
     *[_type == "campaignPlan"].manualPublishingStatus[defined(publishedUrl)]
   ),
+  "contentIdeaTotal": count(*[_type == "contentIdea"]),
+  "knowledgeAssetTotal": count(*[
+    _type in ["brandProfile", "visualStyleProfile", "promptTemplate", "prompt", "tool"]
+  ]),
   "latest": *[_type == "campaignPlan"] | order(coalesce(updatedAt, _updatedAt) desc)[0] {
     _id,
     _type,
@@ -209,10 +218,11 @@ export const dashboardHomeQuery = /* groq */ `
 export const pendingHumanReviewGatesQuery = /* groq */ `
 *[_type == "campaignPlan" && count(humanReviewGates) > 0] | order(title asc) {
   _id,
+  _rev,
   title,
   "slug": slug.current,
   status,
-  "gates": humanReviewGates[]{gateName, state, reviewer, completedAt, notes}
+  "gates": humanReviewGates[]{_key, gateName, state, reviewer, completedAt, notes}
 }
 `
 
@@ -313,6 +323,8 @@ export interface DashboardHomeData {
   visualsDone: number
   manualPublishingPending: number
   manualPublishingDone: number
+  contentIdeaTotal: number
+  knowledgeAssetTotal: number
   latest: CampaignPlanDetail | null
 }
 
@@ -349,6 +361,9 @@ export interface VisualAssetPlanDetail extends VisualAssetPlanListItem {
 
 export interface PendingGatesByCampaign {
   _id: string
+  /** Sanity document revision; required as `expectedRevision` for the
+   *  Phase 2B-2 gate-state write action. */
+  _rev?: string
   title?: string
   slug?: string
   status?: string
@@ -413,6 +428,10 @@ export interface SelectedPlatform {
 }
 
 export interface HumanReviewGate {
+  /** Sanity-assigned stable key for this array element. Required by Phase
+   *  2B-2 server actions to scope the patch via
+   *  `humanReviewGates[_key == "<key>"].state`. */
+  _key?: string
   gateName?: string
   state?: string
   reviewer?: string
@@ -467,6 +486,9 @@ export interface ProgressStatus {
 
 export interface CampaignPlanDetail {
   _id: string
+  /** Sanity document revision; required as `expectedRevision` for the
+   *  Phase 2B-2 gate-state write action. */
+  _rev?: string
   _type: string
   title?: string
   slug?: string

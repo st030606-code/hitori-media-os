@@ -1,10 +1,12 @@
-// Feature flags for Phase Admin 1 — Batch D1.
+// Feature flags for Phase Admin 1 — Batch D1 (+ Phase 2B-1 write actions).
 //
-// Three flags control which dev-only surfaces are reachable:
+// Four flags control which dev-only / write surfaces are reachable:
 //
 //   ENABLE_DIAGNOSTICS         /diagnostics page + nav link
 //   ENABLE_LOCAL_FS_ROUTES     /publish-packages page + nav link + /api/asset-thumb
 //   ACTIVITY_LOG_MODE          'fs' (read docs/ on request) | 'snapshot' (read public/activity-snapshot.json)
+//   ENABLE_WRITE_ACTIONS       Phase 2B write actions master switch — opt-in only
+//                              (default OFF in both dev and prod; must be combined with SANITY_WRITE_TOKEN)
 //
 // Default behavior:
 //   - Localhost dev (NODE_ENV !== 'production') keeps the pre-Batch-D1 UX:
@@ -41,6 +43,13 @@ function defaultEnableInDev(envName: string): boolean {
 export const enableDiagnostics = defaultEnableInDev('ENABLE_DIAGNOSTICS')
 export const enableLocalFsRoutes = defaultEnableInDev('ENABLE_LOCAL_FS_ROUTES')
 
+// Phase 2B-1 write actions: opt-in only. The flag alone does NOT permit
+// writes — the server action additionally verifies SANITY_WRITE_TOKEN is
+// present. Production deploys must keep this off; never set
+// ENABLE_WRITE_ACTIONS=true on Vercel. See
+// docs/specs/phase-2b-1-reaction-notes.md §10 and §6.
+export const enableWriteActions = envFlagOn('ENABLE_WRITE_ACTIONS')
+
 // ACTIVITY_LOG_MODE:
 //   explicit 'fs'        → fs mode
 //   explicit 'snapshot'  → snapshot mode
@@ -52,17 +61,3 @@ export const activityLogMode: ActivityLogMode = (() => {
   if (raw === 'snapshot') return 'snapshot'
   return isLocalhostDev ? 'fs' : 'snapshot'
 })()
-
-export interface NavFlags {
-  enableDiagnostics: boolean
-  enableLocalFsRoutes: boolean
-}
-
-// Helper for layout.tsx to bundle just the props AppNav needs. Booleans only,
-// no secrets, safe to cross the Server → Client boundary.
-export function getNavFlags(): NavFlags {
-  return {
-    enableDiagnostics,
-    enableLocalFsRoutes,
-  }
-}
