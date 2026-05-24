@@ -19,3 +19,9 @@ private/
 # Env example template — sandbox could not inspect its values, so treat as conservatively-ignored.
 # If the file holds only placeholders, the human can opt-in with `git add -f .env.example`.
 .env.example
+
+# Local Hitori Media OS generated workflow artifacts
+idea-jobs/
+generation-jobs/
+*.recovery-backup-*.png
+*.png.recovery-backup-*
