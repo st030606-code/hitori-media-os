@@ -1,25 +1,33 @@
+// Campaign-level "next action" derivation helpers.
+//
+// Moved from the legacy `NextActionSummary` component during Phase UI-fidelity-11
+// so the helper survives independently of the deprecated component file (the
+// fidelity-1 era `<NextActionSummary />` is being deleted, but its derivation
+// logic is still consumed by the current `<NextActionList />`).
+//
+// Pure server-safe functions: no JSX, no client APIs.
+
 import type {CampaignPlanDetail} from '@/lib/groq/campaign'
-import {StatusBadge} from './StatusBadge'
 
-type ActionTone = 'now' | 'soon' | 'later' | 'warn' | 'done'
+export type ActionTone = 'now' | 'soon' | 'later' | 'warn' | 'done'
 
-interface Action {
+export interface Action {
   tone: ActionTone
   title: string
   detail?: string
 }
 
-const PRIORITY_ORDER = ['P0', 'P1', 'P2', 'P3'] as const
+export const PRIORITY_ORDER = ['P0', 'P1', 'P2', 'P3'] as const
 
-function isActiveGateState(state?: string): boolean {
+export function isActiveGateState(state?: string): boolean {
   return state === 'pending-review' || state === 'in-progress' || state === 'blocked'
 }
 
-function isActiveVisualState(state?: string): boolean {
+export function isActiveVisualState(state?: string): boolean {
   return state !== 'done' && state !== 'skipped'
 }
 
-function actionToneClasses(tone: ActionTone): string {
+export function actionToneClasses(tone: ActionTone): string {
   switch (tone) {
     case 'now':
       return 'border-amber-300 bg-amber-50 text-amber-950'
@@ -34,7 +42,7 @@ function actionToneClasses(tone: ActionTone): string {
   }
 }
 
-function actionLabel(tone: ActionTone): string {
+export function actionLabel(tone: ActionTone): string {
   switch (tone) {
     case 'now':
       return 'Do next'
@@ -147,30 +155,4 @@ export function computeNextActions(campaign: CampaignPlanDetail): Action[] {
   }
 
   return actions
-}
-
-export function NextActionSummary({campaign}: {campaign: CampaignPlanDetail}) {
-  const actions = computeNextActions(campaign)
-  return (
-    <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-      <header className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-        <h2 className="text-base font-semibold text-slate-900">Next Actions</h2>
-        <p className="text-xs text-slate-500">Computed from this campaign's current state. Read-only.</p>
-      </header>
-      <ul className="space-y-2">
-        {actions.map((a, i) => (
-          <li
-            key={i}
-            className={`flex flex-col gap-1 rounded-md border px-3 py-2 text-sm ${actionToneClasses(a.tone)}`}
-          >
-            <div className="flex flex-wrap items-center gap-2">
-              <StatusBadge state={a.tone === 'now' ? 'pending-review' : a.tone === 'warn' ? 'blocked' : a.tone === 'done' ? 'done' : 'info'} label={actionLabel(a.tone)} />
-              <span className="font-medium">{a.title}</span>
-            </div>
-            {a.detail && <p className="text-xs">{a.detail}</p>}
-          </li>
-        ))}
-      </ul>
-    </section>
-  )
 }
