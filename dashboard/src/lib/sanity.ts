@@ -46,8 +46,36 @@ export const sanityClient: SanityClient = createClient({
 // Studio deep-link helper. Used only for read-only "open in Studio" buttons.
 // The actual Studio URL depends on hosting; if Studio runs locally on
 // `npm run dev` (port 3333), this returns the local URL by default.
-const STUDIO_BASE_URL = process.env.NEXT_PUBLIC_STUDIO_BASE_URL || 'http://localhost:3333'
+const STUDIO_BASE_URL = (process.env.NEXT_PUBLIC_STUDIO_BASE_URL || 'http://localhost:3333').replace(/\/$/, '')
+
+export function studioRootUrl(): string {
+  return STUDIO_BASE_URL
+}
 
 export function studioDocumentUrl(documentId: string): string {
   return `${STUDIO_BASE_URL}/structure/${encodeURIComponent(documentId)}`
+}
+
+export function studioContentIdeasListUrl(): string {
+  return `${STUDIO_BASE_URL}/structure/content-ideas-hub;content-ideas-all`
+}
+
+export function studioContentIdeaUrl(documentId: string): string {
+  return `${studioContentIdeasListUrl()};${encodeURIComponent(documentId)}`
+}
+
+export function studioPlatformOutputsListUrl(): string {
+  return `${STUDIO_BASE_URL}/structure/by-type;by-type-platformOutput`
+}
+
+export function studioPlatformOutputUrl(documentId: string): string {
+  return `${studioPlatformOutputsListUrl()};${encodeURIComponent(documentId)}`
+}
+
+export function studioVisualAssetPlansListUrl(): string {
+  return `${STUDIO_BASE_URL}/structure/by-type;by-type-visualAssetPlan`
+}
+
+export function studioVisualAssetPlanUrl(documentId: string): string {
+  return `${studioVisualAssetPlansListUrl()};${encodeURIComponent(documentId)}`
 }
