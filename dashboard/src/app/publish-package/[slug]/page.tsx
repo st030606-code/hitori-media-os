@@ -1,8 +1,16 @@
 import Link from 'next/link'
 import {readPublishPackage, type PublishPackage} from '@/lib/publishPackageReader'
 import {enableLocalFsRoutes} from '@/lib/featureFlags'
-import {ReadOnlyBanner} from '@/components/ReadOnlyBanner'
 import {CopyButton} from '@/components/CopyButton'
+import {sanityClient} from '@/lib/sanity'
+import {
+  publishPackageStateBySlugQuery,
+  findPlatformState,
+  isPublished,
+  formatPublishedAtJst,
+  type PublishPackageState,
+  type PublishPackagePlatformState,
+} from '@/lib/groq/publishPackage'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -11,13 +19,25 @@ interface PageProps {
   params: Promise<{slug: string}>
 }
 
+async function fetchPublishState(slug: string): Promise<PublishPackageState | null> {
+  try {
+    return await sanityClient.fetch<PublishPackageState | null>(
+      publishPackageStateBySlugQuery,
+      {slug},
+    )
+  } catch {
+    // Read-only UI: a Sanity outage should not break the FS-driven page.
+    // The badges simply fall back to "未公開" / unknown.
+    return null
+  }
+}
+
 export default async function PublishPackagePage({params}: PageProps) {
   const {slug} = await params
 
   if (!enableLocalFsRoutes) {
     return (
       <main className="mx-auto flex w-full max-w-4xl flex-col gap-4 px-4 py-10 sm:px-6 lg:px-8">
-        <ReadOnlyBanner />
         <section className="rounded-lg border border-amber-300 bg-amber-50 p-5 text-sm text-amber-950">
           <h1 className="text-xl font-semibold text-amber-950">公開パッケージ</h1>
           <p className="mt-2">
@@ -32,19 +52,20 @@ export default async function PublishPackagePage({params}: PageProps) {
     )
   }
 
-  const pkg = await readPublishPackage(slug)
+  const [pkg, publishState] = await Promise.all([
+    readPublishPackage(slug),
+    fetchPublishState(slug),
+  ])
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-col gap-5 px-4 py-8 sm:px-6 lg:px-8">
-      <ReadOnlyBanner />
+      <PageHeader pkg={pkg} publishState={publishState} />
+      <PlatformOverviewCards pkg={pkg} publishState={publishState} />
 
-      <PageHeader pkg={pkg} />
-      <PlatformOverviewCards pkg={pkg} />
-
-      <XSection pkg={pkg} />
-      <ThreadsSection pkg={pkg} />
-      <NoteSection pkg={pkg} />
-      <SubstackSection pkg={pkg} />
+      <XSection pkg={pkg} platformState={findPlatformState(publishState, 'x')} />
+      <ThreadsSection pkg={pkg} platformState={findPlatformState(publishState, 'threads')} />
+      <NoteSection pkg={pkg} platformState={findPlatformState(publishState, 'note')} />
+      <SubstackSection pkg={pkg} platformState={findPlatformState(publishState, 'substack')} />
 
       <ReleaseReviewFooter pkg={pkg} />
     </main>
@@ -53,11 +74,36 @@ export default async function PublishPackagePage({params}: PageProps) {
 
 // ---------- Page header ----------
 
-function PageHeader({pkg}: {pkg: PublishPackage}) {
+function PageHeader({
+  pkg,
+  publishState,
+}: {
+  pkg: PublishPackage
+  publishState: PublishPackageState | null
+}) {
   const isHitori = pkg.slug === 'building-hitori-media-os'
   const campaignLabel = isHitori
     ? 'AIで「ひとりメディア運営OS」を作っている裏側'
     : pkg.slug
+
+  const mps = publishState?.manualPublishingStatus ?? []
+  const totalTracked = ['x', 'threads', 'note', 'substack'].filter((p) =>
+    mps.some((it) => it.platform === p),
+  ).length
+  const doneCount = mps.filter((it) => it.state === 'done').length
+  const allDone = totalTracked > 0 && doneCount === totalTracked
+  const partial = doneCount > 0 && !allDone
+
+  let nextValue = '媒体ごとにコピーして投稿'
+  let nextTone: 'done' | 'info' | 'warn' = 'warn'
+  if (allDone) {
+    nextValue = '全媒体公開済み — Reaction Notes を後日記入'
+    nextTone = 'done'
+  } else if (partial) {
+    nextValue = `${doneCount} / ${totalTracked} 公開済み — 残りを手動投稿`
+    nextTone = 'warn'
+  }
+
   return (
     <header className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
       <h1 className="text-2xl font-semibold text-slate-900">公開パッケージ</h1>
@@ -71,8 +117,18 @@ function PageHeader({pkg}: {pkg: PublishPackage}) {
       </div>
       <dl className="mt-3 grid grid-cols-1 gap-2 text-sm sm:grid-cols-3">
         <Pair label="技術準備" value="完了" tone="done" />
-        <Pair label="公開方式" value="手動投稿" tone="info" />
-        <Pair label="次にやること" value="媒体ごとにコピーして投稿" tone="warn" />
+        <Pair
+          label="公開状況"
+          value={
+            publishState === null
+              ? '未取得（Sanity 接続不可）'
+              : totalTracked === 0
+                ? '未設定'
+                : `${doneCount} / ${totalTracked} 公開済み`
+          }
+          tone={allDone ? 'done' : partial ? 'warn' : 'info'}
+        />
+        <Pair label="次にやること" value={nextValue} tone={nextTone} />
       </dl>
     </header>
   )
@@ -95,7 +151,13 @@ function Pair({label, value, tone}: {label: string; value: string; tone: 'done' 
 
 // ---------- Platform overview cards ----------
 
-function PlatformOverviewCards({pkg}: {pkg: PublishPackage}) {
+function PlatformOverviewCards({
+  pkg,
+  publishState,
+}: {
+  pkg: PublishPackage
+  publishState: PublishPackageState | null
+}) {
   const platforms: Array<{
     key: string
     label: string
@@ -145,29 +207,91 @@ function PlatformOverviewCards({pkg}: {pkg: PublishPackage}) {
   ]
   return (
     <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-      {platforms.map((p) => (
-        <a
-          key={p.key}
-          href={p.anchor}
-          className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-slate-300 hover:shadow"
-        >
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-base font-semibold text-slate-900">{p.label}</h2>
-            <span className="text-xs text-sky-700 underline underline-offset-2">開く</span>
-          </div>
-          <ul className="mt-2 space-y-0.5 text-xs">
-            <li className={p.hasText ? 'text-emerald-700' : 'text-slate-400'}>
-              {p.hasText ? '✓ 投稿文あり' : '× 投稿文なし'}
-            </li>
-            <li className={p.hasImage ? 'text-emerald-700' : 'text-slate-400'}>
-              {p.hasImage ? '✓ 画像あり' : '× 画像なし'}
-            </li>
-            <li className="text-emerald-700">✓ レビュー済み</li>
-            {p.extra && <li className="text-amber-700">⚠ {p.extra}</li>}
-          </ul>
-        </a>
-      ))}
+      {platforms.map((p) => {
+        const state = findPlatformState(publishState, p.key)
+        const published = isPublished(state)
+        const at = formatPublishedAtJst(state?.publishedAt)
+        return (
+          <a
+            key={p.key}
+            href={p.anchor}
+            className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-slate-300 hover:shadow"
+          >
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-base font-semibold text-slate-900">{p.label}</h2>
+              <span className="text-xs text-sky-700 underline underline-offset-2">開く</span>
+            </div>
+            <div className="mt-2">
+              <PublishedBadge published={published} state={state?.state} />
+              {published && at && (
+                <p className="mt-1 text-[11px] text-slate-500">公開日時: {at}</p>
+              )}
+            </div>
+            <ul className="mt-2 space-y-0.5 text-xs">
+              <li className={p.hasText ? 'text-emerald-700' : 'text-slate-400'}>
+                {p.hasText ? '✓ 投稿文あり' : '× 投稿文なし'}
+              </li>
+              <li className={p.hasImage ? 'text-emerald-700' : 'text-slate-400'}>
+                {p.hasImage ? '✓ 画像あり' : '× 画像なし'}
+              </li>
+              <li className="text-emerald-700">✓ レビュー済み</li>
+              {p.extra && <li className="text-amber-700">⚠ {p.extra}</li>}
+            </ul>
+          </a>
+        )
+      })}
     </section>
+  )
+}
+
+function PublishedBadge({published, state}: {published: boolean; state?: string}) {
+  if (published) {
+    return (
+      <span className="inline-flex items-center rounded-md bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-900 ring-1 ring-inset ring-emerald-300">
+        ✓ 公開済み
+      </span>
+    )
+  }
+  const label = state === 'not-started' || !state ? '⏳ 未公開' : `⏳ ${state}`
+  return (
+    <span className="inline-flex items-center rounded-md bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-900 ring-1 ring-inset ring-amber-300">
+      {label}
+    </span>
+  )
+}
+
+function PublishedStatusBlock({state}: {state?: PublishPackagePlatformState}) {
+  const published = isPublished(state)
+  const at = formatPublishedAtJst(state?.publishedAt)
+  if (published && state?.publishedUrl) {
+    return (
+      <div className="rounded-md border border-emerald-300 bg-emerald-50 p-3 text-sm text-emerald-950">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span className="font-medium">✓ 公開済み</span>
+          {at && <span className="text-xs text-emerald-900">公開日時: {at}</span>}
+        </div>
+        <div className="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+          <span className="text-xs font-medium uppercase tracking-wide text-emerald-900">公開済みURL</span>
+          <a
+            href={state.publishedUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="break-all text-sm text-emerald-900 underline underline-offset-2 hover:text-emerald-700"
+          >
+            {state.publishedUrl}
+          </a>
+          <CopyButton text={state.publishedUrl} label="URLをコピー" />
+        </div>
+      </div>
+    )
+  }
+  return (
+    <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-950">
+      <span className="font-medium">公開予定: 未公開</span>
+      <span className="ml-2 text-xs">
+        （state: {state?.state ?? '不明'}）
+      </span>
+    </div>
   )
 }
 
@@ -260,10 +384,17 @@ function ImageList({
 
 // ---------- X section ----------
 
-function XSection({pkg}: {pkg: PublishPackage}) {
+function XSection({
+  pkg,
+  platformState,
+}: {
+  pkg: PublishPackage
+  platformState?: PublishPackagePlatformState
+}) {
   const c = pkg.x
   return (
     <PlatformCard id="x" title="X" emoji="✕">
+      <PublishedStatusBlock state={platformState} />
       {!c.available && <p className="text-sm text-rose-700">posts.md が読めません。</p>}
       {c.mainPost && <TextBlock label="メイン投稿" text={c.mainPost} />}
       {c.alternateHooks.length > 0 && (
@@ -296,10 +427,17 @@ function XSection({pkg}: {pkg: PublishPackage}) {
 
 // ---------- Threads section ----------
 
-function ThreadsSection({pkg}: {pkg: PublishPackage}) {
+function ThreadsSection({
+  pkg,
+  platformState,
+}: {
+  pkg: PublishPackage
+  platformState?: PublishPackagePlatformState
+}) {
   const c = pkg.threads
   return (
     <PlatformCard id="threads" title="Threads" emoji="@">
+      <PublishedStatusBlock state={platformState} />
       {!c.available && <p className="text-sm text-rose-700">posts.md が読めません。</p>}
       {c.mainPost && <TextBlock label="メイン投稿" text={c.mainPost} />}
       {c.alternateMainPosts.length > 0 && (
@@ -335,10 +473,17 @@ function ThreadsSection({pkg}: {pkg: PublishPackage}) {
 
 // ---------- note section ----------
 
-function NoteSection({pkg}: {pkg: PublishPackage}) {
+function NoteSection({
+  pkg,
+  platformState,
+}: {
+  pkg: PublishPackage
+  platformState?: PublishPackagePlatformState
+}) {
   const c = pkg.note
   return (
     <PlatformCard id="note" title="note" emoji="N">
+      <PublishedStatusBlock state={platformState} />
       {!c.available && <p className="text-sm text-rose-700">article.md が読めません。</p>}
 
       {(c.insertMapStale || pkg.note.images.length > 0) && (
@@ -410,11 +555,18 @@ function NoteSection({pkg}: {pkg: PublishPackage}) {
 
 // ---------- Substack section ----------
 
-function SubstackSection({pkg}: {pkg: PublishPackage}) {
+function SubstackSection({
+  pkg,
+  platformState,
+}: {
+  pkg: PublishPackage
+  platformState?: PublishPackagePlatformState
+}) {
   const c = pkg.substack
   const anyStub = c.aboutPageIsStub || c.welcomeEmailIsStub || c.notesFileIsStub
   return (
     <PlatformCard id="substack" title="Substack" emoji="S">
+      <PublishedStatusBlock state={platformState} />
       {!c.available && <p className="text-sm text-rose-700">post.md が読めません。</p>}
 
       {anyStub && (

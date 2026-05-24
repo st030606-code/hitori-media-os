@@ -4,13 +4,16 @@ import {NextResponse, type NextRequest} from 'next/server'
 import {repoRoot} from '@/lib/repoRoot'
 import {enableLocalFsRoutes} from '@/lib/featureFlags'
 
-// Local-mode-only image serving for the dashboard's /visual-assets page.
+// Local-mode-only image serving for the dashboard's /visual-assets pages.
 // We do NOT want this enabled in production: Vercel won't have the
-// `assets/visuals/` tree, and exposing arbitrary repo files behind a path
-// query parameter is the kind of thing that must stay on localhost.
+// `assets/visuals/` or `assets/inbox/generated/` trees, and exposing
+// arbitrary repo files behind a path query parameter is the kind of thing
+// that must stay on localhost.
 //
 // Allowed inputs and behaviors:
-//   - relative path under `assets/visuals/` only
+//   - relative path under one of the allowed prefixes:
+//       * `assets/visuals/`            (final approved assets)
+//       * `assets/inbox/generated/`    (inbox v00N candidate images, P0 add)
 //   - no absolute paths, no `..` traversal, no double-encoded traversal
 //   - extension whitelist (png / jpg / jpeg / webp / gif)
 //   - size cap 8 MB
@@ -23,7 +26,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const ALLOWED_PREFIX = 'assets/visuals/'
+const ALLOWED_PREFIXES = ['assets/visuals/', 'assets/inbox/generated/'] as const
 const ALLOWED_EXTS: Record<string, string> = {
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
@@ -62,10 +65,11 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     return reject(400, 'absolute path not allowed')
   }
 
-  // 2. require the canonical prefix BEFORE normalize so attackers can't slip
-  //    through with a different relative prefix and rely on resolve() snapping
-  //    them back inside.
-  if (!decoded.startsWith(ALLOWED_PREFIX)) {
+  // 2. require one of the canonical prefixes BEFORE normalize so attackers
+  //    can't slip through with a different relative prefix and rely on
+  //    resolve() snapping them back inside.
+  const matchedPrefix = ALLOWED_PREFIXES.find((p) => decoded.startsWith(p))
+  if (!matchedPrefix) {
     return reject(403, 'forbidden prefix')
   }
 
@@ -78,7 +82,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   ) {
     return reject(400, 'path traversal')
   }
-  if (!normalized.startsWith(ALLOWED_PREFIX)) {
+  if (!normalized.startsWith(matchedPrefix)) {
     return reject(403, 'forbidden prefix after normalize')
   }
 
@@ -87,8 +91,11 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   const mime = ALLOWED_EXTS[ext]
   if (!mime) return reject(415, 'unsupported extension')
 
-  // 5. resolve absolute paths and double-check containment.
-  const allowedRoot = path.resolve(repoRoot(), ALLOWED_PREFIX)
+  // 5. resolve absolute paths and double-check containment against the
+  //    *specific* matched prefix (not any-of), so a request that started with
+  //    `assets/visuals/` cannot resolve to a file under `assets/inbox/` and
+  //    vice versa.
+  const allowedRoot = path.resolve(repoRoot(), matchedPrefix)
   const abs = path.resolve(repoRoot(), normalized)
   // resolve(...) collapses any remaining tricks; require the resulting path
   // to start with allowedRoot + separator so `assets/visuals-evil/` is denied.

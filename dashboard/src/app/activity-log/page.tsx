@@ -1,11 +1,23 @@
+// /activity-log — 作業ログ (Phase UI-fidelity-8).
+//
+// Renders the latest entries from docs/devlog/*.md and docs/handoff/*.md.
+// Two source modes (activityLogMode):
+//   - 'fs'       : reads the repo filesystem at request time (dev default)
+//   - 'snapshot' : reads dashboard/public/activity-snapshot.json (prod default)
+//
+// Data-fetch helpers (readDocsFromFs / loadSnapshot / parseFrontmatter / etc)
+// are unchanged from the previous implementation — only the surrounding
+// presentation moved to PageHeader + KpiCardsRow + inline empty/error.
+
 import {promises as fs} from 'node:fs'
 import path from 'node:path'
+import {Database, FileText, Server} from 'lucide-react'
 import {repoPath, repoRoot} from '@/lib/repoRoot'
 import {activityLogMode} from '@/lib/featureFlags'
-import {ReadOnlyBanner} from '@/components/ReadOnlyBanner'
-import {EmptyState} from '@/components/EmptyState'
-import {SectionHeader} from '@/components/SectionHeader'
-import {SummaryCard} from '@/components/SummaryCard'
+import {PageHeader} from '@/components/common/PageHeader'
+import {KpiCard} from '@/components/common/KpiCard'
+import {KpiCardsRow} from '@/components/common/KpiCardsRow'
+import {CopyButton} from '@/components/CopyButton'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -13,6 +25,8 @@ export const revalidate = 0
 const LATEST_PER_KIND = 20
 const EXCERPT_FS_LEN = 400 // fs mode keeps the existing richer excerpt
 const SNAPSHOT_PATH = ['public', 'activity-snapshot.json'] as const
+
+const neutralTrend = {value: '—', direction: 'flat' as const, periodLabel: '前月比'}
 
 interface DocEntry {
   kind: 'devlog' | 'handoff'
@@ -156,82 +170,141 @@ export default async function ActivityLogPage() {
     }
   }
 
+  const description =
+    mode === 'snapshot' && generatedAt
+      ? `docs/devlog/ と docs/handoff/ の最新 ${LATEST_PER_KIND} 件 / mode: ${mode} · snapshot generated ${generatedAt}`
+      : `docs/devlog/ と docs/handoff/ の最新 ${LATEST_PER_KIND} 件 / mode: ${mode}`
+
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 py-8 sm:px-6 lg:px-8">
-      <ReadOnlyBanner />
+    <main className="mx-auto flex w-full max-w-[1280px] flex-col gap-5 px-4 py-6 sm:px-6 lg:px-8">
+      <PageHeader
+        title="作業ログ"
+        description={description}
+        breadcrumb={[{label: 'ダッシュボード', href: '/'}, {label: '作業ログ'}]}
+        meta={
+          <span>
+            ソース:{' '}
+            <code className="rounded bg-slate-50 px-1.5 py-0.5 text-[11px] ring-1 ring-inset ring-slate-200">
+              {mode === 'fs' ? 'docs/' : 'public/activity-snapshot.json'}
+            </code>
+            {mode === 'snapshot' && (
+              <>
+                {' '}· rebuild:{' '}
+                <code className="rounded bg-slate-50 px-1.5 py-0.5 text-[11px] ring-1 ring-inset ring-slate-200">
+                  npm run build:activity-snapshot
+                </code>
+              </>
+            )}
+          </span>
+        }
+      />
 
-      <header>
-        <h1 className="text-2xl font-semibold text-slate-900">Activity Log</h1>
-        <p className="mt-1 text-sm text-slate-600">
-          Latest entries from <code>docs/devlog/</code> and <code>docs/handoff/</code>.
-          Mode:{' '}
-          <code className="rounded bg-slate-100 px-1 py-0.5 text-xs text-slate-700">{mode}</code>
-          {mode === 'snapshot' && generatedAt && (
-            <> &middot; snapshot generated {generatedAt}</>
-          )}
-          . Up to {LATEST_PER_KIND} per kind.
-        </p>
-      </header>
-
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <SummaryCard
-          label="Mode"
-          primary={mode}
-          secondary={mode === 'fs' ? 'reads repo filesystem on request' : 'reads public/activity-snapshot.json'}
+      <KpiCardsRow>
+        <KpiCard
+          label="モード"
+          value={mode}
+          icon={Database}
+          tone="slate"
+          trend={neutralTrend}
+          secondary={mode === 'fs' ? 'リクエスト時に repo を読む' : 'build-time JSON を読む'}
         />
-        <SummaryCard label="Devlog entries shown" primary={devlogs.length} secondary={`max ${LATEST_PER_KIND} per kind`} />
-        <SummaryCard label="Handoff entries shown" primary={handoffs.length} secondary={`max ${LATEST_PER_KIND} per kind`} />
-        <SummaryCard
-          label="Source"
-          primary={mode === 'fs' ? 'docs/' : 'snapshot'}
-          secondary={mode === 'fs' ? 'live read each request' : 'rebuild with npm run build:activity-snapshot'}
+        <KpiCard
+          label="Devlog"
+          value={devlogs.length}
+          icon={FileText}
+          tone="blue"
+          trend={neutralTrend}
+          secondary={`max ${LATEST_PER_KIND} 件`}
         />
-      </section>
+        <KpiCard
+          label="Handoff"
+          value={handoffs.length}
+          icon={FileText}
+          tone="purple"
+          trend={neutralTrend}
+          secondary={`max ${LATEST_PER_KIND} 件`}
+        />
+        <KpiCard
+          label="ソース"
+          value={mode === 'fs' ? 'docs/' : 'snapshot'}
+          icon={Server}
+          tone="emerald"
+          trend={neutralTrend}
+          secondary={mode === 'fs' ? 'live read' : 'build-time'}
+        />
+      </KpiCardsRow>
 
       {mode === 'snapshot' && snapshotError && (
-        <EmptyState
-          tone="error"
-          title="No activity snapshot found"
-          body={`Could not read public/activity-snapshot.json (${snapshotError}). Run "npm run build:activity-snapshot" from the dashboard/ directory to generate it.`}
-        />
+        <section className="rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900">
+          <p className="font-semibold">activity-snapshot.json を読み込めませんでした</p>
+          <p className="mt-1 text-[12px]">
+            {snapshotError}。<code className="rounded bg-white/60 px-1 py-0.5 text-[11px]">npm run build:activity-snapshot</code> を dashboard/ ディレクトリで実行して生成してください。
+          </p>
+        </section>
       )}
 
-      <DocList kind="devlog" title="Devlog" entries={devlogs} />
-      <DocList kind="handoff" title="Handoff" entries={handoffs} />
+      <DocListCard title="Devlog" kind="devlog" entries={devlogs} />
+      <DocListCard title="Handoff" kind="handoff" entries={handoffs} />
     </main>
   )
 }
 
-function DocList({kind, title, entries}: {kind: string; title: string; entries: DocEntry[]}) {
+function DocListCard({kind, title, entries}: {kind: string; title: string; entries: DocEntry[]}) {
   if (entries.length === 0) {
     return (
-      <EmptyState
-        title={`No ${kind} entries to show`}
-        body={`Expected markdown files under docs/${kind}/. In snapshot mode, run npm run build:activity-snapshot to rebuild.`}
-      />
+      <section className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-6 text-sm text-slate-700">
+        <h2 className="text-base font-semibold text-slate-900">{title} エントリーがありません</h2>
+        <p className="mt-2 text-slate-600">
+          <code className="rounded bg-white px-1.5 py-0.5 text-xs ring-1 ring-inset ring-slate-200">docs/{kind}/</code>{' '}
+          の下に markdown ファイルを置いてください。snapshot モードなら{' '}
+          <code className="rounded bg-white px-1.5 py-0.5 text-xs ring-1 ring-inset ring-slate-200">npm run build:activity-snapshot</code>{' '}
+          で再生成します。
+        </p>
+      </section>
     )
   }
   return (
     <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-      <SectionHeader title={title} description={`${entries.length} entries (newest first by filename)`} />
+      <header className="mb-3 flex items-center justify-between gap-2">
+        <div>
+          <h2 className="text-base font-semibold text-slate-900">{title}</h2>
+          <p className="text-[11px] text-slate-500">
+            {entries.length} entries (newest first by filename)
+          </p>
+        </div>
+        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold tabular-nums text-slate-700 ring-1 ring-inset ring-slate-200">
+          {entries.length}
+        </span>
+      </header>
       <ul className="divide-y divide-slate-100">
         {entries.map((e) => (
           <li key={e.relPath} className="py-3 text-sm">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <div>
+              <div className="min-w-0">
                 <h3 className="font-medium text-slate-900">{e.title}</h3>
-                <p className="mt-0.5 text-xs text-slate-500">
-                  <code>{e.filename}</code>
-                  {e.date && <span> · {e.date}</span>}
-                  {e.status && <span> · status: {e.status}</span>}
-                </p>
+                <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-slate-500">
+                  <code className="rounded bg-slate-50 px-1 py-0.5 ring-1 ring-inset ring-slate-200">
+                    {e.filename}
+                  </code>
+                  {e.date && <span className="tabular-nums">{e.date}</span>}
+                  {e.status && (
+                    <span className="rounded bg-blue-50 px-1.5 py-0.5 text-blue-700 ring-1 ring-inset ring-blue-200">
+                      {e.status}
+                    </span>
+                  )}
+                </div>
               </div>
-              {e.mtime && <span className="text-[11px] text-slate-400">{e.mtime}</span>}
+              {e.mtime && (
+                <span className="shrink-0 text-[11px] tabular-nums text-slate-400">{e.mtime}</span>
+              )}
             </div>
             {e.excerpt && <p className="mt-1.5 text-xs leading-relaxed text-slate-700">{e.excerpt}</p>}
-            <p className="mt-1 text-[11px] text-slate-400">
-              <code>{e.relPath}</code>
-            </p>
+            <div className="mt-1.5 flex items-center gap-1.5 text-[11px]">
+              <code className="break-all rounded bg-slate-50 px-1 py-0.5 text-slate-600 ring-1 ring-inset ring-slate-200">
+                {e.relPath}
+              </code>
+              <CopyButton text={e.relPath} label="copy" />
+            </div>
           </li>
         ))}
       </ul>
