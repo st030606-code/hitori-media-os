@@ -1,6 +1,6 @@
 {
   "contentSlug": "building-hitori-media-os",
-  "updatedAt": "2026-05-18T12:01:45.593Z",
+  "updatedAt": "2026-05-21T03:31:49.445Z",
   "candidates": [
     {
       "relativePath": "assets/inbox/generated/building-hitori-media-os/note-hero-v1-attempt-1.png",
@@ -34,9 +34,9 @@
       "reviewNotes": "",
       "finalAssetPath": "assets/visuals/building-hitori-media-os/x/hook/x-hook-main-v1.png",
       "patchPath": "patches/visual-assets/building-hitori-media-os/x-hook-main-v1.json",
-      "registeredAt": "2026-05-14T13:47:16.465Z",
+      "registeredAt": "2026-05-21T03:31:49.444Z",
       "createdAt": "2026-05-14T13:47:16.465Z",
-      "updatedAt": "2026-05-14T13:47:16.465Z"
+      "updatedAt": "2026-05-21T03:31:49.444Z"
     },
     {
       "relativePath": "assets/inbox/generated/building-hitori-media-os/note-inline-content-os-flow-v1/v004.png",

@@ -30,6 +30,24 @@ Status: ready-for-human-review
 - **Substack About / Welcome / Notes は stub のまま**: `about-page.md` / `welcome-email.md` / `notes.md` は TODO + checklist のみで本文未記入。`substack-final-review.md` の Manual publish readiness で「手書きで埋める」と既述、boss が公開前に記入する。
 - **Optional X / Threads reply chains を短縮する余地**: X 6 投稿スレッド / Threads 7 投稿 reply chain は冗長気味、各 final-review が「4-5 本に絞る判断あり」と既述。boss が公開時に手動で削減判断。
 
+## Publication Log Snapshot
+
+2026-05-19 時点の手動公開状況。campaign 全体としては **partially published**（Threads が boss 判断で次回以降に保留）。
+
+- ✅ **X**: published — `https://x.com/potablenx/status/2056534823737720925`（2026-05-19 09:38 JST）→ [x-final-review.md](x-final-review.md)
+- ✅ **note**: published — `https://note.com/potablen/n/nad186a95af61?sub_rt=share_pb`（2026-05-19 09:57 JST）→ [note-final-review.md](note-final-review.md)
+- ✅ **Substack**: published — `https://404runner.substack.com/p/note-substack-x-threads-youtube-podcast1os`（2026-05-19 09:57 JST）→ [substack-final-review.md](substack-final-review.md)
+- ⏳ **Threads**: **未投稿** — boss が今回の bundle ではあえて Threads 公開を見送り、X / note / Substack の反応を見てから次回以降に公開予定 → [threads-final-review.md](threads-final-review.md)
+
+公開後の手動記録は各 final-review の `Published URL` / `Published Date / Time` / `Reaction Notes` セクションに反映済み。campaign は **Threads が pending のため fully published 扱いにはしない**。
+
+### Pending Sanity reflection（本バッチでは Sanity 書き込みなし）
+
+- [ ] Sanity Studio で `substackPostPlan.publishedUrl` を手動更新（Substack URL）
+- [ ] Sanity Studio で `manualPublishingStatus` を 4 platform 分更新（X/note/Substack = done + URL、Threads = not-started）
+- [ ] Sanity Studio で `contentIdea.outputChecklist` の該当 entry に `publishedUrl` を反映
+- [ ] Sanity Studio で `substackGrowthAction.resultNotes` を実施後に更新（後日 reaction が出てから）
+
 ## Per-Platform Review
 
 - [x] X reviewed（[x-final-review.md](x-final-review.md)）

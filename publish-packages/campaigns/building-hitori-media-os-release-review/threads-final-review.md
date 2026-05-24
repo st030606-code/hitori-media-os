@@ -85,22 +85,27 @@ X 版より、答えを誘導しすぎない。
 - [ ] 有料PDFの引用がない
 - [ ] 各投稿が Threads の文字数制限（500字目安）に収まっている
 
+## Publication Status
+
+**未投稿**（boss が今回の bundle ではあえて Threads 公開を見送り。X / note / Substack の反応を見てから次回以降に公開予定）
+
 ## Published URL
 
 ```text
-TODO: 公開後に貼り付ける
+pending — Threads は次回以降に手動公開する
 ```
 
 ## Published Date / Time
 
 ```text
-TODO: 公開後に記入
+pending — Threads は次回以降に手動公開する
 ```
 
 ## Reaction Notes
 
 ```text
-TODO: 公開後に記入する。返信数、対話の質、X からの流入の有無、subscriber への波及など。
+未投稿。次回以降に公開予定。
+（公開後に追記: 返信数、対話の質、X からの流入の有無、subscriber への波及など）
 ```
 
 ## Production Visual Readiness

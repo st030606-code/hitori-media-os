@@ -123,19 +123,20 @@ Visual Register で登録済みの画像があれば優先する。無ければ 
 ## Published URL
 
 ```text
-TODO: 公開後に貼り付ける
+https://note.com/potablen/n/nad186a95af61?sub_rt=share_pb
 ```
 
 ## Published Date / Time
 
 ```text
-TODO: 公開後に記入
+2026-05-19 09:57 JST
 ```
 
 ## Reaction Notes
 
 ```text
-TODO: 公開後に記入。スキ数、コメント、引用、検索流入の手応え、Substack への流入有無など。
+初回公開。スキ / コメント / 滞在感は後で追記。
+（後日: スキ数、コメント、引用、検索流入の手応え、Substack への流入有無を記入する）
 ```
 
 ## Production Visual Readiness
